@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--путь к ресурсам сайта-->
+    <meta name="resources-path" content="resources/">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <script src="resources/js/libs/modernizr.js"></script>
+    <script src="resources/js/libs/webcomponents-lite.js"></script>
+    <script src="resources/js/libs/setPrototypeOf.polyfill.js"></script>
+    <script data-main="resources/js/app" src="resources/js/require.js"></script>
+</head>
+<body>
+    <vh-fix></vh-fix>
+    <router-component></router-component>
+    <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3"></audio-player>
+
+    <div class="page-wrapper" data-scheme="dark" data-popup="inactive">
+        <header>
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
+                    <g id="Layer_1" data-name="Layer 1">
+                        <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
+                        <polygon class="cls-1" points="57.55 79.5 80.48 99.61 48.29 83.04 57.45 78.57 57.55 79.5"/>
+                        <polygon class="cls-1" points="91.72 90.62 91.42 90.33 72.31 70.84 72.31 70.83 74.11 64.86 79.83 56.42 80.52 58.41 91.42 89.77 91.57 90.19 91.72 90.62"/>
+                        <polygon class="cls-1" points="75.26 66.04 91.72 90.62 79.83 56.42 74.12 64.87 75.26 66.04"/>
+                        <path class="cls-1" d="M41.94,0A42,42,0,1,0,64.39,77.36l0.07,0L59.26,70.4a33.52,33.52,0,1,1,6.93-5.65l6.12,6.08h0a41.83,41.83,0,0,0,3.41-4.07,42.46,42.46,0,0,0,4.78-8.34A41.95,41.95,0,0,0,41.94,0Z"/>
+                        <path class="cls-1" d="M51.24,49.94a12.21,12.21,0,1,0-4.77,3.41l7.64,10.18a24.72,24.72,0,1,1,6-4.76Z"/>
+                        <polygon class="cls-1" points="91.72 90.06 91.57 90.19 91.48 90.27 91.42 90.33 72.31 70.84 72.31 70.83 72.32 70.83 90.61 88.97 90.62 88.98 91.42 89.77 91.72 90.06"/>
+                        <path class="cls-1" d="M72.74,70.39"/>
+                    </g>
+                </svg>
+            </div>
+            <button is="popup-toggle" class="menu-btn" data-id="menu-popup">
+                <div class="b b1"></div>
+                <div class="b b2"></div>
+                <div class="b b3"></div>
+                <div class="b b4"></div>
+                <div class="b b5"></div>
+                <div class="b b6"></div>
+            </button>
+            <div class="title">Album:</div>
+        </header>
+
+        <div class="cart">
+            <span>Cart</span>
+            <button>+2</button>
+        </div>
+
+        <audio-progressbar>
+            <div class="ac"></div>
+        </audio-progressbar>
+
+        <popup-component class="menu-popup" data-id="menu-popup">
+            <div class="popup-outer">
+                <div class="popup-inner">
+                    <div class="popup-cell">
+                        <nav class="menu">
+                            <menu-item>
+                                <a href="index.html"
+                                    is="inner-link">
+                                    <text-glitch data-to="B%43*" data-text="Beats">Beats</text-glitch>
+                                </a>
+                            </menu-item>
+                            <menu-item>
+                                <a href="albums.html"
+                                    is="inner-link"
+                                    class="active">
+                                    <text-glitch data-to="A.75&" data-text="Album">Album</text-glitch>
+                                </a>
+                            </menu-item>
+                            <menu-item>
+                                <a href="videos.html"
+                                    is="inner-link">
+                                    <text-glitch data-to="V!7.0" data-text="Video">Video</text-glitch>
+                                </a>
+                            </menu-item>
+                            <menu-item>
+                                <a href="about.html"
+                                    is="inner-link">
+                                    <text-glitch data-to="A^%,4" data-text="About">About</text-glitch>
+                                </a>
+                            </menu-item>
+                            <menu-item>
+                                <a href="merch.html"
+                                    is="inner-link">
+                                    <text-glitch data-to="M`~13" data-text="Merch">Merch</text-glitch>
+                                </a>
+                            </menu-item>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </popup-component>
+
+        <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
+            <div class="popup-outer">
+                <div class="popup-inner">
+                    <div class="popup-cell">
+                        <section class="all-tracks">
+                            <div class="wrapper">
+                                <div class="l">
+                                    <h1>All track</h1>
+                                    <h3>Select genre</h3>
+
+                                    <filters-component class="filters" data-id="beats-filter">
+                                        <div class="item" data-filter="Hip-hop">Hip-hop</div>
+                                        <div class="item" data-filter="Trap">Trap</div>
+                                        <div class="item" data-filter="Soul">Soul</div>
+                                        <div class="item" data-filter="Jazzy">Jazzy</div>
+                                    </filters-component>
+                                </div>
+                                <div class="r">
+                                    <track-list class="tracks-list" data-id="beats">
+                                        <div class="tracks-group">
+                                            <h3>Hip-hop</h3>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                        </div>
+                                        <div class="tracks-group">
+                                            <h3>Trap</h3>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                        </div>
+                                        <div class="tracks-group">
+                                            <h3>Soul</h3>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                        </div>
+                                        <div class="tracks-group">
+                                            <h3>Jazzy</h3>
+                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
+                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
+                                        </div>
+                                    </track-list>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </popup-component>
+
+        <div class="stage-fallback"></div>
+        <canvas is="bg-stage"></canvas>
+
+        <main class="vh-min-height">
+            <div class="stage"></div>
+
+            <div class="content replaceable" data-id="main-content">
+                <albums-helper></albums-helper>
+                <div class="album-bg"></div>
+
+                <div class="album-aside">
+                    <div class="left-wrapper">
+                        <div class="inner vh-height">
+                            <slide-scroll-index 
+                                data-id="album-slides"
+                                class="album-index">1</slide-scroll-index>
+                            <button class="arr a-t"
+                                is="slide-scroll-control"
+                                data-id="album-slides"
+                                data-to="prev">
+                                <div class="ico"></div>
+                            </button>
+                            <button class="arr a-b" 
+                                is="slide-scroll-control"
+                                data-id="album-slides"
+                                data-to="next">
+                                <div class="ico"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <slide-scroll data-id="album-slides">
+                    <div class="slide-scroll-wrapper">
+                        <section class="album js-slide vh-min-height">
+                            <div class="left-wrapper">
+                                <div class="album-header">
+                                    <div>New release album</div>
+                                    <div>Date: 2017 Feb</div>
+                                    <div>2LP Limited ed</div>
+                                </div>
+
+                                <div class="album-content">
+                                    <h1>The Heart Gently Weeps</h1>
+                                    <div class="nfo">
+                                        <div class="price">$35.00</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="section-footer album-footer">
+                                    <button class="btn">Buy album</button>
+                                    <button class="btn">Listen now</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </slide-scroll>
+                <aside class="cover">
+                    <div class="cover-img">
+                        <proportional-height>
+                            <img src="tmp/beat-lables/1.jpg" alt="">
+                            <img src="tmp/beat-lables/2.jpg" alt="">
+                            <img src="tmp/beat-lables/3.jpg" alt="">
+                        </proportional-height>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
