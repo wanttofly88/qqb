@@ -102,42 +102,51 @@
         <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
             <div class="popup-outer">
                 <div class="popup-inner">
-                    <div class="popup-cell">
-                        <section class="all-tracks">
-                            <div class="wrapper">
-                                    <track-list class="tracks-list" data-id="beats">
-                                        <div class="tracks-group">
-                                            <h3>Hip-hop</h3>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                        </div>
-                                        <div class="tracks-group">
-                                            <h3>Trap</h3>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                        </div>
-                                        <div class="tracks-group">
-                                            <h3>Soul</h3>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                        </div>
-                                        <div class="tracks-group">
-                                            <h3>Jazzy</h3>
-                                            <div class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</div>
-                                            <div class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</div>
-                                        </div>
-                                    </track-list>
+                    <section class="all-tracks">
+                        <div class="wrapper">
+                            <track-list class="tracks-list" data-id="beats">
+                                <div class="tracks-group">
+                                    <h3># Hip-hop</h3>
+                                    <ol>
+                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                    </ol>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
-                        </section>
-                    </div>
+                                <div class="tracks-group">
+                                    <h3># Epic</h3>
+                                    <ol>
+                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                    </ol>
+                                </div>
+                                <div class="tracks-group">
+                                    <h3># Tropical</h3>
+                                    <ol>
+                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                    </ol>
+                                </div>
+                                <div class="tracks-group">
+                                    <h3># Cinematic</h3>
+                                    <ol>
+                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                    </ol>
+                                </div>
+                            </track-list>
+                        </div>
+                        <div class="clear"></div>
+                    </section>
+
+
                 </div>
             </div>
         </popup-component>
@@ -152,7 +161,7 @@
                 <div class="beat-bg"></div>
                 <div class="beat-header">
                     <div class="left-wrapper">
-                        <button class="btn pause">Pause</button>
+                        <button is="audio-pause" class="btn pause">Pause</button>
                         <audio-progress class="time">
                             <span class="mn">00.</span><span class="sc">00.</span><span class="ms">000</span>
                         </audio-progress>

@@ -1,4 +1,10 @@
-define(['dispatcher', 'slide-scroll/slide-scroll.store'], function(dispatcher, store) {
+define([
+	'dispatcher',
+	'slide-scroll/slide-scroll.store'
+], function(
+	dispatcher,
+	store
+) {
 	"use strict";
 
 	var timeForBlocking = 800;
@@ -16,8 +22,6 @@ define(['dispatcher', 'slide-scroll/slide-scroll.store'], function(dispatcher, s
 			setTimeout(function() {
 				self._animating = false;
 			}, timeForBlocking);
-
-			console.log(storeData);
 
 			if (this._to === 'prev') {
 				if (this._index === 0) {
