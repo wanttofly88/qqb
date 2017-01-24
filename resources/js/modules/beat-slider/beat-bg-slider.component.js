@@ -16,8 +16,6 @@ define([
 		var showSlide = function(slide, way) {
 			var bg = slide.getElementsByClassName('bg')[0];
 
-			console.log('showing');
-
 			slide.classList.remove('hidden');
 			this._z = this._z + 1;
 
@@ -59,6 +57,9 @@ define([
 			if (!storeData) return;
 
 			index = storeData.index;
+
+			if (index === null) return;
+
 			if (index === this._index) {
 				return
 			} else if (index < this._index) {

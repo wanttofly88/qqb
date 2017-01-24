@@ -6,18 +6,23 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var song = null;
 	var playlistId = null;
 	var playlist = null;
-	var index = false;
+	var index = null;
 
 	var _handleEvent = function(e) {
 		if (e.type === 'audio-song-changed') {
-			if (e.song.index === index) return;
+			if (e.song === song) return;
 			if (e.playlistId && e.playlistId !== playlistId) {
 				console.log('audio error. wrong playlist id specified');
 				return;
 			}
 
 			song = e.song;
-			index = song.index;
+
+			if (song) {
+				index = song.index;
+			} else {
+				index = null;
+			}
 
 			eventEmitter.dispatch();
 		}

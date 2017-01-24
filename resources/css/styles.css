@@ -376,7 +376,7 @@ button {
 }
 
 .wrapper {
-	width: 80%;cart
+	width: 80%;
 	margin: 0 auto;
 	position: relative;
 }
@@ -500,6 +500,28 @@ h1 {
 		font-size: 100px;
 	}
 }
+h3 {
+	font-size: 29px;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: -0.05em;
+	margin-bottom: 19px;
+}
+
+ol {
+	counter-reset: ol;
+}
+ol li,
+ul li {
+	margin-bottom: 1px;
+}
+ol li {
+	counter-increment: ol;
+}
+ol li:before {
+	content: counter(ol, decimal-leading-zero);
+	margin-right: 20px;
+}
 
 .left-wrapper {
 	position: relative;
@@ -585,10 +607,10 @@ beat-bg-slider .slide.hidden:before {
 
 .cover .cover-img {
 	position: absolute;
-	top: 10%;
-	bottom: 10%;
-	left: 10%;
-	right: 10%;
+	top: 12%;
+	bottom: 12%;
+	left: 12%;
+	right: 12%;
 	z-index: 1;
 }
 .cover proportional-height {
@@ -617,7 +639,7 @@ beat-bg-slider .slide.hidden:before {
 	top: 0;
 	left: 0;
 	width: 100%;
-	padding-top: 42px;
+	padding-top: 53px;
 	box-sizing: border-box;
 	color: #252525;
 	z-index: 3;
@@ -631,12 +653,14 @@ beat-bg-slider .slide.hidden:before {
 }
 .beat-header .all {
 	position: absolute;
-	top: 13px;
+	top: 0px;
 	right: 19.5%;
 }
 .beat-header .time {
+	position: absolute;
+	left: 75px;
 	display: inline-block;
-	bottom: -1px;
+	bottom: -6px;
 }
 .beat-header .time .mn {
 	font-size: 29px;
@@ -861,6 +885,26 @@ slide-scroll.inactive {
 }
 slide-scroll .slide-scroll-wrapper {
 	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
+}
+
+.all-tracks-popup {
+	background: url(../images/menu.jpg);
+	background-position: center;
+	background-size: cover;
+}
+.all-tracks {
+	padding-top: 95px;
+	padding-bottom: 95px;
+	margin-left: 49%;
+}
+.all-tracks .tracks-group {
+	margin-bottom: 60px;
+}
+.all-tracks .tracks-group:last-child {
+	margin-bottom: 0;
+}
+.all-tracks .track {
+	cursor: pointer;
 }
 
 audio-progressbar {

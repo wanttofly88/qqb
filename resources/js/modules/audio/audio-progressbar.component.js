@@ -7,7 +7,7 @@ define([
 ) {
 	"use strict";
 
-	var crossFadeDuration = 0.5;
+	var crossFadeDuration = 0.3;
 
 	var elementProto = function() {
 		var handleStore = function() {

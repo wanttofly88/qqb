@@ -1,9 +1,11 @@
 define([
 	'dispatcher',
-	'slide-scroll/slide-scroll.store'
+	'slide-scroll/slide-scroll.store',
+	'popup/popup.store'
 ], function(
 	dispatcher,
-	store
+	store,
+	popupStore
 ) {
 	"use strict";
 
@@ -31,6 +33,7 @@ define([
 				}
 
 				if (this.component._isScrolling) return;
+				if (popupStore.getData().active) return;
 
 				if (keyCode === 38 || keyCode === 33) {
 					dispatcher.dispatch({
@@ -97,6 +100,7 @@ define([
 				this._scrollBuffer.shift();
 
 				if (this.component._isScrolling) return;
+				if (popupStore.getData().active) return;
 
 				bufferNew = this._scrollBuffer.slice(20, 40);
 				bufferOld = this._scrollBuffer.slice(0, 20);

@@ -29,6 +29,7 @@ require([
 	'audio/audio-player.component',
 	'audio/audio-progress.component',
 	'audio/audio-progressbar.component',
+	'audio/audio-pause.component',
 	'track-list/track-list.component',
 	'text-glitch/text-glitch.component',
 	'popup/popup.component',
