@@ -129,8 +129,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		var attachedCallback = function() {
 			this._bounds = this.getAttribute('data-bound') || '0,0';
 			this._steps = this.getAttribute('data-steps') || 3;
-			this._sim = this.getAttribute('data-sim') || 2;
-			this._throttle = this.getAttribute('data-throttle') || 2;
+			this._sim = this.getAttribute('data-sim') || 3;
+			this._throttle = this.getAttribute('data-throttle') || 1;
 
 			this._step = -this._sim - 1;
 			this._sim = parseInt(this._sim);

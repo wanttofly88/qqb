@@ -236,6 +236,12 @@ header .logo .cls-1 {
 	fill: #252525;
 }
 @media screen and (min-width: 640px) {
+	header .logo {
+		left: 40px;
+		top: 40px;
+	}
+}
+@media screen and (min-width: 1000px) {
 	header {
 		position: fixed;
 		transform: translateZ(0px);
@@ -249,11 +255,20 @@ header .logo .cls-1 {
 header .title {
 	position: absolute;
 	bottom: 55px;
-	left: 46%;
+	left: 50%;
 	font-size: 14px;
 	letter-spacing: 0.05em;
+	transform: rotate(-90deg) translateY(0.5px) translateZ(0px);
+	transform-origin: 0 50%;
+	bottom: 55px;
 	transform: rotate(-90deg);
 	transform-origin: 0 50%;
+	display: none;
+}
+@media screen and (min-width: 1000px) {
+	header .title {
+		display: block;
+	}
 }
 button {
 	display: inline-block;
@@ -267,16 +282,84 @@ button {
 	font-size: 14px;
 	color: #ffffff;
 }
-
-
+@keyframes blink {
+	0% {
+	 	opacity: 0;
+	}
+	33% {
+		opacity: 0;
+	}
+	66% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 .btn {
+	transition: color 0.2s;
 	position: relative;
 }
 .btn:before {
-	content: "[";
+	content: "";
+	position: absolute;
+	left: -2px;
+	top: -4px;
+	width: 0;
+	bottom: -3px;
+	z-index: -1;
+	vertical-align: bottom;
+	background: #142229;
+	transition: all 0.4s;
+	opacity: 0.95;
+	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
 }
 .btn:after {
-	content: "]";
+	content: "";
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 8px;
+	height: 100%;
+	width: 11px;
+	background: #ffffff;
+	z-index: 2;
+	opacity: 0;
+	transition: opacity 0.2s ease 0.1s;
+	box-shadow: 0 0 2px #ffffff;
+}
+.btn.big:after {
+	right: 16px;
+	width: 18px;
+}
+.btn:hover {
+	text-shadow: 0 0 1px #ffffff;
+	color: #ffffff !important;
+}
+.btn:hover:before {
+	width: calc(100% + 6px);
+	transition: all 0.15s;
+	V
+}
+.btn:hover:after {
+	opacity: 1;
+	animation: blink 0.5s infinite alternate;
+	-webkit-animation: blink 0.5s infinite alternate;
+}
+@-moz-document url-prefix() {
+	.btn:before {
+		left: -1px;
+		top: -3px;
+		bottom: -2px;
+	}
+	.btn:after {
+		right: 11px;
+		top: 1px;
+		height: calc(100% - 2px);
+	}
+	.btn.big:after {
+		right: 19px;
+	}
 }
 
 .menu-btn {
@@ -288,6 +371,22 @@ button {
 	cursor: pointer;
 	transform: translateZ(0px);
 	z-index: 200;
+}
+@media screen and (min-width: 640px) {
+	.menu-btn {
+		right: 30px;
+		top: 32px;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.menu-btn {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
 }
 .menu-btn .b {
 	position: absolute;
@@ -359,17 +458,6 @@ button {
 	opacity: 0;
 }
 
-@media screen and (min-width: 640px) {
-	.menu-btn {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-	}
-}
-
 
 .content {
 	will-change: opacity;
@@ -388,6 +476,12 @@ button {
 	z-index: 100;
 }
 @media screen and (min-width: 640px) {
+	.cart {
+		right: 40px;
+		bottom: 40px;
+	}
+}
+@media screen and (min-width: 1000px) {
 	.cart {
 		right: 4.2%;
 		top: 54px;
@@ -412,21 +506,24 @@ button {
 }
 @media screen and (min-width: 640px) {
 	.wrapper {
-		width: 80%;
+		width: calc(100% - 80px);
 	}
 	.left-wrapper {
-		margin-left: 10%;
-		margin-right: 10%;
+		margin-left: 40px;
+		margin-right: 40px;
 	}
 }
 @media screen and (min-width: 1000px) {
+	.wrapper {
+		width: 80%;
+	}
 	.left-wrapper {
 		margin-left: 10%;
 		margin-right: 33%;
 	}
 }
 
-canvas[is='bg-stage'],
+stage-component,
 .stage-fallback {
 	position: fixed;
 	width: 100%;
@@ -506,15 +603,20 @@ canvas[is='bg-stage'],
 		display: block;
 		padding: 0;
 		position: absolute;
-		left: 10%;
-		bottom: 50px;
+		left: 40px;
+		bottom: 40px;
 	}
 	.menu-popup menu-item a {
 		font-size: 60px;
 		line-height: 1;
 	}
 }
-
+@media screen and (min-width: 1000px) {
+	.menu-popup nav {
+		left: 10%;
+		bottom: 50px;
+	}
+}
 
 .menu-popup text-glitch {
 	display: inline-block;
@@ -527,32 +629,46 @@ canvas[is='bg-stage'],
 	left: 0;
 	top: 0;
 	z-index: -1;
-	opacity: 0;
-	transition: all 0.7s;
-	transition-timing-function: cubic-bezier(0.28, 0.69, 0.41, 0.99);
 }
 .menu-popup text-glitch:before {
-	color: #6400ff;
+	color: #0035ff;
 }
 .menu-popup text-glitch:after {
-	color: #ff00a3;
+	color: #ff49f8;
 }
-/*.menu-popup a:hover text-glitch:before {
-	opacity: 0.3;
-	transform: translateX(16px);
+.menu-popup a text-glitch {
+	transition: all 0.4s;
 }
-.menu-popup a:hover text-glitch:after {
-	opacity: 0.3;
-	transform: translateX(8px);
-}*/
-
+.menu-popup a text-glitch:before {
+	opacity: 0;
+	transition: all 1s;
+	transition-timing-function: cubic-bezier(0.28, 0.69, 0.41, 0.99);
+}
+.menu-popup a:hover text-glitch:before {
+	opacity: 0.6;
+	transform: translateX(-3px) translateY(2px);
+}
+.menu-popup a:hover text-glitch {
+	text-shadow: 0px 0px 2px #ffffff;
+}
+.menu-popup text-glitch:after {
+	color: #ff49f8;
+/*	z-index: 2;
+	clip: rect(40px, 200px, 60px, 40px);
+	text-shadow: 0px 0px 2px #000 !important;*/
+}
 
 h1 {
-	font-size: 36px;
+	font-size: 32px;
 	font-weight: 400;
 	line-height: 1;
 	text-transform: uppercase;
 	letter-spacing: -0.05em;
+}
+@media screen and (min-height: 530px) {
+	h1 {
+		font-size: 36px;
+	}
 }
 @media screen and (min-width: 640px) {
 	h1 {
@@ -699,7 +815,7 @@ beat-bg-slider .slide.hidden:before {
 @media screen and (min-width: 640px) {
 	.cover .cover-img {
 		top: -60px;
-		bottom: 60px;
+		bottom: 40px;
 		left: 13%;
 		right: 13%;
 	}
@@ -735,7 +851,7 @@ beat-bg-slider .slide.hidden:before {
 	max-height: 100%;
 }
 
-.beat-header {
+.section-header {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -746,38 +862,47 @@ beat-bg-slider .slide.hidden:before {
 	z-index: 3;
 	transform: translateZ(0px);
 }
-.beat-header button {
-	color: #252525;
+.section-header .left-wrapper {
+	margin-left: 70px;
 }
-.beat-header .pause {
-	margin-left: 50px;
-}
-.beat-header .time {
+.section-header .time {
 	position: absolute;
 	left: 75px;
 	display: inline-block;
 	bottom: -6px;
 	display: none;
 }
-.beat-header .time .mn {
+.section-header .time .mn {
 	font-size: 29px;
 }
-.beat-header .time .sc {
+.section-header .time .sc {
 	font-size: 29px;
 }
-.beat-header .time .ms {
+.section-header .time .ms {
 	font-size: 14px;
 }
 @media screen and (min-width: 640px) {
-	.beat-header .pause {
-		margin-left: 0;
+	.section-header {
+		padding-top: 52px;
 	}
-	.beat-header {
-		padding-top: 53px;
-	}
-	.beat-header .time {
+	.section-header .time {
 		display: block;
 	}
+	.section-header .left-wrapper {
+		margin-left: 90px;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.section-header {
+		padding-top: 53px;
+	}
+	.section-header .left-wrapper {
+		margin-left: 10%;
+	}
+}
+
+.beat-header button {
+	color: #252525;
 }
 
 .beat {
@@ -799,13 +924,13 @@ beat-bg-slider .slide.hidden:before {
 .album .album-content {
 	padding-top: 100px;
 	padding-bottom: 25px;
-	max-width: 600px;
-	margin-right: 150px;
+	margin-right: 50px;
 }
 @media screen and (min-width: 640px) {
 	.beat .beat-content,
 	.album .album-content {
 		padding: 0;
+		margin-bottom: 0;
 		position: absolute;
 		top: 20%;
 		max-width: 600px;
@@ -834,9 +959,6 @@ beat-bg-slider .slide.hidden:before {
 .album button {
 	color: #ffffff;
 }
-/*.btn:hover {
-
-}*/
 
 
 .album .left-wrapper {
@@ -899,11 +1021,11 @@ beat-bg-slider .slide.hidden:before {
 }
 .beat-aside .all {
 	position: absolute;
-	top: 92px;
-	right: -11px;
 	color: #252525;
-	width: 45px;
-	height: 45px;
+	top: 107px;
+	right: -1px;
+/*	width: 45px;
+	height: 45px;*/
 	text-align: center;
 }
 .beat-aside .beat-index,
@@ -915,26 +1037,21 @@ beat-bg-slider .slide.hidden:before {
 	text-align: center;
 }
 .beat-aside .beat-index {
-	bottom: calc(25% + 219px);
+	bottom: calc(25% + 190px);
 }
 .beat-aside .beat-total {
 	bottom: calc(25% + 59px);
 }
 .beat-aside .arr.a-t {
-	bottom: calc(25% + 154px);
+	bottom: calc(25% + 135px);
 }
 .beat-aside .arr.a-b {
-	bottom: calc(25% + 94px);
+	bottom: calc(25% + 85px);
 }
 
 @media screen and (min-width: 640px) {
-	.beat-aside .inner {
-		position: absolute;
-		right: -7%;
-		height: 100vh;
-	}
 	.beat-aside .all {
-		top: 15%;
+		top: calc(20% + 12px);
 	}
 	.beat-aside .beat-index {
 		bottom: calc(33% + 239px);
@@ -951,11 +1068,12 @@ beat-bg-slider .slide.hidden:before {
 }
 @media screen and (min-width: 1000px) {
 	.beat-aside .inner {
+		position: absolute;
 		right: 19.5%;
 		height: 100vh;
 	}
 	.beat-aside .all {
-		top: 39px;
+		top: 53px;
 	}
 	.beat-aside .beat-index {
 		top: calc(26% + 13px);
@@ -1062,7 +1180,7 @@ slide-scroll {
 	z-index: 1;
 }
 slide-scroll .js-slide {
-	height: 530px;
+	height: 460px;
 }
 @media screen and (min-width: 640px) {
 	slide-scroll .js-slide {
@@ -1099,13 +1217,18 @@ slide-scroll .slide-scroll-wrapper {
 	background-position: center;
 	background-size: cover;
 }
+.all-tracks-popup .popup-inner {
+	text-align: center;
+}
 .all-tracks {
-	padding-top: 95px;
-	padding-bottom: 95px;
-	margin-left: 49%;
+	padding-left: 0;
+	padding-top: 100px;
+	display: inline-block;
+	white-space: nowrap;
 }
 .all-tracks .tracks-group {
 	margin-bottom: 60px;
+	text-align: left;
 }
 .all-tracks .tracks-group:last-child {
 	margin-bottom: 0;
@@ -1113,6 +1236,18 @@ slide-scroll .slide-scroll-wrapper {
 .all-tracks .track {
 	cursor: pointer;
 }
+@media screen and (min-width: 1000px) {
+	.all-tracks-popup .popup-inner {
+		text-align: left;
+	}
+	.all-tracks {
+		display: block;
+		padding-top: 95px;
+		padding-bottom: 95px;
+		margin-left: 54%;
+	}
+}
+
 
 audio-progressbar {
 	position: fixed;
@@ -1178,6 +1313,9 @@ popup-component.active {
 	opacity: 1;
 	transition: opacity 0.1s linear 0s, transform 0.1s ease 0s, width 0s linear 0s;
 }
+popup-component button {
+	color: #ffffff;
+}
 
 page-transition {
 	position: fixed;
@@ -1197,4 +1335,145 @@ page-transition.active {
 	width: 100%;
 	opacity: 1;
 	transition: opacity 0.2s linear 0s, transform 0.2s ease 0s, width 0s linear 0s;
+}
+
+preloader-component {
+	position: fixed;
+	z-index: 10000;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: #101010;
+	display: block;
+	transition: opacity 0.4s;
+	transform: translateZ(0px);
+	display: none;
+}
+.csstransitions preloader-component {
+	display: block;
+}
+
+preloader-component.hidden {
+	opacity: 0;
+}
+preloader-component .wrapper {
+	position: relative;
+	height: 100%;
+}
+preloader-component .text {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 52px;
+	margin: auto;
+}
+preloader-component .loaded-text {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	opacity: 0;
+	font-size: 25px;
+	transform: translateZ(0px);
+}
+preloader-component .perc {
+	position: relative;
+	font-size: 25px;
+	opacity: 1;
+	transition: opacity 0.2s;
+	transform: translateZ(0px);
+	z-index: 10px;
+	opacity: 0;
+	margin-bottom: 5px;
+}
+preloader-component.loading .perc {
+	opacity: 1;
+}
+preloader-component.loaded .perc {
+	opacity: 0;
+}
+preloader-component.loaded .loaded-text {
+	transition: opacity 0.2s;
+	opacity: 1;
+}
+preloader-component .loaded-text:after {
+	content: "";
+	position: relative;
+	display: inline-block;
+	width: 18px;
+	height: 25px;
+	top: 4px;
+	left: 2px;
+	background: #ffffff;
+	box-shadow: 0 0 3px #ffffff;
+	transform: translateZ(0px);
+	line-height: 25px;
+	z-index: 20;
+}
+preloader-component .loaded-text.no-animation:after {
+	animation: blink 0.5s 2 alternate;
+	-webkit-animation: blink 0.5s 2 alternate;
+}
+preloader-component .nt {
+	opacity: 0;
+	transform: translateY(5px);
+}
+preloader-component.loading .nt {
+	opacity: 1;
+	transform: translateY(0px);
+	transition: all 0.6s;
+}
+@media screen and (min-width: 640px) {
+	preloader-component .text {
+		height: 81px;
+	}
+	preloader-component .loaded-text,
+	preloader-component .perc {
+		font-size: 50px;
+		margin-bottom: 4px;
+	}
+	preloader-component .loaded-text:after {
+		height: 52px;
+		width: 34px;
+		top: 7px;
+		line-height: 50px;
+	}
+}
+@media screen and (min-width: 1000px) {
+	preloader-component .text {
+		height: 90px;
+	}
+	preloader-component .loaded-text,
+	preloader-component .perc {
+		font-size: 60px;
+		margin-bottom: 1px;
+	}
+	preloader-component .loaded-text:after {
+		height: 59px;
+		width: 37px;
+		top: 7px;
+		line-height: 60px;
+	}
+
+}
+
+.csstransitions .beat-content h1 {
+	opacity: 0;
+	transform: translateY(-3px);
+	transition: all 0.6s ease-out 0s;
+}
+.csstransitions .preload-complete .beat-content h1 {
+	opacity: 1;
+	transform: translateY(0px);
+}
+.csstransitions .beat-content .nfo {
+	opacity: 0;
+	transform: translateY(10px);
+	transition: all 0.6s ease-out;
+}
+.csstransitions .preload-complete .beat-content .nfo {
+	opacity: 1;
+	transform: translateY(0px);
 }
