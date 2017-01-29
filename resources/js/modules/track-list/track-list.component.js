@@ -44,6 +44,9 @@ define([
 						index: index,
 						playlistId: self._id
 					});
+					dispatcher.dispatch({
+						type: 'popup-close'
+					});
 				});
 
 				self._playlist.push({

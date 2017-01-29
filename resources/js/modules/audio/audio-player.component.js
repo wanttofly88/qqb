@@ -11,9 +11,6 @@ define([
 ) {
 	"use strict";
 
-	// TODO: use page visibility api
-	// TODO: add pause
-
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
@@ -256,6 +253,17 @@ define([
 					this._songNfo = this._ambient;
 				}
 				this._playSong(this._songNfo);
+			}
+
+			if (e.type === 'audio-cache') {
+				if (e.playlistId && e.playlistId !== playlistId) {
+					console.log('audio error. wrong playlist id specified');
+					return;
+				}
+				if (playlist && playlist[e.index]) {
+					this._songNfo = playlist[e.index];
+				}
+				this._loadSound(this._songNfo.src);
 			}
 		}
 

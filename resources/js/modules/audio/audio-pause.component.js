@@ -12,9 +12,9 @@ define([
 			var song = playerStore.getData().song;
 
 			if (song) {
-				this.innerHTML = 'Pause';
+				this.innerHTML = '[Pause]';
 			} else {
-				this.innerHTML = 'Play';
+				this.innerHTML = '[Play]';
 			}
 		}
 

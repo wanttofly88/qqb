@@ -2,12 +2,14 @@ define([
 	'dispatcher',
 	'popup/popup.store',
 	'slide-scroll/slide-scroll.store',
-	'audio/audio-player.store'
+	'audio/audio-player.store',
+	'preloader/preloader.store'
 ], function(
 	dispatcher,
 	popupStore,
 	slideStore,
-	playerStore
+	playerStore,
+	preloaderStore
 ) {
 	"use strict";
 
@@ -56,34 +58,48 @@ define([
 			});
 		}
 
+		var handlePreloader = function() {
+			var complete = preloaderStore.getData().complete;
+			var self = this;
+			if (!complete) return;
+
+			setTimeout(function() {
+				self._handlePopupStore();
+				self._handleSlideStore();
+				self._handlePlayerStore();
+			}, 0);
+		}
+
 		var createdCallback = function() {
 			this._songIndex = null;
 			this._handleStore = handlePopupStore.bind(this);
 			this._handlePopupStore = handlePopupStore.bind(this);
 			this._handleSlideStore = handleSlideStore.bind(this);
 			this._handlePlayerStore = handlePlayerStore.bind(this);
+			this._handlePreloader = handlePreloader.bind(this);
 		}
 		var attachedCallback = function() {
-			var self = this;
-
 			this._songIndex = null;
 
+			dispatcher.dispatch({
+				type: 'load-playlist',
+				id: 'beats'
+			});
+			dispatcher.dispatch({
+				type: 'audio-cache',
+				index: 0,
+				id: 'beats'
+			});
+
+			this._handlePreloader();
+
+			preloaderStore.eventEmitter.subscribe(this._handlePreloader);
 			popupStore.eventEmitter.subscribe(this._handlePopupStore);
 			slideStore.eventEmitter.subscribe(this._handleSlideStore);
 			playerStore.eventEmitter.subscribe(this._handlePlayerStore);
-
-			setTimeout(function() {
-				dispatcher.dispatch({
-					type: 'load-playlist',
-					id: 'beats'
-				});
-
-				self._handlePopupStore();
-				self._handleSlideStore();
-				self._handlePlayerStore();
-			}, 0);
 		}
 		var detachedCallback = function() {
+			preloaderStore.eventEmitter.unsubscribe(this._handlePreloader);
 			popupStore.eventEmitter.unsubscribe(this._handlePopupStore);
 			slideStore.eventEmitter.unsubscribe(this._handleSlideStore);
 			playerStore.eventEmitter.unsubscribe(this._handlePlayerStore);

@@ -20,9 +20,19 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
+    <preloader-component>
+        <div class="wrapper">
+            <div class="text">
+                <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
+                <div class="perc">0%</div>
+                <div class="nt">Soundtrack to life</div>
+            </div>
+        </div>
+    </preloader-component>
+
     <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3"></audio-player>
 
-    <div class="page-wrapper" data-scheme="bright" data-popup="inactive">
+    <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
@@ -51,7 +61,7 @@
 
         <div class="cart">
             <span>Cart</span>
-            <button class="btn">+2</button>
+            <button class="btn" data-text="[+0]">[+0]</button>
         </div>
 
         <audio-progressbar>
@@ -67,31 +77,31 @@
                                 <a href="index.html"
                                     is="inner-link"
                                     class="active">
-                                    <text-glitch data-to="B%43*" data-text="Beats">Beats</text-glitch>
+                                    <text-glitch data-to="Beats" data-text="B%43*">B%43*</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="albums.html"
                                     is="inner-link">
-                                    <text-glitch data-to="A.75&" data-text="Album">Album</text-glitch>
+                                    <text-glitch data-to="Album" data-text="A.75?">A.75?</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="videos.html"
                                     is="inner-link">
-                                    <text-glitch data-to="V!7.0" data-text="Video">Video</text-glitch>
+                                    <text-glitch data-to="Video" data-text="V!7.0">V!7.0</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="about.html"
                                     is="inner-link">
-                                    <text-glitch data-to="A^%,4" data-text="About">About</text-glitch>
+                                    <text-glitch data-to="About" data-text="A^%,4">A^%,4</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="merch.html"
                                     is="inner-link">
-                                    <text-glitch data-to="M`~13" data-text="Merch">Merch</text-glitch>
+                                    <text-glitch data-to="Merch" data-text="M`~13">M`~13</text-glitch>
                                 </a>
                             </menu-item>
                         </nav>
@@ -103,47 +113,50 @@
         <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
             <div class="popup-outer">
                 <div class="popup-inner">
-                    <section class="all-tracks">
-                        <div class="wrapper">
-                            <track-list class="tracks-list" data-id="beats">
-                                <div class="tracks-group">
-                                    <h3># Hip-hop</h3>
-                                    <ol>
-                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                    </ol>
-                                </div>
-                                <div class="tracks-group">
-                                    <h3># Epic</h3>
-                                    <ol>
-                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                    </ol>
-                                </div>
-                                <div class="tracks-group">
-                                    <h3># Tropical</h3>
-                                    <ol>
-                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                    </ol>
-                                </div>
-                                <div class="tracks-group">
-                                    <h3># Cinematic</h3>
-                                    <ol>
-                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                        <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                        <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                    </ol>
-                                </div>
-                            </track-list>
+                    <div class="section-header">
+                        <div class="left-wrapper">
+                            <button is="popup-close" class="btn" data-text=[Close]>[Close]</button>
                         </div>
+                    </div>
+                    <section class="all-tracks">
+                        <track-list class="tracks-list" data-id="beats">
+                            <div class="tracks-group">
+                                <h3># Hip-hop</h3>
+                                <ol>
+                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                </ol>
+                            </div>
+                            <div class="tracks-group">
+                                <h3># Epic</h3>
+                                <ol>
+                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                </ol>
+                            </div>
+                            <div class="tracks-group">
+                                <h3># Tropical</h3>
+                                <ol>
+                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                </ol>
+                            </div>
+                            <div class="tracks-group">
+                                <h3># Cinematic</h3>
+                                <ol>
+                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
+                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
+                                </ol>
+                            </div>
+                        </track-list>
                         <div class="clear"></div>
                     </section>
 
@@ -153,16 +166,16 @@
         </popup-component>
 
         <div class="stage-fallback"></div>
-        <canvas is="bg-stage"></canvas>
+        <stage-component></stage-component>
 
         <main class="vh-min-height">
             <div class="content replaceable" data-id="main-content">
                 <beats-helper></beats-helper>
 
                 <div class="beat-bg"></div>
-                <div class="beat-header">
+                <div class="section-header beat-header">
                     <div class="left-wrapper">
-                        <button is="audio-pause" class="btn pause">Pause</button>
+                        <button is="audio-pause" class="btn pause" data-text="[Pause]">[Pause]</button>
                         <audio-progress class="time">
                             <span class="mn">00.</span><span class="sc">00.</span><span class="ms">000</span>
                         </audio-progress>
@@ -172,7 +185,7 @@
                 <div class="beat-aside">
                     <div class="left-wrapper">
                         <div class="inner vh-height">
-                            <button is="popup-toggle" class="btn all" data-id="all-tracks-popup">+</button>
+                            <button is="popup-toggle" class="btn all" data-id="all-tracks-popup" data-text="[+]">[+]</button>
                             <slide-scroll-index 
                                 data-id="beat-slides"
                                 class="beat-index">1</slide-scroll-index>
@@ -209,7 +222,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn buy">Buy</button>
+                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
@@ -226,7 +239,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn buy">Buy</button>
+                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
@@ -243,7 +256,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn buy">Buy</button>
+                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
