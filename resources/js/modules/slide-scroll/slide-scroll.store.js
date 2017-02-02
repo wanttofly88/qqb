@@ -4,7 +4,17 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var eventEmitter = new utils.EventEmitter();
 	var items = {};
 
+	var timeForBlocking = 800;
+	var animationSpeed = 800;
+	var nativeScroll = false;
+
+	var defaultProps = {
+		timeForBlocking: timeForBlocking,
+		animationSpeed: animationSpeed
+	};
+
 	var _handleEvent = function(e) {
+
 		if (e.type === 'slide-scroll-add') {
 			if (items.hasOwnProperty(e.id)) return;
 
@@ -34,7 +44,21 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				items[e.id].index++;
 			}
 
+			if (e.hasOwnProperty('speed')) {
+				animationSpeed = e.speed;
+			}
+			if (e.hasOwnProperty('block')) {
+				timeForBlocking = e.block;
+			}
+			if (e.hasOwnProperty('native')) {
+				nativeScroll = e.native;
+			}
+
 			eventEmitter.dispatch();
+
+			animationSpeed = defaultProps.timeForBlocking;
+			timeForBlocking = defaultProps.timeForBlocking;
+			nativeScroll = false;
 		}
 
 		if (e.type === 'slide-scroll-to') {
@@ -51,13 +75,30 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				items[e.id].index = e.index;
 			}
 
+			if (e.hasOwnProperty('speed')) {
+				animationSpeed = e.speed;
+			}
+			if (e.hasOwnProperty('block')) {
+				timeForBlocking = e.block;
+			}
+			if (e.hasOwnProperty('native')) {
+				nativeScroll = e.native;
+			}
+
 			eventEmitter.dispatch();
+
+			animationSpeed = defaultProps.timeForBlocking;
+			timeForBlocking = defaultProps.timeForBlocking;
+			nativeScroll = false;
 		}
 	}
 
 	var getData = function() {
 		return {
-			items: items
+			items: items,
+			timeForBlocking: timeForBlocking,
+			animationSpeed: animationSpeed,
+			nativeScroll: nativeScroll
 		}
 	}
 

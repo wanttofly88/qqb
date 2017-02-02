@@ -19,13 +19,13 @@ define([
 			slide.classList.remove('hidden');
 			this._z = this._z + 1;
 
-			if (way === 'bottom') {
-				translate(slide, 100, 0);
-				translate(bg, -92, 0);
-			} else {
-				translate(slide, -100, 0);
-				translate(bg, 92, 0);
-			}
+			// if (way === 'bottom') {
+			// 	translate(slide, 100, 0);
+			// 	translate(bg, -92, 0);
+			// } else {
+			// 	translate(slide, -100, 0);
+			// 	translate(bg, 92, 0);
+			// }
 
 			this._slides[this._index].style.zIndex = this._z;
 
@@ -41,9 +41,11 @@ define([
 
 			setTimeout(function() {
 			if (way === 'bottom') {
-				translate(bg, -10, 800);
+				translate(slide, -100, 800);
+				translate(bg, 80, 800);
 			} else {
-				translate(bg, 10, 800);
+				translate(slide, 100, 800);
+				translate(bg, -80, 800);
 			}
 			}, 20);
 		}
@@ -90,6 +92,17 @@ define([
 		var attachedCallback = function() {
 			this._slides = this.getElementsByClassName('slide');
 			this._current = 0;
+
+			this._slides[0].style.zIndex = 1;
+
+			Array.prototype.forEach.call(this._slides, function(slide, index) {
+				var bg = slide.getElementsByClassName('bg')[0];
+				if (index > 0) {
+					slide.classList.add('hidden');
+					translate(slide, 100, 800);
+					translate(bg, -80, 800);
+				}
+			});
 
 			store.eventEmitter.subscribe(this._handleStore);
 		}

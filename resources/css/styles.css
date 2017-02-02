@@ -112,10 +112,10 @@ a {
 	overflow: hidden;
 	min-width: 320px;
 	color: #ffffff;
+	transition: color 0.2s;
 }
 .page-wrapper[data-scheme="bright"] {
 	color: #252525;
-	transition: color 0.2s;
 }
 .show320 {
 	display: block !important;
@@ -299,6 +299,7 @@ button {
 .btn {
 	transition: color 0.2s;
 	position: relative;
+	color: #ffffff;
 }
 .btn:before {
 	content: "";
@@ -309,7 +310,7 @@ button {
 	bottom: -3px;
 	z-index: -1;
 	vertical-align: bottom;
-	background: #142229;
+	background: #ffffff;
 	transition: all 0.4s;
 	opacity: 0.95;
 	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
@@ -322,24 +323,22 @@ button {
 	right: 8px;
 	height: 100%;
 	width: 11px;
-	background: #ffffff;
+	background: #252525;
 	z-index: 2;
 	opacity: 0;
 	transition: opacity 0.2s ease 0.1s;
-	box-shadow: 0 0 2px #ffffff;
+	box-shadow: 0 0 2px #252525;
 }
 .btn.big:after {
 	right: 16px;
 	width: 18px;
 }
 .btn:hover {
-	text-shadow: 0 0 1px #ffffff;
-	color: #ffffff !important;
+	color: #252525;
 }
 .btn:hover:before {
 	width: calc(100% + 6px);
 	transition: all 0.15s;
-	V
 }
 .btn:hover:after {
 	opacity: 1;
@@ -360,6 +359,23 @@ button {
 	.btn.big:after {
 		right: 19px;
 	}
+}
+.page-wrapper[data-scheme="bright"] .cart .btn,
+.btn.dark {
+	color: #252525;
+}
+.page-wrapper[data-scheme="bright"] .cart .btn:before,
+.btn.dark:before {
+	background: #142229;
+}
+.btn.dark:after,
+.page-wrapper[data-scheme="bright"] .cart .btn:after {
+	background: #ffffff;
+	box-shadow: 0 0 2px #ffffff;
+}
+.btn.dark:hover,
+.page-wrapper[data-scheme="bright"] .cart .btn:hover {
+	color: #ffffff;
 }
 
 .menu-btn {
@@ -464,9 +480,9 @@ button {
 	transition: opacity 0.2s linear 0s;
 	opacity: 1;
 }
-.page-wrapper[data-popup="active"] .content {
+.no-touchevents.webgl .page-wrapper[data-popup="active"] .content {
 	opacity: 0;
-	transition: opacity 0.3s linear 0s;
+	transition: opacity 0.2s linear 0s;
 }
 
 .cart {
@@ -474,6 +490,7 @@ button {
 	right: 18px;
 	bottom: 20px;
 	z-index: 100;
+	transform: translateZ(0px);
 }
 @media screen and (min-width: 640px) {
 	.cart {
@@ -487,10 +504,6 @@ button {
 		top: 54px;
 		display: block;
 	}
-}
-.page-wrapper[data-scheme="bright"] .cart button {
-	color: #252525;
-	transition: color 0.2s;
 }
 
 .wrapper {
@@ -531,7 +544,21 @@ stage-component,
 	left: 0;
 	top: 0;
 	z-index: 0;
+	display: none;
 }
+.stage-fallback {
+	display: block;
+}
+popup-component .stage-fallback {
+	position: absolute;
+}
+.no-touchevents.webgl stage-component {
+	display: block;
+}
+.no-touchevents.webgl .stage-fallback {
+	display: none;
+}
+
 .stage-fallback {
 	background: url(../images/menu.jpg);
 	background-size: cover;
@@ -539,17 +566,8 @@ stage-component,
 }
 
 .menu-popup {
-	background: url(../images/menu.jpg);
-	background-size: cover;
-	background-position: center;
 	z-index: 50;
 }
-@media screen and (min-width: 1000px) {
-	.menu-popup {
-		/*background: none;*/
-	}
-}
-
 .menu-popup .popup-cell {
 	text-align: center;
 }
@@ -570,33 +588,28 @@ stage-component,
 	line-height: 1.15;
 }
 .menu-popup menu-item {
-	transform: translateX(15px);
 	opacity: 0;
-	transition: transform 0s ease 0.2s, opacity 0s ease 0.2s;
+	transition: opacity 0s ease 0.2s;
 }
 .menu-popup.active menu-item {
 	opacity: 1;
 	transform: translateX(0px);
-	transition: transform 0.15s ease 0s, opacity 0.15s ease 0s;
-}
-.menu-popup menu-item:nth-child(1) {
-	opacity: 1;
-	transform: translateX(0px);
+	transition: opacity 0.15s ease 0s;
 }
 .menu-popup.active menu-item:nth-child(1) {
-	transition-delay: 0s;
+	transition-delay: 0.2s;
 }
 .menu-popup.active menu-item:nth-child(2) {
-	transition-delay: 0.0s;
+	transition-delay: 0.25s;
 }
 .menu-popup.active menu-item:nth-child(3) {
-	transition-delay: 0.05s;
+	transition-delay: 0.3s;
 }
 .menu-popup.active menu-item:nth-child(4) {
-	transition-delay: 0.1s;
+	transition-delay: 0.35s;
 }
 .menu-popup.active menu-item:nth-child(5) {
-	transition-delay: 0.15s;
+	transition-delay: 0.4s;
 }
 @media screen and (min-width: 640px) {
 	.menu-popup nav {
@@ -618,45 +631,63 @@ stage-component,
 	}
 }
 
-.menu-popup text-glitch {
+text-glitch {
 	display: inline-block;
 	position: relative;
 }
-.menu-popup text-glitch:before,
-.menu-popup text-glitch:after {
-	content: attr(data-text);
+text-glitch .glitch-fake {
+	opacity: 0;
+}
+text-glitch .glitch-start {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	overflow: hidden;
+}
+text-glitch .glitch-start span {
+	position: absolute;
+	right: 0;
+}
+text-glitch .glitch-animation {
 	position: absolute;
 	left: 0;
 	top: 0;
-	z-index: -1;
+	width: 0;
+	overflow: hidden;
+	z-index: 2;
 }
-.menu-popup text-glitch:before {
-	color: #0035ff;
+text-glitch .glitch-final {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0px;
+	color: #252525;
+	overflow: hidden;
+	width: 0;
+	z-index: 3;
 }
-.menu-popup text-glitch:after {
-	color: #ff49f8;
+text-glitch:before {
+	content: "";
+	position: absolute;
+	left: -7px;
+	right: -20px;
+	top: 0;
+	bottom: 0;
+	background: #ffffff;
+	z-index: 0;
+	transform: scaleX(0);
+	transform-origin: 0 0;
+	transition: all 0.3s;
 }
-.menu-popup a text-glitch {
-	transition: all 0.4s;
+text-glitch.hover:before {
+	transform: scaleX(1);
 }
-.menu-popup a text-glitch:before {
-	opacity: 0;
-	transition: all 1s;
-	transition-timing-function: cubic-bezier(0.28, 0.69, 0.41, 0.99);
-}
-.menu-popup a:hover text-glitch:before {
-	opacity: 0.6;
-	transform: translateX(-3px) translateY(2px);
-}
-.menu-popup a:hover text-glitch {
-	text-shadow: 0px 0px 2px #ffffff;
-}
-.menu-popup text-glitch:after {
-	color: #ff49f8;
-/*	z-index: 2;
-	clip: rect(40px, 200px, 60px, 40px);
-	text-shadow: 0px 0px 2px #000 !important;*/
-}
+
+
 
 h1 {
 	font-size: 32px;
@@ -712,19 +743,10 @@ ol li:before {
 	content: counter(ol, decimal-leading-zero);
 	margin-right: 20px;
 }
-.beat-bg,
-.album-bg {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #ffffff;
+.stage-fallback.beat-bg {
 	background-image: url(../images/beat-bg.jpg);
-	background-size: cover;
-	background-position: center;
 }
-.album-bg {
+.stage-fallback.album-bg {
 	background-image: url(../images/menu.jpg);
 }
 aside {
@@ -771,7 +793,7 @@ beat-bg-slider .slide {
 	top: 0;
 	overflow: hidden;
 	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
-	will-change: transform;
+	transform: translateZ(0px);
 }
 beat-bg-slider .slide .bg {
 	position: absolute;
@@ -881,6 +903,11 @@ beat-bg-slider .slide.hidden:before {
 .section-header .time .ms {
 	font-size: 14px;
 }
+.section-header .close {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
 @media screen and (min-width: 640px) {
 	.section-header {
 		padding-top: 52px;
@@ -901,17 +928,11 @@ beat-bg-slider .slide.hidden:before {
 	}
 }
 
-.beat-header button {
-	color: #252525;
-}
-
 .beat {
 	position: relative;
 	color: #252525;
 }
-.beat button {
-	color: #252525;
-}
+
 .beat .left-wrapper,
 .album .left-wrapper {
 	position: absolute;
@@ -956,10 +977,6 @@ beat-bg-slider .slide.hidden:before {
 	position: relative;
 	color: #ffffff;
 }
-.album button {
-	color: #ffffff;
-}
-
 
 .album .left-wrapper {
 	margin-left: 17.5%;
@@ -1126,7 +1143,7 @@ beat-bg-slider .slide.hidden:before {
 }
 
 
-.album-footer button {
+.album-footer .btn {
 	margin-right: 55px;
 }
 
@@ -1205,24 +1222,21 @@ slide-scroll .js-slide {
 }
 
 slide-scroll.inactive {
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch
 }
 slide-scroll .slide-scroll-wrapper {
 	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
 }
 
-.all-tracks-popup {
-	background: url(../images/menu.jpg);
-	background-position: center;
-	background-size: cover;
-}
 .all-tracks-popup .popup-inner {
 	text-align: center;
 }
 .all-tracks {
 	padding-left: 0;
 	padding-top: 100px;
+	padding-bottom: 100px;
 	display: inline-block;
 	white-space: nowrap;
 }
@@ -1271,7 +1285,7 @@ popup-component {
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 100%;
+	width: 0%;
 	z-index: 50;
 	transform: translateZ(0px);
 	overflow: hidden;
@@ -1306,15 +1320,14 @@ popup-component .popup-cell {
 popup-component {
 	width: 0;
 	opacity: 0;
+	pointer-events: none;
 	transition: opacity 0.2s linear 0s, transform 0.2s ease 0s, width 0s linear 0.2s;
 }
 popup-component.active {
 	width: 100%;
 	opacity: 1;
+	pointer-events: auto;
 	transition: opacity 0.1s linear 0s, transform 0.1s ease 0s, width 0s linear 0s;
-}
-popup-component button {
-	color: #ffffff;
 }
 
 page-transition {
@@ -1345,7 +1358,6 @@ preloader-component {
 	left: 0;
 	top: 0;
 	background: #101010;
-	display: block;
 	transition: opacity 0.4s;
 	transform: translateZ(0px);
 	display: none;

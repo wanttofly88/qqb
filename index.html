@@ -69,6 +69,7 @@
         </audio-progressbar>
 
         <popup-component class="menu-popup" data-id="menu-popup">
+            <div class="stage-fallback"></div>
             <div class="popup-outer">
                 <div class="popup-inner">
                     <div class="popup-cell">
@@ -77,31 +78,31 @@
                                 <a href="index.html"
                                     is="inner-link"
                                     class="active">
-                                    <text-glitch data-to="Beats" data-text="B%43*">B%43*</text-glitch>
+                                    <text-glitch data-to="Beats">B%43s</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="albums.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Album" data-text="A.75?">A.75?</text-glitch>
+                                    <text-glitch data-to="Album">Alc5?</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="videos.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Video" data-text="V!7.0">V!7.0</text-glitch>
+                                    <text-glitch data-to="Video">Vi#d0</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="about.html"
                                     is="inner-link">
-                                    <text-glitch data-to="About" data-text="A^%,4">A^%,4</text-glitch>
+                                    <text-glitch data-to="About">A$ou4</text-glitch>
                                 </a>
                             </menu-item>
                             <menu-item>
                                 <a href="merch.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Merch" data-text="M`~13">M`~13</text-glitch>
+                                    <text-glitch data-to="Merch">M8.c3</text-glitch>
                                 </a>
                             </menu-item>
                         </nav>
@@ -111,11 +112,12 @@
         </popup-component>
 
         <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
+            <div class="stage-fallback"></div>
             <div class="popup-outer">
                 <div class="popup-inner">
                     <div class="section-header">
                         <div class="left-wrapper">
-                            <button is="popup-close" class="btn" data-text=[Close]>[Close]</button>
+                            <button is="popup-close" class="btn close" data-text=[Close]>[Close]</button>
                         </div>
                     </div>
                     <section class="all-tracks">
@@ -172,10 +174,10 @@
             <div class="content replaceable" data-id="main-content">
                 <beats-helper></beats-helper>
 
-                <div class="beat-bg"></div>
+                <div class="beat-bg stage-fallback"></div>
                 <div class="section-header beat-header">
                     <div class="left-wrapper">
-                        <button is="audio-pause" class="btn pause" data-text="[Pause]">[Pause]</button>
+                        <button is="audio-pause" class="btn dark pause" data-text="[Pause]">[Pause]</button>
                         <audio-progress class="time">
                             <span class="mn">00.</span><span class="sc">00.</span><span class="ms">000</span>
                         </audio-progress>
@@ -185,7 +187,7 @@
                 <div class="beat-aside">
                     <div class="left-wrapper">
                         <div class="inner vh-height">
-                            <button is="popup-toggle" class="btn all" data-id="all-tracks-popup" data-text="[+]">[+]</button>
+                            <button is="popup-toggle" class="btn dark all" data-id="all-tracks-popup" data-text="[+]">[+]</button>
                             <slide-scroll-index 
                                 data-id="beat-slides"
                                 class="beat-index">1</slide-scroll-index>
@@ -208,7 +210,8 @@
                     </div>
                 </div>
 
-                <slide-scroll data-id="beat-slides">
+                <slide-scroll data-id="beat-slides" 
+                    data-min-heights="0:460;640:640;1000:480;1400:540;1800:720">
                     <div class="slide-scroll-wrapper">
                         <section class="beat js-slide vh-min-height">
                             <div class="left-wrapper">
@@ -222,7 +225,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
@@ -239,7 +242,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
@@ -256,7 +259,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
@@ -287,5 +290,202 @@
             </div>
         </main>
     </div>
+
+    <script type="x-shader/x-vertex" id="simpleVertexShader">
+        varying vec2 vUv;
+        void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="simpleFragmentShader">
+        varying vec2 vUv;
+        uniform sampler2D tDiffuse;
+
+        void main() {
+            float vx = vUv.x;
+            float vy = vUv.y;
+            gl_FragColor = texture2D(tDiffuse, vec2(vx, vy));
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="bufferFragmentShader">
+        precision highp float;
+
+        uniform vec2 res;
+        uniform sampler2D bufferTexture;
+        uniform float st;
+        uniform float blurH;
+        uniform vec4 gBox;
+        uniform float shift;
+
+        varying vec2 vUv;
+
+        float insideBox(vec2 v, vec2 bottomLeft, vec2 topRight) {
+            vec2 s = step(bottomLeft, v) - step(topRight, v);
+            return s.x * s.y;   
+        }
+
+        void main() {
+            float sr = 64.0 / 255.0;
+            float sg = 219.0 / 255.0;
+            float sb = 225.0 / 255.0;
+            vec4 blue = vec4(sr, sg, sb, 1.0);
+
+            vec2 pixel = gl_FragCoord.xy / res.xy;
+
+            float t = insideBox(
+                pixel, 
+                vec2(min(gBox.x, gBox.z), min(gBox.y, gBox.w)),
+                vec2(max(gBox.x, gBox.z), max(gBox.y, gBox.w))
+            );
+
+            pixel.x = pixel.x + t*shift;
+
+            pixel.y = pixel.y - 0.004;
+            vec4 color = texture2D(bufferTexture, pixel);
+
+
+            // if (abs(sr - color.r) <= 0.03) {
+            //     color = blue;
+            // } else {
+            //     // color.r = color.r - (color.r - sr) / 100.0;
+            //     // color.g = color.g - (color.g - sg) / 100.0;
+            //     // color.b = color.b - (color.b - sb) / 100.0;
+            //     color = mix(color, blue, 0.03);
+            // }
+
+            if (st == 0.0) {
+                color = blue;
+            } else {
+                if (mod(st, 3.0) == 0.0) {
+                    color = mix(color, blue, 0.05); 
+                }
+            }
+
+            // gl_FragColor = sum;
+
+            gl_FragColor = color;
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="gradientFragmentShader">
+        varying vec2 vUv;
+
+        void main() {
+            float sr = 201.0 / 255.0;
+            float sg = 36.0 / 255.0;
+            float sb = 217.0 / 255.0;
+
+            float tr = 99.0 / 255.0;
+            float tg = 172.0 / 255.0;
+            float tb = 223.0 /255.0;
+
+            float vx = vUv.x;
+            float vy = vUv.y;
+            float r = sr - (sr - tr) * vy;
+            float g = sg - (sg - tg) * vy;
+            float b = sb - (sb - tb) * vy;
+            float a = pow((1.0 - vy), 2.0);
+            //float a = 1.0;
+            gl_FragColor = vec4(r, g, b, a);
+            //gl_FragColor = vec4(sr, sg, sb, 1.0);
+        }
+    </script>
+
+    <script type="x-shader/x-fragment" id="glitchFragmentShader">
+        varying vec2 vUv;
+        uniform sampler2D tDiffuse;
+
+        void main() {
+            float vx = vUv.x;
+            float vy = vUv.y;
+            // if (vy < 0.5 && vy > 0.45) {
+            //     vx = vx + sin(vy/0.025)/10.0;
+            // }
+            gl_FragColor = texture2D(tDiffuse, vec2(vx, vy));
+        }
+    </script>
+
+
+
+    <script type="x-shader/x-fragment" id="postProcessingShader">
+        uniform float time;
+        uniform float nIntensity;
+        uniform float sIntensity;
+        uniform float sCount;
+        uniform sampler2D tDiffuse;
+        varying vec2 vUv;
+
+        uniform float colorScheme;
+
+        // vec2 mod289(vec2 x) {
+        //     return x - floor(x * (1.0 / 289.0)) * 289.0;
+        // }
+        // vec3 permute(vec3 x) {
+        //     return mod289(((x*34.0)+1.0)*x);
+        // }
+
+        // float snoise(vec2 v) {
+        //     const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
+        //                       0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
+        //                      -0.577350269189626,  // -1.0 + 2.0 * C.x
+        //                       0.024390243902439); // 1.0 / 41.0
+        //     vec2 i = floor(v + dot(v, C.yy));
+        //     vec2 x0 = v -   i + dot(i, C.xx);
+
+        //     vec2 i1;
+        //     i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+        //     vec4 x12 = x0.xyxy + C.xxzz;
+        //     x12.xy -= i1;
+
+        //     i = mod289(i); // Avoid truncation effects in permutation,
+        //     vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+        //        + i.x + vec3(0.0, i1.x, 1.0 ));
+
+        //     vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+        //     m = m * m;
+        //     m = m * m;
+
+        //     vec3 x = 2.0 * fract(p * C.www) - 1.0;
+        //     vec3 h = abs(x) - 0.5;
+        //     vec3 ox = floor(x + 0.5);
+        //     vec3 a0 = x - ox;
+
+        //     m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
+
+        //     vec3 g;
+        //     g.x  = a0.x  * x0.x  + h.x  * x0.y;
+        //     g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+        //     return 130.0 * dot(m, g);
+        // }
+
+        void main() {
+            vec4 cTextureScreen = texture2D( tDiffuse, vUv );
+            float x = vUv.x * vUv.y * time *  1000.0;
+            x = mod( x, 13.0 ) * mod( x, 123.0 );
+            float dx = mod( x, 0.01 );
+
+            vec3 cResult = cTextureScreen.rgb + cTextureScreen.rgb * clamp( 0.1 + dx * 100.0, 0.0, 1.0 );
+
+            vec2 sc = vec2( sin( vUv.y * sCount ), cos( vUv.y * sCount ) );
+            cResult += cTextureScreen.rgb * vec3( sc.x, sc.y, sc.x ) * sIntensity;
+
+            cResult = cTextureScreen.rgb + clamp( nIntensity, 0.0,1.0 ) * ( cResult - cTextureScreen.rgb );
+
+
+            vec3 gResult = vec3( 1.0 - (cResult.r * 0.3 + cResult.g * 0.59 + cResult.b * 0.11 ));
+            gResult.r = gResult.r * gResult.r;
+            gResult.g = gResult.g * gResult.g;
+            gResult.b = gResult.b * gResult.b;
+            gResult = mix(gResult, vec3(0.01, 0.01, 0.01), 0.7);
+
+            cResult = mix(cResult, gResult, colorScheme);
+
+            gl_FragColor =  vec4( cResult, cTextureScreen.a );
+        }
+    </script>
+
 </body>
 </html>

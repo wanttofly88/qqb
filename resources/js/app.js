@@ -14,7 +14,8 @@ require.config({
 	baseUrl: __path + 'js/modules',
 	paths: {
 		TweenMax: '../libs/TweenMax',
-		THREE: '../libs/three-with-composer',
+		THREE: '../libs/THREE',
+		THREEShaders: '../libs/THREE-Shaders'
 	},
 	shim: {
 		THREE: {
@@ -43,7 +44,7 @@ require([
 
 	'track-list/track-list.component',
 
-	'text-glitch/text-glitch.component',
+	'text-glitch/text-glitch2.component',
 
 	'popup/popup.component',
 	'popup/popup-toggle.component',

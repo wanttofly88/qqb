@@ -12,10 +12,6 @@ define([
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
 
-	var minHeight = 400;
-	var timeForBlocking = 800;
-	var animationSpeed = 800;
-
 	var elementProto = function() {
 		var translate = function(element, position, speed) {
 			element.style.transitionDuration = speed + 'ms';
@@ -185,8 +181,7 @@ define([
 				move = this._delta.y/3;
 
 				if (this._delta.y > 0 && this.index <= 0) {
-					// this._edge = true;
-					this._edge = false;
+					this._edge = true;
 				} else if (this._delta.y < 0 && this.index >= this.component._total - 1) {
 					this._edge = true;
 				} else {
@@ -248,6 +243,8 @@ define([
 			var storeData = store.getData().items[this._id];
 			var wh = this.clientHeight;
 			var self = this;
+			var timeForBlocking = store.getData().timeForBlocking;
+			var animationSpeed = store.getData().animationSpeed;
 
 			this._isScrolling = true;
 
@@ -255,25 +252,59 @@ define([
 				self._isScrolling = false;
 			}, timeForBlocking);
 
+			if (this._slides[storeData.index - 1]) {
+				this._slides[storeData.index - 1].classList.add('slide-previous');
+			}
+
+			this._slides[storeData.index].classList.remove('slide-previous');
+			this._slides[storeData.index].classList.remove('slide-next');
+
+			if (this._slides[storeData.index + 1]) {
+				this._slides[storeData.index + 1].classList.add('slide-next');
+			}
+
 			translate(this._wrapper, -wh*storeData.index, animationSpeed);
 		}
 
+		var scrollHandler = function(e) {
+			var scrolled = this.scrollTop;
+			var maxIndex = 0;
+
+			if (this._active === true) return;
+
+			Array.prototype.forEach.call(this._slides, function(slide, index) {
+				if (scrolled + 50 >= slide.offsetTop) {
+					maxIndex = index;
+				}
+			});
+
+			if (maxIndex === this.index) return;
+			this.index = maxIndex;
+
+			dispatcher.dispatch({
+				type: 'slide-scroll-to',
+				id: this._id,
+				index: maxIndex,
+				native: true
+			});
+		}
+
 		var activate = function() {
-			if (this._active) return;
+			if (this._active === true) return;
 			this._active = true;
 
 			store.eventEmitter.subscribe(this._storeHandler);
 			this._touchHandler.set();
 			this._wheelHandler.set();
 			this._keyboardHandler.set();
-			this._resizeHandler();
 			this.classList.remove('inactive');
-
 			this.scrollTop = 0;
+
+			this._resizeHandler();
 		}
 
 		var deactivate = function() {
-			if (!this._active) return;
+			if (this._active === false) return;
 			this._active = false; 
 
 			store.eventEmitter.unsubscribe(this._storeHandler);
@@ -288,16 +319,25 @@ define([
 		var resizeHandler = function() {
 			var storeData = store.getData().items[this._id];
 			var wh = window.innerHeight;
+			var ww = window.innerWidth;
+
+			var minHeight;
 
 			if (!storeData) {
 				console.warn('slide-scroll internall error');
 				return;
 			}
 
-			if (wh < minHeight && this._active) {
-				this._deactivate();
-			} else if (wh >= minHeight && !this._active) {
-				this._activate();
+			if (this._minHeights) {
+				minHeight = this._minHeights.reduce(function(prev, cur) {
+					return cur.bp < ww ? cur: prev;
+				});
+
+				if (wh < minHeight.h && this._active) {
+					this._deactivate();
+				} else if (wh >= minHeight.h && !this._active) {
+					this._activate();
+				}
 			}
 
 			if (this._active) {
@@ -310,20 +350,31 @@ define([
 			this._active = false;
 			this._storeHandler  = storeHandler.bind(this);
 			this._resizeHandler = resizeHandler.bind(this);
+			this._scrollHandler = scrollHandler.bind(this);
 			this._touchHandler  = new TouchHandler(this);
 			this._wheelHandler  = new WheelHandler(this);
 			this._keyboardHandler  = new KeyboardHandler(this);
 			this._activate   = activate.bind(this);
 			this._deactivate = deactivate.bind(this);
+			this.index = 0;
 		}
 
 		var attachedCallback = function() {
-			var slides = this.getElementsByClassName('js-slide');
-			this._active = true;
+			this._slides = this.getElementsByClassName('js-slide');
+			this._active = undefined;
 			this._wrapper = this.getElementsByClassName('slide-scroll-wrapper')[0];
 			this._id = this.getAttribute('data-id') || (idName + (idNum++));
-			this._total = slides.length;
+			this._total = this._slides.length;
 			this.setAttribute('data-id', this._id);
+
+			this._minHeights = this.getAttribute('data-min-heights');
+			this._minHeights = this._minHeights ? this._minHeights.split(';').map(function(item) {
+					var vals = item.split(':');
+					return {
+						bp: parseInt(vals[0]),
+						h: parseInt(vals[1])
+					}
+				}): null;
 
 			dispatcher.dispatch({
 				type: 'slide-scroll-add',
@@ -332,21 +383,21 @@ define([
 				total: this._total
 			});
 
-			store.eventEmitter.subscribe(this._storeHandler);
-			this._touchHandler.set();
-			this._wheelHandler.set();
-			this._keyboardHandler.set();
+			Array.prototype.forEach.call(this._slides, function(slide, index) {
+				if (index > 0) {
+					slide.classList.add('slide-next');
+				}
+			});
+
+			this._activate();
 			window.addEventListener('resize', this._resizeHandler);
-			this._resizeHandler();
+			this.addEventListener('scroll', this._scrollHandler);
 		}
 
 		var detachedCallback = function() {
-			this._active = false;
-			store.eventEmitter.unsubscribe(this._storeHandler);
-			this._touchHandler.remove();
-			this._wheelHandler.remove();
-			this._keyboardHandler.remove();
+			this._deactivate();
 			window.removeEventListener('resize', this._resizeHandler);
+			this.removeEventListener('scroll', this._scrollHandler);
 		}
 
 		return {

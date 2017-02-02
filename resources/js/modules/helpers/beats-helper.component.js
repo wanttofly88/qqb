@@ -19,10 +19,16 @@ define([
 			var pw = document.getElementsByClassName('page-wrapper')[0];
 
 			if (active) {
-				pw.setAttribute('data-scheme', 'dark');
+				dispatcher.dispatch({
+					type: 'scheme-popup-change',
+					state: 'active'
+				});
 			}
 			if (!active) {
-				pw.setAttribute('data-scheme', 'bright');
+				dispatcher.dispatch({
+					type: 'scheme-popup-change',
+					state: 'inactive'
+				});
 			}
 		}
 
@@ -72,7 +78,6 @@ define([
 
 		var createdCallback = function() {
 			this._songIndex = null;
-			this._handleStore = handlePopupStore.bind(this);
 			this._handlePopupStore = handlePopupStore.bind(this);
 			this._handleSlideStore = handleSlideStore.bind(this);
 			this._handlePlayerStore = handlePlayerStore.bind(this);
@@ -80,6 +85,11 @@ define([
 		}
 		var attachedCallback = function() {
 			this._songIndex = null;
+
+			dispatcher.dispatch({
+				type: 'scheme-color-change',
+				scheme: 'bright'
+			});
 
 			dispatcher.dispatch({
 				type: 'load-playlist',
