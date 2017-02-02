@@ -16,8 +16,10 @@ define([
 
 		}
 		var attachedCallback = function() {
-			var pw = document.getElementsByClassName('page-wrapper')[0];
-			pw.setAttribute('data-scheme', 'dark');
+			dispatcher.dispatch({
+				type: 'scheme-color-change',
+				scheme: 'dark'
+			});
 		}
 		var detachedCallback = function() {
 

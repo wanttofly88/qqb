@@ -235,6 +235,7 @@ define(function() {
 		this.unsubscribe = function(handler) {
 			if (this._handlers.indexOf(handler) === -1) {
 				console.log('trying to unsubscribe unexisting handler');
+				console.log(handler.toString());
 			}
 			this._handlers = this._handlers.filter(function(h) {
 				return h !== handler;

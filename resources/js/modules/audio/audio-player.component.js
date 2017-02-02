@@ -181,7 +181,7 @@ define([
 			this._frequencyFilter.type = 'lowpass';
 			this._frequencyFilter.frequency.value = this._context.sampleRate / 2;
 			this._frequencyFilter.connect(this._gainNode);
-			// this._gainNode.connect(this._context.destination);
+			this._gainNode.connect(this._context.destination);
 		}
 
 		var loop = function() {

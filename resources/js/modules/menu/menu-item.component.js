@@ -7,7 +7,7 @@ define(['dispatcher'], function(dispatcher) {
 			// 	sim: 2,
 			// 	throttle: 2
 			// });
-			this._glith.stop();
+			// this._glith.stop();
 			this._glith.animate(this._glith.getAttribute('data-to'));
 		}
 		var stopAnimation = function() {
@@ -16,7 +16,7 @@ define(['dispatcher'], function(dispatcher) {
 			// 	throttle: 2
 			// });
 			this._glith.stop();
-			this._glith.animate(false);
+			// this._glith.animate(false);
 		}
 
 		var createdCallback = function() {
