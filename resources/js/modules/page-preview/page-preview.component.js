@@ -1,9 +1,9 @@
 define([
 	'dispatcher',
-	'scheme/scheme.store'
+	'resize/resize.store'
 ], function(
-	dispatcher,
-	schemeStore
+	dispatcher, 
+	resizeStore
 ) {
 	"use strict";
 
@@ -12,10 +12,8 @@ define([
 
 		}
 		var attachedCallback = function() {
-			dispatcher.dispatch({
-				type: 'scheme-color-change',
-				scheme: 'dark'
-			});
+			this._svg = this.classList.toggle('svg')[0];
+			
 		}
 		var detachedCallback = function() {
 
@@ -30,7 +28,7 @@ define([
 	}();
 
 	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
-	document.registerElement('albums-helper', {
+	document.registerElement('page-preview', {
 		prototype: elementProto
 	});
 });

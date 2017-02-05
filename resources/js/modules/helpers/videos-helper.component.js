@@ -30,7 +30,7 @@ define([
 	}();
 
 	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
-	document.registerElement('albums-helper', {
+	document.registerElement('videos-helper', {
 		prototype: elementProto
 	});
 });

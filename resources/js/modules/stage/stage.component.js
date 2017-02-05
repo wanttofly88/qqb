@@ -330,6 +330,11 @@ define([
 			this._step = 0;
 		}
 		var attachedCallback = function() {
+
+			document.getElementsByTagName('html')[0].classList.add('no-webgl');
+			document.getElementsByTagName('html')[0].classList.remove('webgl');
+			return;
+
 			this._base.init();
 			this._base.resize();
 			this._rect.init();
@@ -338,6 +343,8 @@ define([
 			this._loop();
 			schemeStore.eventEmitter.subscribe(this._handleScheme);
 			slideStore.eventEmitter.subscribe(this._handleSlideScroll);
+
+
 		}
 
 		var detachedCallback = function() {

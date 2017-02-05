@@ -15,6 +15,7 @@
     <script data-main="resources/js/app" src="resources/js/require.js"></script>
 </head>
 <body>
+
     <vh-fix></vh-fix>
     <page-transition></page-transition>
     <router-component></router-component>
@@ -27,10 +28,17 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
+        <page-preview>
+            <svg></svg>
+        </page-preview>
     </preloader-component>
 
+    <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3">
+        <audio src=""></audio>
+        <audio src=""></audio>
+    </audio-player>
 
-    <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
+    <div is="scheme-component" class="page-wrapper" data-scheme="dark" data-popup="inactive">
         <header>
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
@@ -54,12 +62,12 @@
                 <div class="b b5"></div>
                 <div class="b b6"></div>
             </button>
-            <div class="title">Album:</div>
+            <div class="title">Video:</div>
         </header>
 
         <div class="cart">
             <span>Cart</span>
-            <button class="btn" data-text="[+0]">[+0]</button>
+            <button class="btn">[+0]</button>
         </div>
 
         <audio-progressbar>
@@ -80,14 +88,14 @@
                             </div>
                             <div class="item">
                                 <a href="albums.html"
-                                    is="inner-link"
-                                    class="active">
+                                    is="inner-link">
                                     <menu-text data-to="Album">Alc5?</menu-text>
                                 </a>
                             </div>
                             <div class="item">
                                 <a href="videos.html"
-                                    is="inner-link">
+                                    is="inner-link"
+                                    class="active">
                                     <menu-text data-to="Video">Vi#d0</menu-text>
                                 </a>
                             </div>
@@ -115,7 +123,7 @@
                 <div class="popup-inner">
                     <div class="section-header">
                         <div class="left-wrapper">
-                            <button is="popup-close" class="btn close" data-text=[Close]>[Close]</button>
+                            <button is="popup-close" class="btn close">[Close]</button>
                         </div>
                     </div>
                     <section class="all-tracks">
@@ -169,91 +177,59 @@
         <stage-component></stage-component>
 
         <main class="vh-min-height">
-            <div class="stage"></div>
-
             <div class="content replaceable" data-id="main-content">
-                <albums-helper></albums-helper>
-                <div class="stage-fallback album-bg"></div>
+                <videos-helper></videos-helper>
+                <div class="video-bg stage-fallback"></div>
 
-                <div class="album-aside">
+                <div class="section-header videos-header">
                     <div class="left-wrapper">
-                        <div class="inner vh-height">
-                            <slide-scroll-index 
-                                data-id="album-slides"
-                                class="album-index">1</slide-scroll-index>
-                            <button class="arr a-t"
-                                is="slide-scroll-control"
-                                data-id="album-slides"
-                                data-to="prev">
-                                <div class="ico"></div>
-                            </button>
-                            <button class="arr a-b" 
-                                is="slide-scroll-control"
-                                data-id="album-slides"
-                                data-to="next">
-                                <div class="ico"></div>
-                            </button>
-                        </div>
+                        <slide-scroll-index 
+                            data-id="video-slides"
+                            class="video-index">1</slide-scroll-index>
                     </div>
                 </div>
 
-                <slide-scroll data-id="album-slides"  data-min-heights="0:460;640:640;1000:480;1400:540;1800:720">
+                <slide-scroll data-id="video-slides" 
+                    data-min-heights="0:460;640:640;1000:480;1400:540;1800:720">
                     <div class="slide-scroll-wrapper">
-                        <section class="album js-slide vh-min-height">
+                        <section class="video-slide js-slide vh-min-height">
+                            <full-img class="video-bg">
+                                <img src="tmp/video/p1.jpg" alt="">
+                            </full-img>
                             <div class="left-wrapper">
-                                <div class="album-header">
-                                    <div>New release album</div>
-                                    <div>Date: 2017 Feb</div>
-                                    <div>2LP Limited ed</div>
-                                </div>
-
-                                <div class="slide-content album-content">
-                                    <h1>The Heart Gently Weeps</h1>
-                                    <div class="nfo">
-                                        <div class="price">$35.00</div>
+                                <div class="slide-content video-content">
+                                    <h1>moderat reminder</h1>
+                                    <div class="view">
+                                        <button class="btn">[View]</button>
                                     </div>
-                                </div>
-
-
-                                <div class="section-footer album-footer">
-                                    <button class="btn">[Buy album]</button>
-                                    <button class="btn">[Listen now]</button>
+                                    <div class="nfo">
+                                        <div>Cinematic Soulful</div>
+                                        <div>Date: 2016 feb</div>
+                                        <div>Prod: Abyss</div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
-                        <section class="album js-slide vh-min-height">
+                        <section class="video-slide js-slide vh-min-height">
+                            <full-img class="video-bg">
+                                <img src="tmp/video/p2.jpg" alt="">
+                            </full-img>
                             <div class="left-wrapper">
-                                <div class="album-header">
-                                    <div>New release album</div>
-                                    <div>Date: 2017 Feb</div>
-                                    <div>2LP Limited ed</div>
-                                </div>
-
-                                <div class="slide-content album-content">
-                                    <h1>The Heart Gently Weeps</h1>
-                                    <div class="nfo">
-                                        <div class="price">$35.00</div>
+                                <div class="slide-content video-content">
+                                    <h1>moderat reminder</h1>
+                                    <div class="view">
+                                        <button class="btn">[View]</button>
                                     </div>
-                                </div>
-
-
-                                <div class="section-footer album-footer">
-                                <button class="btn">[Buy album]</button>
-                                <button class="btn">[Listen now]</button>
+                                    <div class="nfo">
+                                        <div>Cinematic Soulful</div>
+                                        <div>Date: 2016 feb</div>
+                                        <div>Prod: Abyss</div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
                     </div>
                 </slide-scroll>
-                <aside class="cover">
-                    <div class="cover-img">
-                        <proportional-height>
-                            <img src="tmp/beat-lables/1.jpg" alt="">
-                            <img src="tmp/beat-lables/2.jpg" alt="">
-                            <img src="tmp/beat-lables/3.jpg" alt="">
-                        </proportional-height>
-                    </div>
-                </aside>
             </div>
         </main>
     </div>

@@ -8,6 +8,27 @@ define([
 	"use strict";
 
 	var elementProto = function() {
+		var handleStore = function() {
+			var storeData = playerStore.getData();
+
+			if (storeData.playlistId !== this._id) {
+				if (this._active !== null) {
+					this._playlist[this._active].element.classList.remove('active');
+					this._active = null;
+				}
+			} else {
+				if (storeData.inndex !== this._active) {
+					if (this._active !== null) {
+						this._playlist[this._active].element.classList.remove('active');
+					}
+					this._active = storeData.index;
+					if (this._active !== null) {
+						this._playlist[this._active].element.classList.add('active');
+					}
+				}
+			}
+		}
+
 		var handleDispatcher = function(e) {
 			if (e.type === 'load-playlist' && e.id === this._id) {
 				dispatcher.dispatch({
@@ -20,9 +41,10 @@ define([
 
 		var createdCallback = function() {
 			this._playlist = [];
-			this._active = false;
+			this._active = null;
 
 			this._handleDispatcher = handleDispatcher.bind(this);
+			this._handleStore = handleStore.bind(this);
 		}
 
 		var attachedCallback = function() {
@@ -50,6 +72,7 @@ define([
 				});
 
 				self._playlist.push({
+					element: track,
 					index: index,
 					name: name,
 					src: src
@@ -57,9 +80,11 @@ define([
 			});
 
 			dispatcher.subscribe(this._handleDispatcher);
+			playerStore.eventEmitter.subscribe(this._handleStore);
 		}
 		var detachedCallback = function() {
 			dispatcher.unsubscribe(this._handleDispatcher);
+			playerStore.eventEmitter.unsubscribe(this._handleStore);
 		}
 
 
