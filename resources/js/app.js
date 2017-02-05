@@ -29,13 +29,13 @@ require([
 	'resize/vh-fix.component',
 	'resize/proportional-height.component',
 
+	'full-img/full-img.component',
+
 	'scheme/scheme.component',
 
 	'router/router.component',
 	'router/inner-link.component',
 	'router/page-transition.component',
-
-	'menu/menu-item.component',
 
 	'audio/audio-player.component',
 	'audio/audio-progress.component',
@@ -44,7 +44,7 @@ require([
 
 	'track-list/track-list.component',
 
-	'text-glitch/text-glitch2.component',
+	'text-glitch/menu-text.component',
 
 	'popup/popup.component',
 	'popup/popup-toggle.component',
@@ -52,6 +52,7 @@ require([
 
 	'helpers/beats-helper.component',
 	'helpers/albums-helper.component',
+	'helpers/videos-helper.component',
 
 	'slide-scroll/slide-scroll.component',
 	'slide-scroll/slide-scroll-index.component',

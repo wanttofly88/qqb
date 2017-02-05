@@ -28,9 +28,15 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
+        <page-preview>
+            <svg></svg>
+        </page-preview>
     </preloader-component>
 
-    <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3"></audio-player>
+    <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3">
+        <audio src=""></audio>
+        <audio src=""></audio>
+    </audio-player>
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
@@ -61,7 +67,7 @@
 
         <div class="cart">
             <span>Cart</span>
-            <button class="btn" data-text="[+0]">[+0]</button>
+            <button class="btn">[+0]</button>
         </div>
 
         <audio-progressbar>
@@ -74,37 +80,37 @@
                 <div class="popup-inner">
                     <div class="popup-cell">
                         <nav class="menu">
-                            <menu-item>
+                            <div class="item">
                                 <a href="index.html"
                                     is="inner-link"
                                     class="active">
-                                    <text-glitch data-to="Beats">B%43s</text-glitch>
+                                    <menu-text data-to="Beats">B%43s</menu-text>
                                 </a>
-                            </menu-item>
-                            <menu-item>
+                            </div>
+                            <div class="item">
                                 <a href="albums.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Album">Alc5?</text-glitch>
+                                    <menu-text data-to="Album">Alc5?</menu-text>
                                 </a>
-                            </menu-item>
-                            <menu-item>
+                            </div>
+                            <div class="item">
                                 <a href="videos.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Video">Vi#d0</text-glitch>
+                                    <menu-text data-to="Video">Vi#d0</menu-text>
                                 </a>
-                            </menu-item>
-                            <menu-item>
+                            </div>
+                            <div class="item">
                                 <a href="about.html"
                                     is="inner-link">
-                                    <text-glitch data-to="About">A$ou4</text-glitch>
+                                    <menu-text data-to="About">A$ou4</menu-text>
                                 </a>
-                            </menu-item>
-                            <menu-item>
+                            </div>
+                            <div class="item">
                                 <a href="merch.html"
                                     is="inner-link">
-                                    <text-glitch data-to="Merch">M8.c3</text-glitch>
+                                    <menu-text data-to="Merch">M8.c3</menu-text>
                                 </a>
-                            </menu-item>
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -117,7 +123,7 @@
                 <div class="popup-inner">
                     <div class="section-header">
                         <div class="left-wrapper">
-                            <button is="popup-close" class="btn close" data-text=[Close]>[Close]</button>
+                            <button is="popup-close" class="btn close">[Close]</button>
                         </div>
                     </div>
                     <section class="all-tracks">
@@ -127,7 +133,7 @@
                                 <ol>
                                     <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
                                     <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
+                                    <li class="track" data-src="tmp/audio/Gulag_BPM130_Tag.mp3">Gulag_BPM130_Tag</li>
                                     <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
                                 </ol>
                             </div>
@@ -173,11 +179,11 @@
         <main class="vh-min-height">
             <div class="content replaceable" data-id="main-content">
                 <beats-helper></beats-helper>
-
                 <div class="beat-bg stage-fallback"></div>
+
                 <div class="section-header beat-header">
                     <div class="left-wrapper">
-                        <button is="audio-pause" class="btn dark pause" data-text="[Pause]">[Pause]</button>
+                        <button is="audio-pause" class="btn dark pause">[Pause]</button>
                         <audio-progress class="time">
                             <span class="mn">00.</span><span class="sc">00.</span><span class="ms">000</span>
                         </audio-progress>
@@ -187,7 +193,7 @@
                 <div class="beat-aside">
                     <div class="left-wrapper">
                         <div class="inner vh-height">
-                            <button is="popup-toggle" class="btn dark all" data-id="all-tracks-popup" data-text="[+]">[+]</button>
+                            <button is="popup-toggle" class="btn dark all" data-id="all-tracks-popup">[+]</button>
                             <slide-scroll-index 
                                 data-id="beat-slides"
                                 class="beat-index">1</slide-scroll-index>
@@ -215,7 +221,7 @@
                     <div class="slide-scroll-wrapper">
                         <section class="beat js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="beat-content">
+                                <div class="slide-content beat-content">
                                     <h1>Spaced Grey marbled</h1>
                                     <div class="nfo">
                                         <div>Date release: 2016 Dec</div>
@@ -225,14 +231,14 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
                         </section>
                         <section class="beat js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="beat-content">
+                                <div class="slide-content beat-content">
                                     <h1>Spaced Grey marbled</h1>
                                     <div class="nfo">
                                         <div>Date release: 2016 Dec</div>
@@ -242,14 +248,14 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>
                         </section>
                         <section class="beat js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="beat-content">
+                                <div class="slide-content beat-content">
                                     <h1>Spaced Grey marbled</h1>
                                     <div class="nfo">
                                         <div>Date release: 2016 Dec</div>
@@ -259,7 +265,7 @@
                                 </div>
 
                                 <div class="section-footer beat-footer">
-                                    <button class="btn dark big buy" data-text="[Buy]">[Buy]</button>
+                                    <button class="btn dark big buy">[Buy]</button>
                                     <div class="price">$ 20.00</div>
                                 </div>
                             </div>

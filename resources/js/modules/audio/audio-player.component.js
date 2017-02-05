@@ -14,117 +14,24 @@ define([
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
-	var crossFadeDuration = 0.3;
-
 	var elementProto = function() {
-		var SongsCashe = function(limit) {
-			this._cache = [];
-			this.get = function(url) {
-				var result = null;
-				this._cache.forEach(function(item) {
-					if (item.url === url) {
-						result = item;
-					}
-				});
-
-				return result;
-			}
-			this.put = function(data) {
-				var self = this;
-
-				if (this._cache.length > limit) {
-					this._cache.shift();
-				}
-
-				this._cache.push({
-					url: data.url,
-					buffer: data.buffer
-				});
-			}
-		} 
-
-		var loadSound = function(url) {
-			var request = new XMLHttpRequest();
-			var self = this;
-
-			var promise = new Promise(function(resolve, reject) {
-				var cashed;
-
-				if (!self._context) {
-					reject('webaudio error');
-				}
-
-				cashed = self._songsCashe.get(url);
-
-				if (cashed) {
-					resolve(cashed.buffer);
-				} else {
-					request.open('GET', url, true);
-					request.responseType = 'arraybuffer';
-
-					request.onload = function() {
-						self._context.decodeAudioData(request.response, function(buffer) {
-							self._songsCashe.put({
-								url: url,
-								buffer: buffer
-							});
-
-							resolve(buffer);
-						}, function() {
-							reject('webaudio error');
-						});
-					}
-					request.send();
-				}
-			});
-
-			return promise;
-		}
-
-		var playSound = function(buffer) {
-			var source = this._context.createBufferSource();
-
-			source.buffer = buffer;
-			source.connect(this._context.destination);
-			source.start(0);
-		}
 
 		var playSong = function(song, position) {
 			var self = this;
 			var previousSong;
-			var position = position || this._paused;
+			var position = position || 0;
 
-			var go = function(buffer) {
-				var source = self._context.createBufferSource();
-				var gainNode = self._context.createGain();
-				var playlist = playerStore.getData().playlist;
-				var nextIndex;
+			var t = this._audio.current;
 
-				// cache next song;
-				if (playlist) {
-					if (playlist[song.index + 1]) {
-						nextIndex = song.index + 1;
-					} else {
-						nextIndex = 0;
-					}
-					self._loadSound(playlist[nextIndex].src);
-				}
+			this._audio.current = this._audio.previous;
+			this._audio.previous = t;
 
-				gainNode.gain.value = 0;
-				source.buffer = buffer;
-				source.connect(gainNode);
-				gainNode.connect(self._frequencyFilter);
-				source.start(self._context.currentTime, self._paused);
+			this._audio.current.element.src = song.src;
 
-				gainNode.gain.linearRampToValueAtTime(1, self._context.currentTime + crossFadeDuration);
+			this._audio.current.element.load();
 
-				self._currentSong = {
-					startTime: self._context.currentTime - self._paused,
-					source: source,
-					gainNode: gainNode
-				};
-				self._loadingSong = false;
-
+			if (!this._paused) {
+				this._audio.current.element.play();
 				dispatcher.dispatch({
 					type: 'audio-song-changed',
 					song: {
@@ -133,76 +40,82 @@ define([
 						playlistId: playerStore.getData().playlistId
 					}
 				});
+
+				if (this._mode === 'webaudio') {
+					this._audio.current.gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + this._crossfadeDuration);
+					this._audio.previous.gainNode.gain.linearRampToValueAtTime(0, self._context.currentTime + this._crossfadeDuration);
+				}
+
+				this._audio.current.element.currentTime = position;
 			}
 
-			if (this._loadingSong) return;
-			this._loadingSong = true;
-
-			previousSong = this._currentSong;
-
-			if (previousSong) {
-				previousSong.gainNode.gain.linearRampToValueAtTime(0, self._context.currentTime + crossFadeDuration);
-				setTimeout(function() {
-					previousSong.source.stop(0);
-				}, crossFadeDuration * 1000);
-			}
-
-			this._loadSound(song.src).then(go, function(err) {
-				console.log(err);
-			});
+			setTimeout(function() {
+				self._audio.previous.element.pause();
+			}, this._crossfadeDuration * 1000);
 		}
 
-		var stopSong = function() {
-			var previousSong = this._currentSong;
+		var pauseSong = function() {
+			var element = this._audio.current.element;
+			var current = this._audio.current;
 
-			if (!previousSong) return;
-
-			this._currentSong = null;
-			this._paused = this._context.currentTime - previousSong.startTime;
+			this._paused = this._audio.current.element.currentTime;
 
 			dispatcher.dispatch({
 				type: 'audio-song-changed',
 				song: null
 			});
 
-			if (previousSong) {
-				previousSong.gainNode.gain.linearRampToValueAtTime(0, this._context.currentTime + crossFadeDuration);
-				setTimeout(function() {
-					previousSong.source.stop(0);
-				}, crossFadeDuration * 1000);
+			if (this._mode === 'webaudio') {
+				current.gainNode.gain.linearRampToValueAtTime(0, this._context.currentTime + this._crossfadeDuration);
 			}
+			
+			setTimeout(function() {
+				element.pause();
+			}, this._crossfadeDuration * 1000);
 		}
 
-		var setFilters = function() {
-			this._gainNode = this._context.createGain();
-			this._gainNode.gain.value = 1;
+		var unpauseSong = function() {
+			var element = this._audio.current.element;
+			var current = this._audio.current;
 
-			this._frequencyFilter = this._context.createBiquadFilter();
-			this._frequencyFilter.type = 'lowpass';
-			this._frequencyFilter.frequency.value = this._context.sampleRate / 2;
-			this._frequencyFilter.connect(this._gainNode);
-			this._gainNode.connect(this._context.destination);
+			this._paused = 0;
+
+			dispatcher.dispatch({
+				type: 'audio-song-changed',
+				song: {
+					name: this._songNfo.name,
+					index: this._songNfo.index,
+					playlistId: playerStore.getData().playlistId
+				}
+			});
+
+			if (this._mode === 'webaudio') {
+				current.gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + this._crossfadeDuration);
+			}
+
+			element.play();
 		}
 
 		var loop = function() {
+			var current;
+			var element;
+
 			if (this._stopLoop) return;
 
-			if (this._currentSong) {
-				audioDispatcher.dispatch({
-					type: 'audio-data-changed',
-					duration: this._currentSong.source.buffer.duration,
-					time: this._context.currentTime - this._currentSong.startTime
-				});
+			current = this._audio.current;
+			element = this._audio.current.element;
 
-				if (this._context.currentTime >= this._currentSong.startTime 
-						+ this._currentSong.source.buffer.duration - crossFadeDuration
-						&& !this._loadingSong) {
-				// if (this._context.currentTime >= this._currentSong.startTime + 70
-				// 		&& !this._loadingSong) {
-					dispatcher.dispatch({
-						type: 'audio-next'
-					});
-				}
+			audioDispatcher.dispatch({
+				type: 'audio-data-changed',
+				duration: element.duration,
+				time: element.currentTime
+			});
+
+			if (element.duration && element.currentTime >= element.duration - this._crossfadeDuration) {
+
+				dispatcher.dispatch({
+					type: 'audio-next'
+				});
 			}
 
 			requestAnimationFrame(this._loop);
@@ -212,19 +125,17 @@ define([
 			var playlist = playerStore.getData().playlist;
 			var playlistId = playerStore.getData().playlistId;
 
-			if (e.type === 'audio-low-freq') {
+			if (e.type === 'audio-low-freq' && this._mode === 'webaudio') {
 				this._gainNode.gain.linearRampToValueAtTime(0.5, this._context.currentTime + 0.5);
 				this._frequencyFilter.frequency.exponentialRampToValueAtTime(this._context.sampleRate / 300, this._context.currentTime + 0.5);
 			}
-			if (e.type === 'audio-high-freq') {
+			if (e.type === 'audio-high-freq' && this._mode === 'webaudio') {
 				this._gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + 0.5);
 				this._frequencyFilter.frequency.exponentialRampToValueAtTime(this._context.sampleRate / 2, this._context.currentTime + 0.5);
 
 			}
 			if (e.type === 'audio-play') {
 				if (e.index !== undefined) {
-					this._paused = 0;
-
 					if (e.playlistId && e.playlistId !== playlistId) {
 						console.log('audio error. wrong playlist id specified');
 						return;
@@ -232,14 +143,19 @@ define([
 					if (playlist && playlist[e.index]) {
 						this._songNfo = playlist[e.index];
 					}
+
 					this._playSong(this._songNfo);
 				} else {
-					this._playSong(this._songNfo);
+					if (this._paused) {
+						this._unpauseSong();
+					} else {
+						this._playSong(this._songNfo);
+					}
 				}
 			}
 
 			if (e.type === 'audio-stop') {
-				this._stopSong();
+				this._pauseSong();
 			}
 
 			if (e.type === 'audio-next') {
@@ -254,17 +170,62 @@ define([
 				}
 				this._playSong(this._songNfo);
 			}
+		}
 
-			if (e.type === 'audio-cache') {
-				if (e.playlistId && e.playlistId !== playlistId) {
-					console.log('audio error. wrong playlist id specified');
-					return;
-				}
-				if (playlist && playlist[e.index]) {
-					this._songNfo = playlist[e.index];
-				}
-				this._loadSound(this._songNfo.src);
+		var build = function() {
+			var audio = this.getElementsByTagName('audio');
+			var audioSource1, audioSource2;
+			var context, gainNode, frequencyFilter;
+			var audioGain1, audioGain2;
+
+			this._ambient = {
+				src: this.getAttribute('data-ambient'),
+				name: 'ambient',
+				index: 0
 			}
+
+			if (this._mode === 'webaudio') {
+				context = new AudioContext();
+				gainNode = context.createGain();
+				frequencyFilter = context.createBiquadFilter();
+
+				gainNode.gain.value = 1;
+				frequencyFilter.type = 'lowpass';
+				frequencyFilter.frequency.value = context.sampleRate / 2;
+				frequencyFilter.connect(gainNode);
+				gainNode.connect(context.destination);
+
+				audioSource1 = context.createMediaElementSource(audio[0]);
+				audioSource2 = context.createMediaElementSource(audio[1]);
+				audioGain1 = context.createGain();
+				audioGain2 = context.createGain();
+				audioGain1.gain.value = 1;
+				audioGain2.gain.value = 1;
+
+				audioSource1.connect(audioGain1);
+				audioSource2.connect(audioGain2);
+				audioGain1.connect(frequencyFilter);
+				audioGain2.connect(frequencyFilter);
+			}
+
+			this._audio = {
+				current: {
+					element: audio[0],
+					gainNode: audioGain1
+				},
+				previous: {
+					element: audio[1],
+					gainNode: audioGain2
+				}
+			}
+
+			this._context = context;
+			this._gainNode = gainNode;
+			this._frequencyFilter = frequencyFilter;
+
+
+			this._songNfo = this._ambient;
+			this._loop();
 		}
 
 		var createdCallback = function() {
@@ -276,28 +237,23 @@ define([
 			this._loadingSong = false;
 			this._paused = 0;
 
-			this._loadSound = loadSound.bind(this);
-			this._playSound = playSound.bind(this);
 			this._playSong = playSong.bind(this);
-			this._stopSong = stopSong.bind(this);
+			this._pauseSong = pauseSong.bind(this);
+			this._unpauseSong = unpauseSong.bind(this);
 			this._handleDispatcher = handleDispatcher.bind(this);
-			this._setFilters = setFilters.bind(this);
 			this._loop = loop.bind(this);
-			this._songsCashe = new SongsCashe(2);
+			this._build = build.bind(this);
 		}
 		var attachedCallback = function() {
-			this._ambient = {
-				src: this.getAttribute('data-ambient'),
-				name: 'ambient',
-				index: 0
+			if (window.AudioContext) {
+				this._mode = 'webaudio';
+				this._crossfadeDuration = 0.3;
+			} else {
+				this._mode = 'audio';
+				this._crossfadeDuration = 0;
 			}
 
-			this._context = new AudioContext();
-
-			this._setFilters();
-			this._songNfo = this._ambient;
-
-			this._loop();
+			this._build();
 
 			dispatcher.subscribe(this._handleDispatcher);
 		}

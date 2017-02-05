@@ -12,6 +12,12 @@ define([
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
 
+	var fireResize = function() {
+		var evt = document.createEvent("HTMLEvents");
+		evt.initEvent('resize', true, false);
+		window.dispatchEvent(evt);
+	}
+
 	var elementProto = function() {
 		var translate = function(element, position, speed) {
 			element.style.transitionDuration = speed + 'ms';
@@ -125,6 +131,7 @@ define([
 				document.addEventListener('wheel', this.onWheel);
 			}
 			this.remove = function() {
+				console.dir(this.component);
 				document.removeEventListener('mousewheel', this.onWheel);
 				document.removeEventListener('wheel', this.onWheel);
 			}
@@ -297,10 +304,12 @@ define([
 			this._touchHandler.set();
 			this._wheelHandler.set();
 			this._keyboardHandler.set();
-			this.classList.remove('inactive');
+			this.classList.add('slide-mode');
+			this.classList.remove('scroll-mode');
 			this.scrollTop = 0;
 
 			this._resizeHandler();
+			fireResize();
 		}
 
 		var deactivate = function() {
@@ -311,9 +320,11 @@ define([
 			this._touchHandler.remove();
 			this._wheelHandler.remove();
 			this._keyboardHandler.remove();
-			this.classList.add('inactive');
+			this.classList.remove('slide-mode');
+			this.classList.add('scroll-mode');
 
 			translate(this._wrapper, 0, 0);
+			fireResize();
 		}
 
 		var resizeHandler = function() {
@@ -395,9 +406,9 @@ define([
 		}
 
 		var detachedCallback = function() {
-			this._deactivate();
 			window.removeEventListener('resize', this._resizeHandler);
 			this.removeEventListener('scroll', this._scrollHandler);
+			this._deactivate();
 		}
 
 		return {

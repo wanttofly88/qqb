@@ -61,12 +61,14 @@ define([
 
 				setTimeout(function() {
 					self.style.display = 'none';
+					self._active = false;
 				}, 500);
 			}, 1400);
 		}
 
 		var loop = function() {
 			this._step++;
+			if (!this._active) return;
 
 			if (this._step % 3 === 0 
 				&& !(this._step > 4 && this._step < 9) 
@@ -94,12 +96,12 @@ define([
 			}
 			this._letter = 0;
 			this._step = 0;
-			this._delays = [20];
 
 			this._start = start.bind(this);
 			this._finish = finish.bind(this);
 			this._hide = hide.bind(this);
 			this._loop = loop.bind(this);
+			this._active = true;
 		}
 		var attachedCallback = function() {
 			this._perc = this.getElementsByClassName('perc')[0];
