@@ -336,14 +336,14 @@ button {
 	right: 16px;
 	width: 18px;
 }
-.btn:hover {
+.no-touchevents .btn:hover {
 	color: #252525;
 }
-.btn:hover:before {
+.no-touchevents .btn:hover:before {
 	width: calc(100% + 6px);
 	transition: all 0.15s;
 }
-.btn:hover:after {
+.no-touchevents .btn:hover:after {
 	opacity: 1;
 	animation: blink 0.5s infinite alternate;
 	-webkit-animation: blink 0.5s infinite alternate;
@@ -376,8 +376,8 @@ button {
 	background: #ffffff;
 	box-shadow: 0 0 2px #ffffff;
 }
-.btn.dark:hover,
-.page-wrapper[data-scheme="bright"] .cart .btn:hover {
+.no-touchevents .btn.dark:hover,
+.no-touchevents .page-wrapper[data-scheme="bright"] .cart .btn:hover {
 	color: #ffffff;
 }
 
@@ -563,7 +563,7 @@ popup-component .stage-fallback {
 }
 
 .stage-fallback {
-	background: url(../images/menu.jpg);
+	background: url(../images/bg-dark.jpg);
 	background-size: cover;
 	background-position: center;
 }
@@ -674,7 +674,14 @@ menu-text .glitch-final {
 	width: 0;
 	z-index: 3;
 }
-menu-text:before {
+.menu-fake {
+	color: #252525;
+	font-size: 60px;
+	line-height: 1;
+	letter-spacing: -0.05em;
+}
+menu-text:before,
+.menu-fake:before {
 	content: "";
 	position: absolute;
 	left: -7px;
@@ -687,29 +694,68 @@ menu-text:before {
 	transform-origin: 0 0;
 	transition: all 0.3s ease;
 }
+.menu-fake:before {
+	transform-origin: 100% 0;
+	transform: scaleX(1);
+	z-index: -1;
+}
+.menu-fake div,
+.menu-fake div:before {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	right: 0;
+	top: 0;
+	overflow: hidden;
+}
+.menu-fake div:before {
+	content: attr(data-text);
+	position: absolute;
+	right: 0;
+	width: auto;
+}
+
+.menu-fake.hide:before {
+	transform: scaleX(0);
+	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.2s;
+}
+.menu-fake.hide div {
+	width: 0;
+	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0s;
+}
 menu-text .glitch-final {
 	width: 0%;
 	transition: all 0.3s ease;
 }
-menu-text:hover:before,
+.no-touchevents menu-text:hover:before,
 a.active menu-text:before {
 	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.2s;
 	transform: scaleX(1);
 }
-menu-text:hover .glitch-start,
+.no-touchevents menu-text:hover .glitch-start,
 a.active menu-text .glitch-start {
 	transition: all 0.3s steps(5);
 	width: 0;
 }
-menu-text:hover .glitch-animation,
+.no-touchevents menu-text:hover .glitch-animation,
 a.active menu-text .glitch-animation {
 	transition: all 0.3s steps(5);
 	width: 100%;
 }
-menu-text:hover .glitch-final,
+.no-touchevents menu-text:hover .glitch-final,
 a.active menu-text .glitch-final {
 	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.35s;
 	width: 100%;
+}
+menu-text canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	pointer-events: none;
+}
+a.active menu-text canvas {
+	display: block;
 }
 
 
@@ -758,21 +804,24 @@ ol {
 }
 ol li,
 ul li {
+	position: relative;
 	margin-bottom: 1px;
 }
 ol li {
 	counter-increment: ol;
 }
 ol li:before {
+	position: absolute;
+	left: 0;
+	top: 0;
 	content: counter(ol, decimal-leading-zero);
-	margin-right: 20px;
 }
 .stage-fallback.beat-bg {
-	background-image: url(../images/beat-bg.jpg);
+	background-image: url(../images/bg-light.jpg);
 }
-.stage-fallback.album-bg {
+/*.stage-fallback.album-bg {
 	background-image: url(../images/menu.jpg);
-}
+}*/
 aside {
 	position: fixed;
 	right: 0;
@@ -1288,6 +1337,21 @@ slide-scroll.slide-mode .js-slide.slide-previous .left-wrapper {
 .all-tracks .track {
 	cursor: pointer;
 }
+.all-tracks .track span {
+	position: relative;
+	padding-left: 37px;
+}
+.all-tracks .track span:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background: #ffffff;
+	opacity: 0.7;
+	transition: all 0.2s;
+}
 @media screen and (min-width: 1000px) {
 	.all-tracks-popup .popup-inner {
 		text-align: left;
@@ -1298,6 +1362,22 @@ slide-scroll.slide-mode .js-slide.slide-previous .left-wrapper {
 		padding-bottom: 95px;
 		margin-left: 54%;
 	}
+}
+.all-tracks .track {
+	transition: opacity 0.3s, margin 0.2s;
+	opacity: 1;
+}
+.all-tracks .track:not(.active):hover {
+	transition: opacity 0.2s;
+	opacity: 0.6;
+}
+.all-tracks .track.active {
+	margin-bottom: 8px;
+	transition: margin 0.2s;
+	cursor: default;
+}
+.all-tracks .track.active span:after {
+	width: 100%;
 }
 
 .video-index {
@@ -1319,6 +1399,31 @@ slide-scroll.slide-mode .js-slide.slide-previous .left-wrapper {
 .video-slide {
 	color: #ffffff;
 }
+
+h1 .lt {
+	transition: opacity 0.8s, transform 0.8s;
+}
+h1 .wd {
+	white-space: nowrap;
+}
+h1 .wd,
+h1 .lt,
+h1 .ln {
+	line-height: 1;
+	position: relative;
+	z-index: 2;
+}
+h1 .lt {
+	position: relative;
+	overflow: hidden;
+}
+
+h1 canvas {
+	position: absolute;
+	pointer-events: none;
+	z-index: 3;
+}
+
 
 audio-progressbar {
 	position: fixed;
@@ -1378,13 +1483,13 @@ popup-component {
 	width: 0;
 	opacity: 0;
 	pointer-events: none;
-	transition: opacity 0.2s linear 0s, transform 0.2s ease 0s, width 0s linear 0.2s;
+	transition: opacity 0.4s linear 0s, transform 0.4s ease 0s, width 0s linear 0.4s;
 }
 popup-component.active {
 	width: 100%;
 	opacity: 1;
 	pointer-events: auto;
-	transition: opacity 0.1s linear 0s, transform 0.1s ease 0s, width 0s linear 0s;
+	transition: opacity 0.2s linear 0s, transform 0.2s ease 0s, width 0s linear 0s;
 }
 
 page-transition {
@@ -1393,13 +1498,13 @@ page-transition {
 	top: 0;
 	left: 0;
 	z-index: 10000;
-	background: url(../images/menu.jpg);
+	background: url(../images/bg-dark.jpg);
 	background-size: cover;
 	background-position: center;
 
 	width: 0;
 	opacity: 0;
-	transition: opacity 0.2s linear 0s, transform 0.2s ease 0s, width 0s linear 0.2s;
+	transition: opacity 0.4s linear 0s, transform 0.4s ease 0s, width 0s linear 0.4s;
 }
 page-transition.active {
 	width: 100%;
@@ -1415,9 +1520,19 @@ preloader-component {
 	left: 0;
 	top: 0;
 	background: #101010;
-	transition: opacity 0.4s;
+	transition: opacity 0.6s linear;
 	transform: translateZ(0px);
 	display: none;
+}
+.no-webgl preloader-component {
+	background: none;
+}
+preloader-component canvas {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
 }
 .csstransitions preloader-component {
 	display: block;
@@ -1527,20 +1642,6 @@ preloader-component.loading .nt {
 	}
 
 }
-page-preview {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-}
-page-preview svg {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-}
 
 full-img {
 	position: absolute;
@@ -1557,21 +1658,10 @@ full-img img {
 	left: 0;
 }
 
-.csstransitions .beat-content h1 {
-	opacity: 0;
-	transform: translateY(-3px);
-	transition: all 0.6s ease-out 0s;
+/*.slide-content h1 {
+	transform: translateY(-20px);
+	transition: all 0.8s ease-out;
 }
-.csstransitions .preload-complete .beat-content h1 {
-	opacity: 1;
+.preload-complete .slide-content h1 {
 	transform: translateY(0px);
-}
-.csstransitions .beat-content .nfo {
-	opacity: 0;
-	transform: translateY(10px);
-	transition: all 0.6s ease-out;
-}
-.csstransitions .preload-complete .beat-content .nfo {
-	opacity: 1;
-	transform: translateY(0px);
-}
+}*/

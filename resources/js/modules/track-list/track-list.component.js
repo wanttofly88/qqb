@@ -66,9 +66,12 @@ define([
 						index: index,
 						playlistId: self._id
 					});
-					dispatcher.dispatch({
-						type: 'popup-close'
-					});
+					setTimeout(function() {
+						dispatcher.dispatch({
+							type: 'popup-close'
+						});
+					}, 300);
+
 				});
 
 				self._playlist.push({

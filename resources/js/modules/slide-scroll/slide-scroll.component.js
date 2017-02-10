@@ -409,6 +409,11 @@ define([
 			window.removeEventListener('resize', this._resizeHandler);
 			this.removeEventListener('scroll', this._scrollHandler);
 			this._deactivate();
+
+			dispatcher.dispatch({
+				type: 'slide-scroll-remove',
+				id: this._id
+			});
 		}
 
 		return {

@@ -13,13 +13,14 @@ define(['dispatcher', 'router/router.store'], function(dispatcher, store) {
 				type: 'route',
 				href: self._href,
 				transitionData: {
-					animation: 'normal'
+					animation: 'normal',
+					element: self
 				}
 			});
 		}
 		var handleStore = function() {
 			var href = store.getData().page.href;
-			
+
 			if (href === this._href) {
 				this.classList.add('active');
 			} else {
@@ -33,6 +34,11 @@ define(['dispatcher', 'router/router.store'], function(dispatcher, store) {
 		}
 		var attachedCallback = function() {
 			this._href = this.href;
+
+			if (this._href.indexOf('index') !== -1) {
+				this._href = this.href.split('index')[0];
+			}
+
 			this._handleStore();
 	
 			this.addEventListener('click', this._handleClick);

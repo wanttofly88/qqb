@@ -16,6 +16,13 @@ define([
 	var elementProto = function() {
 		var start = function() {
 			var self = this;
+
+			setTimeout(function() {
+				dispatcher.dispatch({
+					type: 'preload-starting'
+				});
+			}, 40);
+
 			this.classList.add('loading');
 			TweenMax.to(this._obj, 2, {
 				p: 75,
@@ -27,6 +34,12 @@ define([
 		}
 		var finish = function() {
 			var self = this;
+			setTimeout(function() {
+				dispatcher.dispatch({
+					type: 'preload-finishing'
+				});
+			}, 1400);
+
 			TweenMax.killTweensOf(this._obj);
 			TweenMax.to(this._obj, 0.5, {
 				p: 100,
@@ -45,6 +58,7 @@ define([
 
 		var hide = function() {
 			var self = this;
+
 			setTimeout(function() {
 				self._text.classList.add('no-animation');
 			}, 400);
@@ -60,9 +74,14 @@ define([
 				});
 
 				setTimeout(function() {
-					self.style.display = 'none';
+					dispatcher.dispatch({
+						type: 'preload-complete'
+					});
 					self._active = false;
-				}, 500);
+
+					// self-destructing in 900 milliseconds =)
+					self.parentNode.removeChild(self);
+				}, 900);
 			}, 1400);
 		}
 
