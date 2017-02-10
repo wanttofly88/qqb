@@ -60,6 +60,10 @@ require([
 	'slide-scroll/slide-scroll-control.component',
 
 	'beat-slider/beat-bg-slider.component',
-	'preloader/preloader.component',
-	'stage/stage.component'
+
+	'decor/header-appear.component',
+
+	'loading-screen/loading-screen.component',
+	'stage/stage.component',
+	'preloader/preloader.component'
 ]);

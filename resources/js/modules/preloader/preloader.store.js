@@ -5,7 +5,11 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var eventEmitter = new utils.EventEmitter();
 
 	var _handleEvent = function(e) {
-		if (e.type === 'preload-complete') {
+		if (e.type === 'preload-start' && complete) {
+			complete = false;
+			eventEmitter.dispatch();
+		}
+		if (e.type === 'preload-complete' && !complete) {
 			complete = true;
 			eventEmitter.dispatch();
 		}

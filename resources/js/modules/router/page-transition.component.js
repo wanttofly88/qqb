@@ -64,9 +64,40 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	// }();
 
 	var elementProto = function() {
-		var normalTransition = function() {
-
+		var menuTransition = function() {
 			var start = function (e) {
+				this._tmpElements;
+				var el = e.transitionData.element;
+				var mt = el.getElementsByTagName('menu-text')[0];
+				var bc = mt.getBoundingClientRect();
+				var fake = document.createElement('div');
+				var fakeInner = document.createElement('div');
+
+				dispatcher.dispatch({
+					type: 'preload-start',
+					transitionData: this._tmpTransitionData
+				});
+
+				this.innerHTML = '';
+
+				fake.className = 'menu-fake';
+				fake.style.position = 'absolute';
+				fake.style.width = bc.width + 'px';
+				fake.style.height = bc.height + 'px';
+				fake.style.top = bc.top + 'px';
+				fake.style.left = bc.left + 'px';
+
+				fake.appendChild(fakeInner);
+
+				fakeInner.setAttribute('data-text', mt.getAttribute('data-to'));
+
+				this.appendChild(fake);
+
+				this._tmpElements = {
+					fake: fake,
+					fakeInner: fakeInner
+				}
+
 				dispatcher.dispatch({
 					type: 'scroll-block'
 				});
@@ -89,21 +120,37 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 			var end = function(e) {
 				var self = this;
+				var fake = this._tmpElements.fake;
+				var fakeInner = this._tmpElements.fakeInner;
+
 				window.scrollTo(0, 0);
 
-				setTimeout(function() {
-					self.classList.remove('active');
-				}, 100);
+				if (fake && fakeInner) {
+					fake.classList.add('hide');
+				}
+
+				this._tmpElements = {};
 
 				setTimeout(function() {
 					dispatcher.dispatch({
-						type: 'scroll-unblock'
+						type: 'preload-complete',
+						transitionData: this._tmpTransitionData
 					});
-					dispatcher.dispatch({
-						type: 'transition-check',
-						step: 3
-					});
-				}, 300);
+
+					setTimeout(function() {
+						self.classList.remove('active');
+					}, 100);
+
+					setTimeout(function() {
+						dispatcher.dispatch({
+							type: 'scroll-unblock'
+						});
+						dispatcher.dispatch({
+							type: 'transition-check',
+							step: 3
+						});
+					}, 300);
+				}, 500);
 			}
 
 			return {
@@ -115,12 +162,12 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		var handleDispatcher = function(e) {
 			if (e.type === 'transition-start') {
 				if (e.transitionData.animation === 'normal') {
-					this._normalTransition.start(e);
+					this._menuTransition.start(e);
 				}
 			}
 			if (e.type === 'transition-end') {
 				if (e.transitionData.animation === 'normal') {
-					this._normalTransition.end(e);
+					this._menuTransition.end(e);
 				}
 			}
 		}
@@ -128,7 +175,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		var createdCallback = function() {
 
 			this._handleDispatcher = handleDispatcher.bind(this);
-			this._normalTransition = normalTransition.bind(this)();
+			this._menuTransition = menuTransition.bind(this)();
 		}
 		var attachedCallback = function() {
 			dispatcher.subscribe(this._handleDispatcher);

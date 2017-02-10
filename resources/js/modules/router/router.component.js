@@ -100,7 +100,6 @@ define([
 
 		var handleDispatcher = function(e) {
 			if (e.type === 'route') {
-
 				if (this._isTransitioning) return;
 				this._isTransitioning = true;
 				this._route(e);
@@ -116,8 +115,12 @@ define([
 					type: 'transition-end',
 					transitionData: this._tmpTransitionData
 				});
+
 				this._isTransitioning = false;
 				this._reset();
+			}
+			if (e.type === 'transition-step-3-complete') {
+
 			}
 		}
 
