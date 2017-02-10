@@ -25,6 +25,7 @@ define([
 			var material;
 			var fragmentShader, vertexShader;
 			var dpr = 1;
+			var maxW = Math.max(ww, wh);
 
 			camera = new THREE.OrthographicCamera(
 				ww*dpr / -2, 
@@ -66,7 +67,7 @@ define([
 				fragmentShader: fragmentShader
 			});
 
-			plane = new THREE.PlaneBufferGeometry(ww, ww);
+			plane = new THREE.PlaneBufferGeometry(maxW, maxW);
 			mesh = new THREE.Mesh(plane, material);
 			scene.add(mesh);
 
