@@ -34,6 +34,7 @@ require([
 	'scheme/scheme.component',
 
 	'router/router.component',
+	'router/menu-link.component',
 	'router/inner-link.component',
 	'router/page-transition.component',
 
@@ -53,6 +54,7 @@ require([
 	'helpers/beats-helper.component',
 	'helpers/albums-helper.component',
 	'helpers/videos-helper.component',
+	'helpers/album-helper.component',
 
 	'slide-scroll/slide-scroll.component',
 	'slide-scroll/slide-scroll-index.component',

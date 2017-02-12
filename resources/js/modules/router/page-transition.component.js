@@ -161,13 +161,21 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 		var handleDispatcher = function(e) {
 			if (e.type === 'transition-start') {
-				if (e.transitionData.animation === 'normal') {
+				if (e.transitionData.animation === 'menu') {
 					this._menuTransition.start(e);
+				}
+				if (e.transitionData.animation === 'basic') {
+					this._basicTransition.start(e);
 				}
 			}
 			if (e.type === 'transition-end') {
-				if (e.transitionData.animation === 'normal') {
+				if (e.transitionData.animation === 'menu') {
 					this._menuTransition.end(e);
+				}
+			}
+			if (e.type === 'transition-end') {
+				if (e.transitionData.animation === 'basic') {
+					this._basicTransition.end(e);
 				}
 			}
 		}
