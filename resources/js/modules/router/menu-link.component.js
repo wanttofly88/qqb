@@ -13,7 +13,7 @@ define(['dispatcher', 'router/router.store'], function(dispatcher, store) {
 				type: 'route',
 				href: self._href,
 				transitionData: {
-					animation: 'basic',
+					animation: 'menu',
 					element: self
 				}
 			});
@@ -57,7 +57,7 @@ define(['dispatcher', 'router/router.store'], function(dispatcher, store) {
 	}();
 
 	Object.setPrototypeOf(elementProto, HTMLAnchorElement.prototype);
-	document.registerElement('inner-link', {
+	document.registerElement('menu-link', {
 		extends: 'a',
 		prototype: elementProto
 	});

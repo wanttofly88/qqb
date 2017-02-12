@@ -193,7 +193,7 @@ define([
 				frequencyFilter.type = 'lowpass';
 				frequencyFilter.frequency.value = context.sampleRate / 2;
 				frequencyFilter.connect(gainNode);
-				gainNode.connect(context.destination);
+				// gainNode.connect(context.destination);
 
 				audioSource1 = context.createMediaElementSource(audio[0]);
 				audioSource2 = context.createMediaElementSource(audio[1]);

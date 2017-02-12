@@ -18,7 +18,7 @@
     <vh-fix></vh-fix>
     <page-transition></page-transition>
     <router-component></router-component>
-
+<!-- 
     <preloader-component>
         <div class="wrapper">
             <div class="text">
@@ -27,7 +27,7 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-    </preloader-component>
+    </preloader-component> -->
 
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
@@ -108,8 +108,41 @@
                 </div>
             </div>
         </popup-component>
-
+        
         <div class="replaceable" data-id="popups">
+            <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
+                <div class="stage-fallback"></div>
+                <div class="popup-outer">
+                    <div class="popup-inner">
+                        <div class="section-header">
+                            <div class="left-wrapper">
+                                <button is="popup-close" class="btn close">[Close]</button>
+                            </div>
+                        </div>
+                        <section class="all-tracks">
+                            <track-list class="tracks-list" data-id="beats">
+                                <div class="tracks-group">
+                                    <ol>
+                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">
+                                            <span>Mt. Zion</span>
+                                        </li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">
+                                            <span>Spaced Out</span>
+                                        </li>
+                                        <li class="track" data-src="tmp/audio/Gulag_BPM130_Tag.mp3">
+                                            <span>Gulag_BPM130_Tag</span>
+                                        </li>
+                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">
+                                            <span>Spaced Out</span>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </track-list>
+                            <div class="clear"></div>
+                        </section>
+                    </div>
+                </div>
+            </popup-component>
         </div>
 
         <div class="stage-fallback"></div>
@@ -119,86 +152,50 @@
             <div class="stage"></div>
 
             <div class="content replaceable" data-id="main-content">
-                <albums-helper></albums-helper>
-                <div class="stage-fallback albums-bg"></div>
+                <album-helper></album-helper>
+                <div class="stage-fallback album-bg"></div>
 
-                <div class="albums-aside">
+                <div class="section-header album-header">
                     <div class="left-wrapper">
-                        <div class="inner vh-height">
-                            <slide-scroll-index 
-                                data-id="albums-slides"
-                                class="albums-index">1</slide-scroll-index>
-                            <button class="arr a-t"
-                                is="slide-scroll-control"
-                                data-id="albums-slides"
-                                data-to="prev">
-                                <div class="ico"></div>
-                            </button>
-                            <button class="arr a-b" 
-                                is="slide-scroll-control"
-                                data-id="albums-slides"
-                                data-to="next">
-                                <div class="ico"></div>
-                            </button>
-                        </div>
+                        <button is="audio-pause" class="btn pause">[Pause]</button>
+                        <audio-progress class="time">
+                            <span class="mn">00.</span><span class="sc">00.</span><span class="ms">000</span>
+                        </audio-progress>
                     </div>
                 </div>
 
-                <slide-scroll data-id="albums-slides"  data-min-heights="0:460;640:640;1000:600;1400:540;1800:720">
+                <div class="album-back">
+                    <button class="btn">[Eject]</button>
+                </div>
+
+                <slide-scroll data-id="album-slides"  data-min-heights="0:460;640:640;1000:600;1400:540;1800:720">
                     <div class="slide-scroll-wrapper">
-                        <section class="albums js-slide vh-min-height">
+                        <section class="album js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
+                                    <div class="nt">Play now: 02</div>
                                     <h1>The Heart Gently Weeps</h1>
                                     <div class="nfo">
-                                        <div class="price">$35.00</div>
+                                        <button class="btn">[Prev]</button>
+                                        <button class="btn">[Next]</button>
                                     </div>
                                 </div>
 
-                                <div class="albums-header">
-                                    <div>New release album</div>
-                                    <div>Date: 2017 Feb</div>
-                                    <div>2LP Limited ed</div>
-                                </div>
-
-                                <div class="section-footer albums-footer">
-                                    <button class="btn">[Buy album]</button>
-                                    <button class="btn">[Listen now]</button>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="albums js-slide vh-min-height">
-                            <div class="left-wrapper">
-                                <div class="slide-content album-content">
-                                    <h1>The Heart Gently Weeps</h1>
-                                    <div class="nfo">
-                                        <div class="price">$35.00</div>
+                                <div class="section-footer album-footer">
+                                    <div class="l">
+                                        <div>001 Soundtrack</div>
+                                        <div>Qualia Qua Beats</div>
+                                        <div>Date: 2017 Feb</div>
                                     </div>
-                                </div>
-
-                                <div class="albums-header">
-                                    <div>New release album</div>
-                                    <div>Date: 2017 Feb</div>
-                                    <div>2LP Limited ed</div>
-                                </div>
-
-                                <div class="section-footer albums-footer">
-                                    <button class="btn">[Buy album]</button>
-                                    <button class="btn">[Listen now]</button>
+                                    <div class="r">
+                                        <button class="btn">[Buy album]</button>
+                                        <div>$20.00</div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
                     </div>
                 </slide-scroll>
-                <aside class="cover">
-                    <div class="cover-img">
-                        <proportional-height>
-                            <img src="tmp/beat-lables/1.jpg" alt="">
-                            <img src="tmp/beat-lables/2.jpg" alt="">
-                            <img src="tmp/beat-lables/3.jpg" alt="">
-                        </proportional-height>
-                    </div>
-                </aside>
             </div>
         </main>
     </div>
