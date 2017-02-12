@@ -64,6 +64,7 @@ require([
 	'beat-slider/beat-bg-slider.component',
 
 	'decor/header-appear.component',
+	'decor/text-print.component',
 
 	'loading-screen/loading-screen.component',
 	'stage/stage.component',

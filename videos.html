@@ -28,9 +28,6 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-        <page-preview>
-            <svg></svg>
-        </page-preview>
     </preloader-component>
 
     <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3">
@@ -117,61 +114,8 @@
             </div>
         </popup-component>
 
-        <popup-component class="all-tracks-popup" data-id="all-tracks-popup">
-            <div class="stage-fallback"></div>
-            <div class="popup-outer">
-                <div class="popup-inner">
-                    <div class="section-header">
-                        <div class="left-wrapper">
-                            <button is="popup-close" class="btn close">[Close]</button>
-                        </div>
-                    </div>
-                    <section class="all-tracks">
-                        <track-list class="tracks-list" data-id="beats">
-                            <div class="tracks-group">
-                                <h3># Hip-hop</h3>
-                                <ol>
-                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                    <li class="track" data-src="tmp/audio/Gulag_BPM130_Tag.mp3">Gulag_BPM130_Tag</li>
-                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                </ol>
-                            </div>
-                            <div class="tracks-group">
-                                <h3># Epic</h3>
-                                <ol>
-                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                </ol>
-                            </div>
-                            <div class="tracks-group">
-                                <h3># Tropical</h3>
-                                <ol>
-                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                </ol>
-                            </div>
-                            <div class="tracks-group">
-                                <h3># Cinematic</h3>
-                                <ol>
-                                    <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track" data-src="tmp/audio/Spaced Out.mp3">Spaced Out</li>
-                                    <li class="track" data-src="tmp/audio/Mt. Zion.mp3">Mt. Zion</li>
-                                    <li class="track"  data-src="tmp/audio/Spaced Out.mp3" >Spaced Out</li>
-                                </ol>
-                            </div>
-                        </track-list>
-                        <div class="clear"></div>
-                    </section>
-
-
-                </div>
-            </div>
-        </popup-component>
+        <div class="replaceable" data-id="popups">
+        </div>
 
         <div class="stage-fallback"></div>
         <stage-component></stage-component>
@@ -190,7 +134,7 @@
                 </div>
 
                 <slide-scroll data-id="video-slides" 
-                    data-min-heights="0:460;640:640;1000:480;1400:540;1800:720">
+                    data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
                     <div class="slide-scroll-wrapper">
                         <section class="video-slide js-slide vh-min-height">
                             <full-img class="video-bg">
