@@ -33,7 +33,10 @@ define([
 		}
 
 		var handleSlideStore = function() {
+			var preloadComplete = preloaderStore.getData().complete;
 			var storeData = slideStore.getData().items['beat-slides'];
+
+			if (!preloadComplete) return;
 			if (!storeData) {
 				console.warn('beat-slides data is missing in slide-scroll.store');
 				return;

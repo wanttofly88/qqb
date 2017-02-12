@@ -117,7 +117,7 @@ define([
 		var prepare = function() {
 			var lines = this.getElementsByClassName('ln');
 			var letters = this.getElementsByClassName('lt');
-			var innerLetters = lines[0].getElementsByClassName('lt-s2');
+			var length = lines[0].getElementsByTagName('lt').length;
 
 			var totalLetters = letters.length;
 			var r1;
@@ -126,8 +126,7 @@ define([
 
 			for (var i = 0; i < letters.length/4; i++) {
 				r1 = Math.floor(Math.random()*(totalLetters - 2) + 1);
-				letters[r1].style.opacity = 0.2;
-				letters[r1].style.transform = 'translateY(-5px)';
+				letters[r1].classList.add('letter-hidden');
 			}
 
 			clearTimeout(this._loopTimeout);
@@ -144,8 +143,7 @@ define([
 
 			this.classList.add('header-visible');
 			Array.prototype.forEach.call(letters, function(lt, index) {
-				var inner = lt.getElementsByClassName('lt');
-				translate(lt, 0, letterSpeed);
+				lt.classList.remove('letter-hidden');
 			})
 
 			this._loopTimeout = setTimeout(self._loop, loopDelay + letterSpeed);
@@ -163,10 +161,10 @@ define([
 
 			var scheme = schemeStore.getData().scheme;
 
-			canvas.width = this.clientWidth + 100;
-			canvas.height = this.clientHeight + 100;
-			canvas.style.left = '-50px';
-			canvas.style.top = -50 + parseInt(pt) + 'px';
+			canvas.width = this.clientWidth;
+			canvas.height = this.clientHeight;
+			canvas.style.left = '0px';
+			canvas.style.top = parseInt(pt) + 'px';
 
 			canvasInverted.width = canvas.width;
 			canvasInverted.height = canvas.height;
@@ -201,11 +199,11 @@ define([
 						ltHeight = letter.clientHeight;
 
 						// dont ask any questions. it works;
-						ctxInvert.fillText(char, 50 + offs, 50 - ltHeight/10 + ltHeight*lineIndex);
+						ctxInvert.fillText(char, offs, -ltHeight/10 + ltHeight*lineIndex);
 						offs += ltWidth;
 					});
 
-					ctxInvert.fillText(' ' , 50 + offs, 50 - ltHeight/10 + ltHeight*lineIndex);
+					ctxInvert.fillText(' ' , offs, -ltHeight/10 + ltHeight*lineIndex);
 					offs += ltWidth;
 				});
 
@@ -297,13 +295,15 @@ define([
 
 		var handleSlide = function() {
 			var preloaded = preloaderStore.getData().complete;
+			var items = slideStore.getData().items;
 			var index;
 			var to = 600;
 			var self = this;
 
+			if (!items.hasOwnProperty(this._parentId)) return;
 			if (!this._parentId) return;
 
-			index = slideStore.getData().items[this._parentId].index;
+			index = items[this._parentId].index;
 			if (preloaded && 's' + index === this._id && !this._visible) {
 				if (index === 0 && self._firstTime) to = 0;
 				setTimeout(self._appear, to)
@@ -328,7 +328,7 @@ define([
 		}
 
 		var attachedCallback = function() {
-			var sScroll  = document.getElementsByTagName('slide-scroll')[0];
+			var parant  = document.getElementsByTagName('slide-scroll')[0];
 			var sections;
 			var self = this;
 
@@ -345,13 +345,13 @@ define([
 				this._visible = true;
 			}
 
-			if (sScroll) {
-				sections = sScroll.getElementsByTagName('section');
+			if (parant) {
+				sections = parant.getElementsByTagName('section');
 				Array.prototype.forEach.call(sections, function(section, index) {
 					var hd = section.getElementsByTagName('h1')[0];
 					if (hd === self) {
 						self._id = 's' + index;
-						self._parentId = sScroll.getAttribute('data-id');
+						self._parentId = parant.getAttribute('data-id');
 					}
 				});
 			}

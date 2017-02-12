@@ -316,7 +316,7 @@ button {
 	background: #ffffff;
 	transition: all 0.4s;
 	opacity: 0.95;
-	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
+	transition-timing-function: cubic-bezier(0.9, 0, 0.4, 1);
 }
 .btn:after {
 	content: "";
@@ -693,7 +693,7 @@ menu-text .glitch-final {
 }
 .no-touchevents menu-text:hover:before,
 a.active menu-text:before {
-	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.2s;
+	transition: all 0.3s cubic-bezier(0.9, 0, 0.4, 1) 0.2s;
 	transform: scaleX(1);
 }
 .no-touchevents menu-text:hover .glitch-start,
@@ -708,7 +708,7 @@ a.active menu-text .glitch-animation {
 }
 .no-touchevents menu-text:hover .glitch-final,
 a.active menu-text .glitch-final {
-	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.35s;
+	transition: all 0.3s cubic-bezier(0.9, 0, 0.4, 1) 0.35s;
 	width: 100%;
 }
 menu-text canvas {
@@ -760,11 +760,11 @@ a.active menu-text canvas {
 
 .menu-fake.hide:before {
 	transform: scaleX(0);
-	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0.2s;
+	transition: all 0.3s cubic-bezier(0.9, 0, 0.4, 1) 0.2s;
 }
 .menu-fake.hide div {
 	width: 0;
-	transition: all 0.3s cubic-bezier(0.88, 0, 0.41, 0.99) 0s;
+	transition: all 0.3s cubic-bezier(0.9, 0, 0.4, 1) 0s;
 }
 @media screen and (min-width: 640px) {
 	.menu-fake {
@@ -880,7 +880,7 @@ beat-bg-slider .slide {
 	left: 0;
 	top: 0;
 	overflow: hidden;
-	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
+	transition-timing-function: cubic-bezier(0.9, 0, 0.4, 1);
 	transform: translateZ(0px);
 }
 beat-bg-slider .slide .bg {
@@ -889,7 +889,7 @@ beat-bg-slider .slide .bg {
 	height: 100%;
 	left: 0;
 	top: 0;
-	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
+	transition-timing-function: cubic-bezier(0.9, 0, 0.4, 1);
 	will-change: transform;
 	background-size: cover;
 	background-position: center;
@@ -1073,6 +1073,12 @@ beat-bg-slider .slide.hidden:before {
 		margin-left: 17.5%;
 	}
 }
+@media screen and (min-width: 1000px) {
+	.albums .slide-content {
+		top: calc(55px + 26%);
+	}
+}
+
 
 .arr {
 	right: -11px;
@@ -1328,8 +1334,35 @@ beat-bg-slider .slide.hidden:before {
 }
 .video-slide {
 	color: #ffffff;
+	background: #101010;
 }
 
+@media screen and (min-width: 1000px) {
+	slide-scroll.slide-mode .video-slide .slide-content {
+		top: 15%;
+	}
+}
+slide-scroll.slide-mode .video-slide {
+	z-index: 1;
+	transition: transform cubic-bezier(0.9, 0, 0.4, 1) 0.8s;
+	transform: translateY(0%);
+}
+slide-scroll.slide-mode .video-slide.slide-previous {
+	z-index: 0;
+	transform: translateY(60%);
+}
+slide-scroll.slide-mode .video-slide.slide-next {
+	transform: translateY(-33%);
+	z-index: 2;
+}
+slide-scroll.slide-mode .video-slide.slide-next .video-bg {
+	opacity: 0;
+	transition: opacity 0.3s ease 0s;
+}
+slide-scroll.slide-mode .video-slide .video-bg {
+	opacity: 1;
+	transition: opacity 0.3s ease 0.8s;
+}
 
 .album-header {
 	color: #ffffff;
@@ -1418,7 +1451,28 @@ beat-bg-slider .slide.hidden:before {
 	}
 }
 
-
+.album-all {
+	position: fixed;
+	top: 33px;
+	right: 80px;
+	z-index: 4;
+	z-index: 4;
+}
+@media screen and (min-width: 640px) {
+	.album-all {
+		left: auto;
+		top: 46px;
+		right: 100px;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.album-all {
+		position: fixed;
+		right: auto;
+		top: 53px;
+		left: 10%;
+	}
+}
 
 .tracks-list {
 	display: block;
@@ -1474,7 +1528,7 @@ slide-scroll.slide-mode {
 	-webkit-overflow-scrolling: auto
 }
 slide-scroll .slide-scroll-wrapper {
-	transition-timing-function: cubic-bezier(0.88, 0, 0.41, 0.99);
+	transition-timing-function: cubic-bezier(0.9, 0, 0.4, 1);
 }
 slide-scroll.slide-mode .js-slide {
 }
@@ -1676,11 +1730,11 @@ preloader-component {
 	background: #101010;
 	transition: opacity 0.6s linear;
 	transform: translateZ(0px);
-	display: block;
+	display: none;
 }
-.webgl preloader-component.loading {
+/*.webgl preloader-component.loading {
 	background: none;
-}
+}*/
 preloader-component canvas {
 	position: absolute;
 	width: 100%;

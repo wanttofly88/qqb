@@ -1,142 +1,168 @@
-define(['dispatcher'], function(dispatcher) {
-	var initialized = false;
+define(['print/print.store'], function(printStore) {
 
+	"use strict";
+	
 	var items = [];
 
-	var _add = function(container) {
-		var item;
-		var view = container.getAttribute('data-view');
+	var animationSpeed = 500;
+	var charactersToRandomize = 4;
 
-		var active = false;
+	var charPool = ['a', '_', '%', '_', '_', 'р', '.', 'z', '4', '_', 'я', '?', '1', '_', 'н', '_', 'м'];
+	charPool = ['а', 'у', 'к', 'е', 'н', 'г', 'з', 'ф', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'я', 'ч'];
 
-		var models = container.querySelectorAll('.print-model');
-		var modelItems = [];
+	var _animate = function(line, value1, value2) {
+		var charNum = 0;
+		var tmpValue = '';
 
-		var _addModel = function(model, id) {
-			var lines = model.querySelectorAll('.print-line');
-			var lineItems = [];
+		var way = line.way;
+		var delay = line.delay;
 
-			var _addLine = function(line) {
-				lineItems.push({
-					value: line.innerHTML
-				});
-			}
+		var speed = animationSpeed/value2.length;
 
-			if (model.classList.contains('active')) {
-				active = id;
-			}
-
-			for (var i = 0; i <= lines.length - 1; i++) {
-				_addLine(lines[i]);
-			}
-
-			modelItems.push({
-				id: id,
-				lines: lineItems
-			});
+		var _getRandomChar = function() {
+			return charPool[Math.floor(Math.random()*charPool.length)];
 		}
 
-		if (!models || !models.length) {
-			console.warn('print models are not specified');
-			return;
-		}
-		if (!view) {
-			console.warn('view is not specified');
-			return;
-		}
+		line.element.innerHTML = '';
 
-		for (var i = 0; i <= models.length - 1; i++) {
-			_addModel(models[i], i);
-		}
+		var _loop = function() {
+			if (charNum >= value2.length + charactersToRandomize + 1) return;
 
-		item = {
-			active: active,
-			view: view,
-			models: modelItems
-		}
-
-		items.push(item);
-	}
-
-	var _handleEvent = function(e) {
-		var viewId;
-		var item;
-
-		if (e.type === 'print-view-change') {
-			viewId = e.viewId;
-
-			item = getDataById(viewId);
-			if (!item) {
-				console.warn('no data for id "' + viewId + '" was found');
-			}
-
-			item.active = e.number;
-
-			eventEmitter.dispatch({
-				type: 'change'
-			});
-		}
-	}
-
-	var _init = function() {
-		var containers = document.querySelectorAll('.print-container');
-
-		for (var i = 0; i <= containers.length - 1; i++) {
-			_add(containers[i]);
-		}
-
-		dispatcher.subscribe(_handleEvent);
-	}
-
-	var eventEmitter = function() {
-		var _handlers = [];
-
-		var dispatch = function(event) {
-			for (var i = _handlers.length - 1; i >= 0; i--) {
-				_handlers[i](event);
-			}
-		}
-		var subscribe = function(handler) {
-			_handlers.push(handler);
-		}
-		var unsubscribe = function(handler) {
-			for (var i = 0; i <= _handlers.length - 1; i++) {
-				if (_handlers[i] == handler) {
-					_handlers.splice(i--, 1);
+			if (way === 'reverse') {
+				tmpValue = value2.substring(value2.length - charNum, value2.length);
+				for (var i = 0; i <= charactersToRandomize; i++) {
+					if (value2.length - charNum - i > 0) {
+						tmpValue = tmpValue.replaceAt(i, _getRandomChar());
+					}
+				}
+			} else {
+				tmpValue = value2.substring(0, charNum);
+				for (var i = 0; i <= charactersToRandomize; i++) {
+					tmpValue = tmpValue.replaceAt(charNum - i, _getRandomChar());
 				}
 			}
-		}
 
-		return {
-			dispatch: dispatch,
-			subscribe: subscribe,
-			unsubscribe: unsubscribe
-		}
-	}();
+			line.element.innerHTML = tmpValue;
+			charNum++;
 
-	var getData = function() {
-		return items;
+			line.to = setTimeout(_loop, speed);
+		}
+		clearTimeout(line.to);
+		line.to = setTimeout(_loop, line.delay);
 	}
 
-	var getDataById = function(id) {
-		var result = false;
-		for (var i = items.length - 1; i >= 0; i--) {
-			if(items[i].view === id) {
-				result = items[i];
+	var _setInitial = function() {
+		var _checkItem = function(item) {
+			var data;
+			var id = item.id;
+			var _setValues = function(line, dataLine) {
+				if (line.value === dataLine.value) return;
+
+				line.innerHTML = dataLine.value
+				line.value = dataLine.value;
+			}
+
+			data = printStore.getDataById(id);
+			
+			if (item.active === data.active) return;
+
+			item.active = data.active;
+
+			for (var i = 0; i <= item.lines.length - 1; i++) {
+				_setValues(item.lines[i], data.models[data.active].lines[i]);
 			}
 		}
 
-		return result;
+		for (var i = items.length - 1; i >= 0; i--) {
+			_checkItem(items[i]);
+		}
 	}
 
-	if (!initialized) {
-		initialized = true;
-		_init();
+	var _handleChange = function() {
+
+		var _checkItem = function(item) {
+			var data;
+			var id = item.id;
+			var _setValues = function(line, dataLine) {
+				if (line.value === dataLine.value) return;
+
+				_animate(line, line.value, dataLine.value);
+
+				line.value = dataLine.value;
+			}
+
+			data = printStore.getDataById(id);
+			
+			if (item.active === data.active) return;
+
+			item.active = data.active;
+
+			for (var i = 0; i <= item.lines.length - 1; i++) {
+				_setValues(item.lines[i], data.models[data.active].lines[i]);
+			}
+		}
+
+		for (var i = items.length - 1; i >= 0; i--) {
+			_checkItem(items[i]);
+		}
+	}
+
+	var _add = function(view) {
+		var lines;
+		var item;
+		var lineItems = [];
+
+		var _addLine = function(lineElement) {
+			var way = lineElement.getAttribute('data-way') || 'normal';
+			var delay = lineElement.getAttribute('data-delay') || 0;
+			delay = parseInt(delay);
+
+			lineItems.push({
+				way: way,
+				delay: delay,
+				to: false,
+				value: lineElement.innerHTML,
+				element: lineElement
+			});
+		}
+
+		lines = view.querySelectorAll('.print-line');
+
+		if (!lines || !lines.length) {
+			console.warn('no print lines specified');
+			return;
+		}
+
+		for (var i = 0; i <= lines.length - 1; i++) {
+			_addLine(lines[i]);
+		}
+
+		items.push({
+			active: false,
+			container: view,
+			lines: lineItems,
+			id: view.id
+		});
+	}
+
+	var init = function() {
+		var views = document.querySelectorAll('.print-view');
+		for (var i = views.length - 1; i >= 0; i--) {
+			_add(views[i]);
+		}
+
+		String.prototype.replaceAt = function(index, character) {
+			if (index < 0) return this;
+			if (index >= this.length) return this;
+			return this.substr(0, index) + character + this.substr(index + character.length);
+		}
+
+		_setInitial();
+
+		printStore.eventEmitter.subscribe(_handleChange);
 	}
 
 	return {
-		eventEmitter: eventEmitter,
-		getData: getData,
-		getDataById: getDataById
+		init: init
 	}
 });

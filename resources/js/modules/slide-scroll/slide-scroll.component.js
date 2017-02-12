@@ -371,6 +371,7 @@ define([
 		}
 
 		var attachedCallback = function() {
+			var self = this;
 			this._slides = this.getElementsByClassName('js-slide');
 			this._active = undefined;
 			this._wrapper = this.getElementsByClassName('slide-scroll-wrapper')[0];
@@ -403,6 +404,10 @@ define([
 			this._activate();
 			window.addEventListener('resize', this._resizeHandler);
 			this.addEventListener('scroll', this._scrollHandler);
+
+			setTimeout(function() {
+				self.classList.add('slide-scroll-ready');
+			}, 20);
 		}
 
 		var detachedCallback = function() {
