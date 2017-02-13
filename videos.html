@@ -6,7 +6,7 @@
     <!--путь к ресурсам сайта-->
     <meta name="resources-path" content="resources/">
 
-    <title>Document</title>
+    <title>Videos</title>
     <meta name="viewport" content="initial-scale=1, minimal-ui"/>
     <link rel="stylesheet" href="resources/css/styles.css">
     <script src="resources/js/libs/modernizr.js"></script>
@@ -20,7 +20,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-    <preloader-component>
+<!--     <preloader-component>
         <div class="wrapper">
             <div class="text">
                 <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
@@ -28,7 +28,7 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-    </preloader-component>
+    </preloader-component> -->
 
     <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3">
         <audio src=""></audio>
@@ -133,13 +133,14 @@
                     </div>
                 </div>
 
+                <full-img class="video-bg">
+                    <img src="tmp/video/p2.jpg" alt="">
+                </full-img>
+
                 <slide-scroll data-id="video-slides" 
                     data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
                     <div class="slide-scroll-wrapper">
                         <section class="video-slide js-slide vh-min-height">
-                            <full-img class="video-bg">
-                                <img src="tmp/video/p1.jpg" alt="">
-                            </full-img>
                             <div class="left-wrapper">
                                 <div class="slide-content video-content">
                                     <h1>moderat reminder</h1>
@@ -155,9 +156,21 @@
                             </div>
                         </section>
                         <section class="video-slide js-slide vh-min-height">
-                            <full-img class="video-bg">
-                                <img src="tmp/video/p2.jpg" alt="">
-                            </full-img>
+                            <div class="left-wrapper">
+                                <div class="slide-content video-content">
+                                    <h1>moderat reminder</h1>
+                                    <div class="view">
+                                        <button class="btn">[View]</button>
+                                    </div>
+                                    <div class="nfo">
+                                        <div>Cinematic Soulful</div>
+                                        <div>Date: 2016 feb</div>
+                                        <div>Prod: Abyss</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="video-slide js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content video-content">
                                     <h1>moderat reminder</h1>

@@ -11,7 +11,6 @@ define([
 
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
-	var shift  = 200;
 
 	var fireResize = function() {
 		var evt = document.createEvent("HTMLEvents");
@@ -271,11 +270,7 @@ define([
 				this._slides[storeData.index + 1].classList.add('slide-next');
 			}
 
-			if (this._shift) {
-				translate(this._wrapper, -this._shift*storeData.index, animationSpeed);
-			} else {
-				translate(this._wrapper, -wh*storeData.index, animationSpeed);
-			}
+			//translate(this._wrapper, -wh*storeData.index/3, animationSpeed);
 		}
 
 		var scrollHandler = function(e) {
@@ -302,8 +297,6 @@ define([
 		}
 
 		var activate = function() {
-			var self = this;
-
 			if (this._active === true) return;
 			this._active = true;
 
@@ -315,21 +308,11 @@ define([
 			this.classList.remove('scroll-mode');
 			this.scrollTop = 0;
 
-			Array.prototype.forEach.call(this._slides, function(slide, index) {
-				if (self._shift) {
-					slide.style.position = 'absolute';
-					slide.style.height = '100%';
-					slide.style.width = '100%';
-					slide.style.top = self._shift*index + 'px';
-				}
-			});
-
 			this._resizeHandler();
 			fireResize();
 		}
 
 		var deactivate = function() {
-			var self = this;
 			if (this._active === false) return;
 			this._active = false; 
 
@@ -339,14 +322,6 @@ define([
 			this._keyboardHandler.remove();
 			this.classList.remove('slide-mode');
 			this.classList.add('scroll-mode');
-
-			Array.prototype.forEach.call(this._slides, function(slide, index) {
-				if (self._shift) {
-					slide.style.position = 'relative';
-					slide.style.height = 'auto';
-					slide.style.top = '0px';
-				}
-			});
 
 			translate(this._wrapper, 0, 0);
 			fireResize();
@@ -377,11 +352,7 @@ define([
 			}
 
 			if (this._active) {
-				if (this._shift) {
-					translate(this._wrapper, -this._shift*storeData.index, 0);
-				} else {
-					translate(this._wrapper, -wh*storeData.index, 0);
-				}
+				translate(this._wrapper, -wh * storeData.index, 0);
 			}
 		}
 
@@ -397,7 +368,6 @@ define([
 			this._activate   = activate.bind(this);
 			this._deactivate = deactivate.bind(this);
 			this.index = 0;
-			this._shift = shift || null;
 		}
 
 		var attachedCallback = function() {
@@ -431,7 +401,7 @@ define([
 				}
 			});
 
-			this._resizeHandler();
+			this._activate();
 			window.addEventListener('resize', this._resizeHandler);
 			this.addEventListener('scroll', this._scrollHandler);
 

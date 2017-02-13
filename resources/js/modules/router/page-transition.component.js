@@ -64,6 +64,26 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	// }();
 
 	var elementProto = function() {
+		var basicTranisiton = function() {
+			var start = function(e) {
+				dispatcher.dispatch({
+					type: 'transition-check',
+					step: 1
+				});
+			}
+			var end = function(e) {
+				dispatcher.dispatch({
+					type: 'transition-check',
+					step: 3
+				});
+			}
+
+			return {
+				start: start.bind(this),
+				end: end.bind(this)
+			}
+		}
+
 		var menuTransition = function() {
 			var start = function (e) {
 				this._tmpElements;
@@ -161,6 +181,12 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 		var handleDispatcher = function(e) {
 			if (e.type === 'transition-start') {
+				if (!e.transitionData) {
+					e.transitionData = {
+						animation: 'basic'
+					}
+				}
+
 				if (e.transitionData.animation === 'menu') {
 					this._menuTransition.start(e);
 				}
@@ -169,13 +195,25 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				}
 			}
 			if (e.type === 'transition-end') {
+				if (!e.transitionData) {
+					e.transitionData = {
+						animation: 'basic'
+					}
+				}
+
 				if (e.transitionData.animation === 'menu') {
 					this._menuTransition.end(e);
 				}
 			}
 			if (e.type === 'transition-end') {
-				if (e.transitionData.animation === 'basic') {
-					this._basicTransition.end(e);
+				if (!e.transitionData) {
+					e.transitionData = {
+						animation: 'basic'
+					}
+				}
+
+				if (e.transitionData.animation === 'menu') {
+					this._menuTransition.end(e);
 				}
 			}
 		}
@@ -184,6 +222,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 			this._handleDispatcher = handleDispatcher.bind(this);
 			this._menuTransition = menuTransition.bind(this)();
+			this._basicTransition = basicTranisiton.bind(this)();
 		}
 		var attachedCallback = function() {
 			dispatcher.subscribe(this._handleDispatcher);

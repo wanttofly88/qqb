@@ -23,9 +23,11 @@ define([
 			var self = this;
 
 			utils.http(href).get().then(function(responce) {
+				var newTitle;
+
 				self._tmpDocument = document.createElement('div');
 				self._tmpDocument.innerHTML = responce;
-
+				
 				dispatcher.dispatch({
 					type: 'transition-check',
 					step: 1
@@ -54,6 +56,7 @@ define([
 			var title;
 			var titleValue;
 			var containers;
+			var url = store.getData().page.href;
 
 			var replaceConteiner = function(container) {
 				var id = container.getAttribute('data-id');
@@ -86,6 +89,10 @@ define([
 
 			document.title = titleValue;
 
+			if (!this._routingByHistory) {
+				window.history.pushState({url: url}, titleValue, url);
+			}
+
 			dispatcher.dispatch({
 				type: 'transition-check',
 				step: 2
@@ -101,6 +108,13 @@ define([
 		var handleDispatcher = function(e) {
 			if (e.type === 'route') {
 				if (this._isTransitioning) return;
+
+				if (e.byHistory) {
+					this._routingByHistory = true;
+				} else {
+					this._routingByHistory = false;
+				}
+
 				this._isTransitioning = true;
 				this._route(e);
 			}
@@ -122,6 +136,17 @@ define([
 			if (e.type === 'transition-step-3-complete') {
 
 			}
+		}
+
+		var handleHistory = function(e) {
+			var url = e.state.url;
+			if (!url) return;
+
+			dispatcher.dispatch({
+				type: 'route',
+				href: url,
+				byHistory: true
+			});
 		}
 
 		var reset = function() {
@@ -151,14 +176,21 @@ define([
 			this._replace = replace.bind(this);
 			this._handleDispatcher = handleDispatcher.bind(this);
 			this._reset = reset.bind(this);
+			this._handleHistory = handleHistory.bind(this);
 
 			this._reset();
+
+			window.onpopstate = this._handleHistory;
 		}
 		var attachedCallback = function() {
+			var url = location.origin + location.pathname;
+
+			window.history.replaceState({url: url}, false, url);
 			dispatcher.dispatch({
 				type: 'router-page-change',
-				href: location.origin + location.pathname
+				href: url
 			});
+
 			dispatcher.subscribe(this._handleDispatcher);
 		}
 		var detachedCallback = function() {
