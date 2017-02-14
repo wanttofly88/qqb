@@ -19,7 +19,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-<!--     <preloader-component>
+    <preloader-component>
         <div class="wrapper">
             <div class="text">
                 <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
@@ -27,7 +27,7 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-    </preloader-component> -->
+    </preloader-component>
 
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
@@ -145,11 +145,11 @@
                 </div>
 
                 <div class="section-header albums-header">
-                    <div class="left-wrapper">
-                        <div>New release album</div>
-                        <div>Date: 2017 Feb</div>
-                        <div>2LP Limited ed</div>
-                    </div>
+                    <print-slider class="left-wrapper" data-id="nfo-print">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </print-slider>
                 </div>
                 <div class="section-footer albums-footer">
                     <div class="left-wrapper">
@@ -163,9 +163,14 @@
                         <section class="albums js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <h1>The Heart Gently Weeps</h1>
+                                    <h1 is="header-component">The Heart Gently Weeps</h1>
                                     <div class="nfo">
                                         <div class="price">$35.00</div>
+                                    </div>
+                                    <div class="data-hidden" data-id="nfo-print">
+                                        <div>New release album</div>
+                                        <div>Date: 2017 Feb</div>
+                                        <div>2LP Limited ed</div>
                                     </div>
                                 </div>
                             </div>
@@ -173,9 +178,14 @@
                         <section class="albums js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <h1>The Heart Gently Weeps</h1>
+                                    <h1 is="header-component">The Heart</h1>
                                     <div class="nfo">
-                                        <div class="price">$35.00</div>
+                                        <div class="price">$15.00</div>
+                                    </div>
+                                    <div class="data-hidden" data-id="nfo-print">
+                                        <div>Album New release</div>
+                                        <div>Date: 2018 Aug</div>
+                                        <div>2LP</div>
                                     </div>
                                 </div>
                             </div>

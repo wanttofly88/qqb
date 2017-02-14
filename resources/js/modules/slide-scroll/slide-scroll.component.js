@@ -11,7 +11,8 @@ define([
 
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
-	var shift  = 200;
+
+	var SHIFT  = 200; // if set, this is a value in pixel which slide will trevel;
 
 	var fireResize = function() {
 		var evt = document.createEvent("HTMLEvents");
@@ -132,7 +133,6 @@ define([
 				document.addEventListener('wheel', this.onWheel);
 			}
 			this.remove = function() {
-				console.dir(this.component);
 				document.removeEventListener('mousewheel', this.onWheel);
 				document.removeEventListener('wheel', this.onWheel);
 			}
@@ -207,7 +207,12 @@ define([
 				this.component.dispatchEvent(touchMoveEvent);
 
 				e.preventDefault();
-				translate(this.component._wrapper, -this.index*this.wh + move , 0);
+
+				if (this.component._shift) {
+					translate(this.component._wrapper, -this.component._shift*this.index + move, 0);
+				} else {
+					translate(this.component._wrapper, -this.wh*this.index + move, 0);
+				}
 
 			}.bind(this);
 
@@ -230,7 +235,13 @@ define([
 					});
 				} else {
 					if (this._edge) returnSpeed = 150;
-					translate(this.component._wrapper, -this.index*this.wh , returnSpeed);
+
+					if (this.component._shift) {
+						translate(this.component._wrapper, -this.component._shift*this.index, returnSpeed);
+					} else {
+						translate(this.component._wrapper, -this.wh*this.index, returnSpeed);
+					}
+
 					touchEndEvent = new CustomEvent('touchcancel')
 					this.component.dispatchEvent(touchEndEvent);
 				}
@@ -397,7 +408,7 @@ define([
 			this._activate   = activate.bind(this);
 			this._deactivate = deactivate.bind(this);
 			this.index = 0;
-			this._shift = shift || null;
+			this._shift = SHIFT || null;
 		}
 
 		var attachedCallback = function() {

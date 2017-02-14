@@ -515,6 +515,7 @@ button {
 	position: relative;
 }
 .left-wrapper {
+	display: block;
 	position: relative;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -1633,29 +1634,41 @@ slide-scroll.slide-mode .js-slide.slide-previous .left-wrapper {
 	width: 100%;
 }
 
-
-h1 .lt {
-	transition: opacity 0.8s, transform 0.8s;
-}
 h1 .wd {
-	white-space: nowrap;
+	position: relative;
 }
 h1 .wd,
-h1 .lt,
-h1 .ln {
-	line-height: 1;
-	position: relative;
-	z-index: 2;
+h1 .wd-inv {
+	white-space: nowrap;
 }
-h1 .lt {
-	position: relative;
-	overflow: hidden;
-}
-
-h1 canvas {
+h1 .wd-inv {
 	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	color: #101010;
+	opacity: 0;
+	transition: opacity 0.1s;
+}
+h1 .wd-inv:before {
+	content: "";
+	position: absolute;
+	left: -0.1em;
+	right: -0.1em;
+	top: 0;
+	bottom: 0;
+	background: #ffffff;
+	z-index: -1;
 	pointer-events: none;
-	z-index: 3;
+}
+.page-wrapper[data-scheme="bright"] h1 .wd-inv {
+	color: #ffffff;
+}
+.page-wrapper[data-scheme="bright"] h1 .wd-inv:before {
+	background: #101010;
+}
+.data-hidden {
+	display: none;
 }
 
 
