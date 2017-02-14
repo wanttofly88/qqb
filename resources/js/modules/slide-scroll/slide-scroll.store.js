@@ -6,6 +6,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 	var timeForBlocking = 800;
 	var animationSpeed = 800;
+
 	var nativeScroll = false;
 
 	var defaultProps = {

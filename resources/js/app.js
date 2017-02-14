@@ -47,6 +47,8 @@ require([
 
 	'text-glitch/menu-text.component',
 
+	'print-slider/print-slider.component',
+
 	'popup/popup.component',
 	'popup/popup-toggle.component',
 	'popup/popup-close.component',
@@ -63,7 +65,7 @@ require([
 
 	'beat-slider/beat-bg-slider.component',
 
-	'decor/header-appear.component',
+	'decor/header.component',
 	'decor/text-print.component',
 
 	'loading-screen/loading-screen.component',

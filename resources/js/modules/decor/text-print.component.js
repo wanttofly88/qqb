@@ -9,7 +9,7 @@ define([
 
 	var animationSpeed = 400;
 	var charactersToRandomize = 4;
-	var charPool = ['a', 's', 't', 'w', 'z', 'v', 'h', 'y', 'r', 'u', 'j', 'n', 'b', 'i', 'e', 'd', 'q'];
+	var charPool = ['a', 's', 't', 'w', '#', '#', '#'];
 
 	if (!String.prototype.replaceAt) {
 		String.prototype.replaceAt = function(index, character) {
