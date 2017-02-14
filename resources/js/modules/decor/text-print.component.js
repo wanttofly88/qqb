@@ -149,7 +149,7 @@ define([
 					animation: new Animation(lineObj, null, animationSpeed, index*150)
 				});
 
-				line.innerHTML = '';
+				// line.innerHTML = '';
 			});
 
 			this._haldleSlideStore();
