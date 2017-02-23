@@ -7,29 +7,21 @@ define([
 ) {
 	"use strict";
 
-	var elementProto = function() {
-		var createdCallback = function() {
+	var elementProto = Object.create(HTMLElement.prototype);
 
-		}
-		var attachedCallback = function() {
-			dispatcher.dispatch({
-				type: 'scheme-color-change',
-				scheme: 'dark'
-			});
-		}
-		var detachedCallback = function() {
+	elementProto.createdCallback = function() {
 
-		}
+	}
+	elementProto.attachedCallback = function() {
+		dispatcher.dispatch({
+			type: 'scheme-color-change',
+			scheme: 'dark'
+		});
+	}
+	elementProto.detachedCallback = function() {
 
+	}
 
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
-
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('videos-helper', {
 		prototype: elementProto
 	});

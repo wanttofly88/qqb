@@ -30,7 +30,7 @@
         </div>
     </preloader-component>
 
-    <audio-player data-ambient="tmp/audio/Gulag_BPM130_Tag.mp3">
+    <audio-player data-ambient="tmp/audio/ambience-loop.wav">
         <audio src=""></audio>
         <audio src=""></audio>
     </audio-player>
@@ -51,7 +51,7 @@
                     </g>
                 </svg>
             </div>
-            <button is="popup-toggle" class="menu-btn" data-id="menu-popup">
+            <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
                 <div class="b b3"></div>
@@ -121,7 +121,7 @@
         <stage-component></stage-component>
 
         <main class="vh-min-height">
-            <div class="content replaceable" data-id="main-content">
+            <div class="content replaceable vh-min-height" data-id="main-content">
                 <videos-helper></videos-helper>
                 <div class="video-bg stage-fallback"></div>
 
@@ -133,9 +133,13 @@
                     </div>
                 </div>
 
-                <full-img class="video-bg">
-                    <img src="tmp/video/p2.jpg" alt="">
-                </full-img>
+                
+                    <video-slider>
+                        <div class="slide" style="background-image: url('tmp/video/p2.jpg')"></div>
+                        <div class="slide" style="background-image: url('tmp/video/p2.jpg')"></div>
+                        <div class="slide" style="background-image: url('tmp/video/p2.jpg')"></div>
+                    </video-slider>
+                
 
                 <slide-scroll data-id="video-slides" 
                     data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">

@@ -13,6 +13,7 @@ if (__path.slice(-1) !== '/') __path += '/';
 require.config({
 	baseUrl: __path + 'js/modules',
 	paths: {
+		text: '../libs/text',
 		TweenMax: '../libs/TweenMax',
 		THREE: '../libs/THREE',
 		THREEShaders: '../libs/THREE-Shaders'
@@ -26,6 +27,7 @@ require.config({
 
 
 require([
+	'text',
 	'resize/vh-fix.component',
 	'resize/proportional-height.component',
 
@@ -42,16 +44,16 @@ require([
 	'audio/audio-progress.component',
 	'audio/audio-progressbar.component',
 	'audio/audio-pause.component',
+	'audio/audio-visual.component',
 
 	'track-list/track-list.component',
 
 	'text-glitch/menu-text.component',
 
-	'print-slider/print-slider.component',
-
 	'popup/popup.component',
 	'popup/popup-toggle.component',
 	'popup/popup-close.component',
+	'popup/menu-toggle.component',
 
 	'helpers/beats-helper.component',
 	'helpers/albums-helper.component',
@@ -63,7 +65,12 @@ require([
 	'slide-scroll/slide-scroll-total.component',
 	'slide-scroll/slide-scroll-control.component',
 
-	'beat-slider/beat-bg-slider.component',
+	'print-slider/print-slider.component',
+	'attribute-slider/href-slider.component',
+	'attribute-slider/buy-slider.component',
+
+	'slider/cover-bg-slider.component',
+	'slider/cover-slider.component',
 
 	'decor/header.component',
 	'decor/text-print.component',

@@ -7,53 +7,44 @@ define([
 ) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleStore = function() {
-			var time = dataStore.getData().time;
-			var minutes = Math.floor(time / 60);
-			var seconds = Math.floor(time % 60);
-			var milliseconds = (time - Math.floor(time)).toFixed(3);
+	var elementProto = Object.create(HTMLElement.prototype);
 
-			if (seconds < 10) {
-				seconds = '0' + seconds;
-			}
-			if (minutes < 10) {
-				minutes = '0' + minutes;
-			}
+	elementProto.handleStore = function() {
+		var time = dataStore.getData().time;
+		var minutes = Math.floor(time / 60);
+		var seconds = Math.floor(time % 60);
+		var milliseconds = (time - Math.floor(time)).toFixed(3);
 
-			seconds = seconds + '.';
-			minutes = minutes + '.';
-			milliseconds = milliseconds.substring(2);
-
-			this._mnElement.innerHTML = minutes;
-			this._scElement.innerHTML = seconds;
-			this._msElement.innerHTML = milliseconds;
-
+		if (seconds < 10) {
+			seconds = '0' + seconds;
+		}
+		if (minutes < 10) {
+			minutes = '0' + minutes;
 		}
 
-		var createdCallback = function() {
-			this._handleStore = handleStore.bind(this);
-		}
-		var attachedCallback = function() {
-			this._mnElement = document.getElementsByClassName('mn')[0];
-			this._scElement = document.getElementsByClassName('sc')[0];
-			this._msElement = document.getElementsByClassName('ms')[0];
+		seconds = seconds + '.';
+		minutes = minutes + '.';
+		milliseconds = milliseconds.substring(2);
 
-			dataStore.eventEmitter.subscribe(this._handleStore);
-		}
-		var detachedCallback = function() {
-			dataStore.eventEmitter.unsubscribe(this._handleStore);
-		}
+		this._mnElement.innerHTML = minutes;
+		this._scElement.innerHTML = seconds;
+		this._msElement.innerHTML = milliseconds;
+	}
 
+	elementProto.createdCallback = function() {
+		this.handleStore = this.handleStore.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this._mnElement = document.getElementsByClassName('mn')[0];
+		this._scElement = document.getElementsByClassName('sc')[0];
+		this._msElement = document.getElementsByClassName('ms')[0];
 
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
+		dataStore.eventEmitter.subscribe(this.handleStore);
+	}
+	elementProto.detachedCallback = function() {
+		dataStore.eventEmitter.unsubscribe(this.handleStore);
+	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('audio-progress', {
 		prototype: elementProto
 	});

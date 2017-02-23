@@ -1,21 +1,14 @@
 define(['dispatcher'], function(dispatcher) {
 	"use strict";
 
-	var elementProto = function() {
-		var createdCallback = function() {
-		}
-		var attachedCallback = function() {
-		}
-		var detachedCallback = function() {
-		}
+	var elementProto = Object.create(HTMLElement.prototype);
 
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
+	elementProto.createdCallback = function() {
+	}
+	elementProto.attachedCallback = function() {
+	}
+	elementProto.detachedCallback = function() {
+	}
 
 	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('blog-post', {

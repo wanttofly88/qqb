@@ -1,4 +1,16 @@
 define(function() {
+
+	var getIEVersion = function() {
+		var rv = -1;
+		if (navigator.appName == 'Microsoft Internet Explorer') {
+			var ua = navigator.userAgent;
+			var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+		if (re.exec(ua) != null)
+			rv = parseFloat( RegExp.$1 );
+		}
+		return rv;
+	}
+
 	var offset = function(elem) {
 		function getOffsetSum(elem) {
 			var top = 0, left = 0;
@@ -234,8 +246,6 @@ define(function() {
 		}
 		this.unsubscribe = function(handler) {
 			if (this._handlers.indexOf(handler) === -1) {
-				console.log('trying to unsubscribe unexisting handler');
-				console.log(handler.toString());
 			}
 			this._handlers = this._handlers.filter(function(h) {
 				return h !== handler;
@@ -249,6 +259,7 @@ define(function() {
 		getRequestAnimationFrame: getRequestAnimationFrame,
 		http: http,
 		queryParse: queryParse,
+		getIEVersion: getIEVersion,
 		EventEmitter: EventEmitter
 	}
 

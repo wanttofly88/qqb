@@ -7,54 +7,46 @@ define([
 ) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleStore = function() {
-			var song = playerStore.getData().song;
+	var elementProto = Object.create(HTMLButtonElement.prototype);
 
-			if (song) {
-				this.innerHTML = '[Pause]';
-			} else {
-				this.innerHTML = '[Play]';
-			}
+	elementProto.handleStore = function() {
+		var paused = playerStore.getData().paused;
+
+		if (!paused) {
+			this.innerHTML = '[Pause]';
+		} else {
+			this.innerHTML = '[Play]';
 		}
+	}
 
-		var handleClick = function() {
-			var song = playerStore.getData().song;
-
-			if (song) {
-				dispatcher.dispatch({
-					type: 'audio-stop'
-				});
-			} else {
-				dispatcher.dispatch({
-					type: 'audio-play'
-				});
-			}
+	elementProto.handleClick = function() {
+		var paused = playerStore.getData().paused;
+		if (!paused) {
+			dispatcher.dispatch({
+				type: 'audio-stop'
+			});
+		} else {
+			dispatcher.dispatch({
+				type: 'audio-play'
+			});
 		}
+	}
 
-		var createdCallback = function() {
-			this._handleClick = handleClick.bind(this);
-			this._handleStore = handleStore.bind(this);
-		}
-		var attachedCallback = function() {
-			this.addEventListener('click', this._handleClick);
-			playerStore.eventEmitter.subscribe(this._handleStore);
-		}
-		var detachedCallback = function() {
-			this.removeEventListener('click', this._handleClick);
-			playerStore.eventEmitter.unsubscribe(this._handleStore);
-		}
+	elementProto.createdCallback = function() {
+		this.handleClick = this.handleClick.bind(this);
+		this.handleStore = this.handleStore.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this.addEventListener('click', this.handleClick);
+		playerStore.eventEmitter.subscribe(this.handleStore);
+	}
+	elementProto.detachedCallback = function() {
+		this.removeEventListener('click', this.handleClick);
+		playerStore.eventEmitter.unsubscribe(this.handleStore);
+	}
 
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
-
-	Object.setPrototypeOf(elementProto, HTMLButtonElement.prototype);
 	document.registerElement('audio-pause', {
 		extends: 'button',
 		prototype: elementProto
-	});});
+	});
+});

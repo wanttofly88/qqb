@@ -29,6 +29,11 @@
         </div>
     </preloader-component>
 
+    <audio-player data-ambient="tmp/audio/ambience-loop.wav">
+        <audio src=""></audio>
+        <audio src=""></audio>
+    </audio-player>
+
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
@@ -46,7 +51,7 @@
                     </g>
                 </svg>
             </div>
-            <button is="popup-toggle" class="menu-btn" data-id="menu-popup">
+            <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
                 <div class="b b3"></div>
@@ -113,12 +118,11 @@
         </div>
 
         <div class="stage-fallback"></div>
-        <stage-component></stage-component>
-
+        <stage-component data-mask="resources/images/stage-mask.png"></stage-component>
         <main class="vh-min-height">
             <div class="stage"></div>
 
-            <div class="content replaceable" data-id="main-content">
+            <div class="content replaceable vh-min-height" data-id="main-content">
                 <albums-helper></albums-helper>
                 <div class="stage-fallback albums-bg"></div>
 
@@ -145,7 +149,7 @@
                 </div>
 
                 <div class="section-header albums-header">
-                    <print-slider class="left-wrapper" data-id="nfo-print">
+                    <print-slider class="left-wrapper" data-id="albums-slides">
                         <div></div>
                         <div></div>
                         <div></div>
@@ -153,8 +157,10 @@
                 </div>
                 <div class="section-footer albums-footer">
                     <div class="left-wrapper">
-                        <button class="btn">[Buy album]</button>
-                        <a href="album.html" class="btn">[Listen now]</a>
+                        <!--здесь не надо заполнять data-product-id-->
+                        <button is="buy-slider" data-id="albums-slides" data-product-id="" class="btn">[Buy album]</button>
+                        <!--здесь не надо заполнять href-->
+                        <a is="href-slider" href="" class="btn" data-id="albums-slides">[Listen now]</a>
                     </div>
                 </div>
 
@@ -163,14 +169,28 @@
                         <section class="albums js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
+                                    <div class="slidescroll-fallback">
+                                        <div class="data-text" data-id="albums-slides">
+                                            <div>New release album</div>
+                                            <div>Date: 2017 Feb</div>
+                                            <div>2LP Limited ed</div>
+                                        </div>
+                                    </div>
                                     <h1 is="header-component">The Heart Gently Weeps</h1>
-                                    <div class="nfo">
+                                    <div class="price-nfo">
                                         <div class="price">$35.00</div>
                                     </div>
-                                    <div class="data-hidden" data-id="nfo-print">
-                                        <div>New release album</div>
-                                        <div>Date: 2017 Feb</div>
-                                        <div>2LP Limited ed</div>
+                                    <div class="slidescroll-fallback fb-btns">
+                                        <!--data-product-id это id продукта, который будет посылаться на сервер-->
+                                        <button class="btn data-product"
+                                            data-id="albums-slides"
+                                            data-product-id="album-1">[Buy album]</button>
+                                        <!--ссылка на страницу альбома-->
+                                        <a is="inner-link" 
+                                            href="album.html" 
+                                            class="btn data-href"
+                                            data-id="albums-slides"
+                                            >[Listen now]</a>
                                     </div>
                                 </div>
                             </div>
@@ -178,14 +198,26 @@
                         <section class="albums js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <h1 is="header-component">The Heart</h1>
-                                    <div class="nfo">
-                                        <div class="price">$15.00</div>
-                                    </div>
-                                    <div class="data-hidden" data-id="nfo-print">
+                                    <div class="slidescroll-fallback">
+                                        <div class="data-text" data-id="albums-slides">
                                         <div>Album New release</div>
                                         <div>Date: 2018 Aug</div>
                                         <div>2LP</div>
+                                        </div>
+                                    </div>
+                                    <h1 is="header-component">The Heart</h1>
+                                    <div class="price-nfo">
+                                        <div class="price">$15.00</div>
+                                    </div>
+                                    <div class="slidescroll-fallback fb-btns">
+                                        <button class="btn data-product"
+                                            data-id="albums-slides"
+                                            data-product-id="album-2">[Buy album]</button>
+                                        <a is="inner-link" 
+                                            href="album.html" 
+                                            class="btn data-href"
+                                            data-id="albums-slides"
+                                            >[Listen now]</a>
                                     </div>
                                 </div>
                             </div>
@@ -193,13 +225,15 @@
                     </div>
                 </slide-scroll>
                 <aside class="cover">
-                    <div class="cover-img">
+
+                    <!--data-id такой же как у slide-scroll. так как к нему привязывается-->
+                    <cover-slider class="cover-img" data-id="albums-slides">
                         <proportional-height>
-                            <img src="tmp/beat-lables/1.jpg" alt="">
-                            <img src="tmp/beat-lables/2.jpg" alt="">
-                            <img src="tmp/beat-lables/3.jpg" alt="">
+                            <img class="slide" src="tmp/beat-lables/1.jpg" alt="">
+                            <img class="slide" src="tmp/beat-lables/2.jpg" alt="">
+                            <img class="slide" src="tmp/beat-lables/3.jpg" alt="">
                         </proportional-height>
-                    </div>
+                    </cover-slider>
                 </aside>
             </div>
         </main>

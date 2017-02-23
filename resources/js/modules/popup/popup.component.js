@@ -5,121 +5,112 @@ define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 		e.stopPropagation();
 	}
 
-	var elementProto = function() {
-		var open = function() {
-			var overflow;
-			var inner;
-			var pw = document.getElementsByClassName('page-wrapper')[0];
-			var dw2;
-			var diff = 0;
+	var elementProto = Object.create(HTMLElement.prototype);
 
-			this._active = true;
+	elementProto.open = function() {
+		var overflow;
+		var inner;
+		var pw = document.getElementsByClassName('page-wrapper')[0];
+		var dw2;
+		var diff = 0;
 
-			overflow = this.getElementsByClassName('popup-outer')[0];
-			inner = this.getElementsByClassName('popup-cell')[0];
+		this._active = true;
 
-			this.classList.add('active');
+		overflow = this.getElementsByClassName('popup-outer')[0];
+		inner = this.getElementsByClassName('popup-cell')[0];
 
-			dw2 = document.documentElement.clientWidth;
-			diff = dw2 - this._dw1;
-			if (diff < 0) diff = 0;
+		this.classList.add('active');
 
-			if (inner) {
-				inner.style.paddingRight = diff + 'px';
-			}
-			if (overflow) {
-				overflow.addEventListener('touchmove', _preventTouchScroll);
-			}
+		dw2 = document.documentElement.clientWidth;
+		diff = dw2 - this._dw1;
+		if (diff < 0) diff = 0;
 
-			if (pw) {
-				pw.style.marginRight = diff + 'px';
-			}
+		if (inner) {
+			inner.style.paddingRight = diff + 'px';
 		}
-		var close = function() {
-			var overflow;
-			var inner;
-			var pw = document.getElementsByClassName('page-wrapper')[0];
-			var dw2;
-			var diff = 0;
-
-			this._active = false;
-
-			overflow = this.getElementsByClassName('popup-outer')[0];
-			inner = this.getElementsByClassName('popup-cell')[0];
-
-			this.classList.remove('active');
-
-			dw2 = document.documentElement.clientWidth;
-			diff = dw2 - this._dw1;
-			if (diff < 0) diff = 0;
-
-			if (inner) {
-				inner.style.paddingRight = '0px';
-			}
-			if (overflow) {
-				overflow.removeEventListener('touchmove', _preventTouchScroll);
-			}
-
-			if (pw) {
-				pw.style.marginRight = diff + 'px';
-			}
-		}
-		var handleStore = function() {
-			var active = popupStore.getData().active;
-			var body = document.getElementsByTagName('body')[0];
-			var pw = document.getElementsByClassName('page-wrapper')[0];
-
-			this._dw1 = document.documentElement.clientWidth;
-
-			if (active) {
-				body.classList.add('prevent-scroll');
-				pw.setAttribute('data-popup', 'active');
-
-				dispatcher.dispatch({
-					type: 'audio-low-freq'
-				});
-			} else {
-				body.classList.remove('prevent-scroll');
-				pw.setAttribute('data-popup', 'inactive');
-
-				dispatcher.dispatch({
-					type: 'audio-high-freq'
-				});
-			}
-
-			if (!this._active && active === this._id) {
-				this._open();
-			} else if (this._active && active !== this._id) {
-				this._close();
-			}
+		if (overflow) {
+			overflow.addEventListener('touchmove', _preventTouchScroll);
 		}
 
-		var createdCallback = function() {
-			this._open  = open.bind(this);
-			this._close = close.bind(this);
-			this._handleStore = handleStore.bind(this);
-			this._dw1 = 0;
+		if (pw) {
+			pw.style.paddingRight = diff + 'px';
 		}
-		var attachedCallback = function() {
-			this._id = this.getAttribute('data-id');
-			this._active = false;
+	}
+	elementProto.close = function() {
+		var overflow;
+		var inner;
+		var pw = document.getElementsByClassName('page-wrapper')[0];
+		var dw2;
+		var diff = 0;
 
-			popupStore.eventEmitter.subscribe(this._handleStore);
+		this._active = false;
+
+		overflow = this.getElementsByClassName('popup-outer')[0];
+		inner = this.getElementsByClassName('popup-cell')[0];
+
+		this.classList.remove('active');
+
+		dw2 = document.documentElement.clientWidth;
+		diff = dw2 - this._dw1;
+		if (diff < 0) diff = 0;
+
+		if (inner) {
+			inner.style.paddingRight = '0px';
 		}
-		var detachedCallback = function() {
-			popupStore.eventEmitter.unsubscribe(this._handleStore);
+		if (overflow) {
+			overflow.removeEventListener('touchmove', _preventTouchScroll);
 		}
 
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
+		if (pw) {
+			pw.style.paddingRight = diff + 'px';
 		}
-	}();
+	}
+	elementProto.handleStore = function() {
+		var active = popupStore.getData().active;
+		var body = document.getElementsByTagName('body')[0];
+		var pw = document.getElementsByClassName('page-wrapper')[0];
 
+		this._dw1 = document.documentElement.clientWidth;
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
+		if (active) {
+			body.classList.add('prevent-scroll');
+			pw.setAttribute('data-popup', 'active');
+
+			dispatcher.dispatch({
+				type: 'audio-low-freq'
+			});
+		} else {
+			body.classList.remove('prevent-scroll');
+			pw.setAttribute('data-popup', 'inactive');
+
+			dispatcher.dispatch({
+				type: 'audio-high-freq'
+			});
+		}
+
+		if (!this._active && active === this._id) {
+			this.open();
+		} else if (this._active && active !== this._id) {
+			this.close();
+		}
+	}
+
+	elementProto.createdCallback = function() {
+		this.open  = this.open.bind(this);
+		this.close = this.close.bind(this);
+		this.handleStore = this.handleStore.bind(this);
+		this._dw1 = 0;
+	}
+	elementProto.attachedCallback = function() {
+		this._id = this.getAttribute('data-id');
+		this._active = false;
+
+		popupStore.eventEmitter.subscribe(this.handleStore);
+	}
+	elementProto.detachedCallback = function() {
+		popupStore.eventEmitter.unsubscribe(this.handleStore);
+	}
+
 	document.registerElement('popup-component', {
 		prototype: elementProto
 	});

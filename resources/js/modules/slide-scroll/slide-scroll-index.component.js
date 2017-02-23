@@ -1,37 +1,29 @@
 define(['dispatcher', 'slide-scroll/slide-scroll.store'], function(dispatcher, store) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleStore = function() {
-			var storeData = store.getData().items[this._id];
-			if (!storeData) return;
+	var elementProto = Object.create(HTMLElement.prototype);
 
-			this.innerHTML = storeData.index + 1;
-		}
-		var createdCallback = function() {
-			this._handleStore = handleStore.bind(this);
-		}
-		var attachedCallback = function() {
-			this._id = this.getAttribute('data-id');
-			if (!this._id) {
-				console.warn('data-id attribute is missing on slide-scroll-index');
-			}
-			store.eventEmitter.subscribe(this._handleStore);
-			this._handleStore();
-		}
-		var detachedCallback = function() {
-			store.eventEmitter.unsubscribe(this._handleStore);
-		}
+	elementProto.handleStore = function() {
+		var storeData = store.getData().items[this._id];
+		if (!storeData) return;
 
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
+		this.innerHTML = storeData.index + 1;
+	}
+	elementProto.createdCallback = function() {
+		this.handleStore = this.handleStore.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this._id = this.getAttribute('data-id');
+		if (!this._id) {
+			console.warn('data-id attribute is missing on slide-scroll-index');
 		}
-	}();
+		store.eventEmitter.subscribe(this.handleStore);
+		this.handleStore();
+	}
+	elementProto.detachedCallback = function() {
+		store.eventEmitter.unsubscribe(this.handleStore);
+	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('slide-scroll-index', {
 		prototype: elementProto
 	});

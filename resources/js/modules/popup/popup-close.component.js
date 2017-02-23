@@ -1,31 +1,24 @@
 define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleClick = function() {
-			dispatcher.dispatch({
-				type: 'popup-close'
-			});
-		}
+	var elementProto = Object.create(HTMLButtonElement.prototype);
 
-		var createdCallback = function() {
-			this._handleClick = handleClick.bind(this);
-		}
-		var attachedCallback = function() {
-			this.addEventListener('click', this._handleClick);
-		}
-		var detachedCallback = function() {
-			this.removeEventListener('click', this._handleClick);
-		}
+	elementProto.handleClick = function() {
+		dispatcher.dispatch({
+			type: 'popup-close'
+		});
+	}
 
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
+	elementProto.createdCallback = function() {
+		this.handleClick = this.handleClick.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this.addEventListener('click', this.handleClick);
+	}
+	elementProto.detachedCallback = function() {
+		this.removeEventListener('click', this.handleClick);
+	}
 
-	Object.setPrototypeOf(elementProto, HTMLButtonElement.prototype);
 	document.registerElement('popup-close', {
 		extends: 'button',
 		prototype: elementProto

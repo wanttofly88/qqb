@@ -1,366 +1,220 @@
 define([
 	'dispatcher',
 	'THREE',
-	'TweenMax',
 	'resize/resize.store',
+	'utils',
+	'text!glsl/simple-vertex.glsl',
+	'text!glsl/dot-fragment.glsl',
 	'scheme/scheme.store',
-	'slide-scroll/slide-scroll.store',
-	'utils'
+	'TweenMax'
 ], function(
 	dispatcher,
 	THREE,
-	TweenMax,
 	resizeStore,
+	utils,
+	simpleVertexShader,
+	dotFragmentShader,
 	schemeStore,
-	slideStore,
-	utils
+	TweenMax
 ) {
 	"use strict";
 
-	var dpr = 1;
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
-	var base = function(component) {
-		var renderer;
-		var init = function() {
-			var ww = resizeStore.getData().width;
-			var wh = resizeStore.getData().height;
+	var elementProto = Object.create(HTMLElement.prototype);
 
-			var blurH = 0.4/ww;
-			var blurW = 0.4/wh;
+	elementProto.buld = function() {
+		var camera, scene, renderer;
+		var ww = resizeStore.getData().width;
+		var wh = resizeStore.getData().height;
+		var plane, mesh, material;
+		var dpr = 1;
+		var maxW = Math.max(ww, wh);
+		var texloader = new THREE.TextureLoader();
+		var texture;
+		var self = this;
 
-			var simpleVertex = document.getElementById('simpleVertexShader').innerHTML;
-			var simpleFragment = document.getElementById('simpleFragmentShader').innerHTML;
-			var bufferFragment = document.getElementById('bufferFragmentShader').innerHTML;
-			var postFragment = document.getElementById('postProcessingShader').innerHTML;
+		camera = new THREE.OrthographicCamera(
+			ww*dpr / -2, 
+			ww*dpr / 2,  
+			wh*dpr / 2, 
+			wh*dpr / -2, 
+			-100, 
+			100
+		);
 
-			var finalMaterial, quad;
+		scene = new THREE.Scene();
+		renderer = new THREE.WebGLRenderer({
+			antialias: true,
+			alpha: true
+		});
 
-			var camera, scene;
-			var buffer = {
-				scene: new THREE.Scene(),
-				textureA: new THREE.WebGLRenderTarget(ww, wh, { 
-					minFilter: THREE.LinearFilter, 
-					magFilter: THREE.NearestFilter
-				}),
-				textureB: new THREE.WebGLRenderTarget(ww, wh, { 
-					minFilter: THREE.LinearFilter, 
-					magFilter: THREE.NearestFilter
-				}),
-				plane: new THREE.PlaneBufferGeometry(ww, wh)
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(ww, wh);
+
+		renderer.domElement.style.width  = '100%';
+		renderer.domElement.style.height = '100%';
+		renderer.setClearColor(0x40dbe1);
+
+		this.appendChild(renderer.domElement);
+
+		material = new THREE.ShaderMaterial({
+			uniforms: {
+				map: {type: 't', value: texture},
+				r: {type: 'f', value: 0},
+				shiftY: {type: 'f', value: 0},
+				time: {type: 'f', value: 0},
+				resolution: {type: 'v2', value: [1, 1]},
+				bright: {type: 'f', value: 0}
+			},
+			vertexShader: simpleVertexShader,
+			fragmentShader: dotFragmentShader
+		});
+
+		texture = texloader.load(this._maskSrc, function(e) {
+			self._sizes = {
+				nw: texture.image.naturalWidth,
+				nh: texture.image.naturalHeight
 			}
+			texture.premultiplyAlpha = true;
+			texture.needsUpdate = true;
 
-			buffer.material = new THREE.ShaderMaterial({
-				uniforms: {
-					bufferTexture: { type: 't', value: buffer.textureA.texture },
-					st: { type: 'f', value: 1 },
-					blurH: { type: 'f', value: blurH },
-					blurW: { type: 'f', value: blurW },
-					gBox: { type: 'v4', value: new THREE.Vector4(0, 0, 0, 0) },
-					gxs: { type: 'f', value: 0 },
-					gxe: { type: 'f', value: 0 },
-					gys: { type: 'f', value: 0 },
-					gye: { type: 'f', value: 0 },
-					shift: { type: 'f', value: 0 },
-					res: { type: 'v2', value:new THREE.Vector2(ww, wh) }
-				},
-				fragmentShader: bufferFragment
-			});
+			texture.magFilter = THREE.NearestFilter;
+			texture.minFilter = THREE.NearestFilter;
 
-			buffer.object = new THREE.Mesh(buffer.plane, buffer.material);
-			buffer.scene.add(buffer.object);
+			material.uniforms.map.value = texture;
 
-			// finalMaterial = new THREE.MeshBasicMaterial({map: buffer.textureB.texture});
-
-			finalMaterial = new THREE.ShaderMaterial({
-				uniforms: {
-					tDiffuse: { type: 't', value: buffer.textureB.texture},
-					time: { type: 'f', value: 0 },
-					nIntensity: { type: 'f', value: 0 },
-					sIntensity: { type: 'f', value: 0 },
-					sCount: { type: 'f', value: wh/1.1 },
-					colorScheme: { type: 'f', value: 0 }
-				},
-				vertexShader: simpleVertex,
-				fragmentShader: postFragment
-			});
-
-			quad = new THREE.Mesh(buffer.plane, finalMaterial);
-
-			camera = new THREE.OrthographicCamera(
-				ww*dpr / -2, 
-				ww*dpr / 2,  
-				wh*dpr / 2, 
-				wh*dpr / -2, 
-				-100, 
-				100
-			);
-
-			scene = new THREE.Scene();
-
-			scene.add(quad);
-
-			renderer = new THREE.WebGLRenderer({
-				antialias: true,
-				alpha: true
-			});
-			renderer.setPixelRatio(window.devicePixelRatio);
-			renderer.setSize(ww, wh);
-
-			renderer.domElement.style.width  = '100%';
-			renderer.domElement.style.height = '100%';
-			renderer.setClearColor(0x40dbe1);
-
-			component.appendChild(renderer.domElement);
-
-			component._renderer = renderer;
-			component._camera = camera;
-			component._scene = scene;
-			component._buffer = buffer;
-			component._material = finalMaterial;
-		}
-
-		var resize = function() {
-			var ww = resizeStore.getData().width;
-			var wh = resizeStore.getData().height;
-
-			if (component._camera && renderer) {
-				component._camera.left =   ww*dpr / -2;
-				component._camera.right =  ww*dpr / 2;
-				component._camera.top =    wh*dpr / 2;
-				component._camera.bottom = wh*dpr / -2;
-
-				component._camera.updateProjectionMatrix();
-				renderer.setPixelRatio(window.devicePixelRatio);
-				renderer.setSize(ww, wh);
-
-				renderer.domElement.style.width  = '100%';
-				renderer.domElement.style.height = '100%';
-			}
-		}
-
-		var handleScheme = function() {
-			var scheme = schemeStore.getData().scheme;
-			var targetValue;
-			var material;
-
-			if (component._scheme === scheme) return;
-
-			material = component._material;
-
-			if (scheme === 'dark') {
-				targetValue = 1;
-			} else {
-				targetValue = 0;
-			}
-
-			if (component._scheme === undefined) {
-				material.uniforms.colorScheme.value = targetValue;
-			} else {
-				TweenMax.killTweensOf(material.uniforms.colorScheme);
-				TweenMax.to(material.uniforms.colorScheme, 0.3, {
-					value: targetValue
-				});
-			}
-
-			component._scheme = scheme;
-		}
-
-		var glitch = function(material) {
-			var rand = Math.random();
-			var gys, gye;
-			var gxs, gxe;
-			var shift;
-
-			if (rand < 0.01) {
-				gys = 0.2 + Math.random()/4;
-				gye = gys + 0.05;
-				shift = (Math.random() - 0.5)/2;
-				gxs = Math.random();
-				gxe = Math.random();
-				material.uniforms.gBox.value = new THREE.Vector4(gxs, gys, gxe, gye);
-				material.uniforms.shift.value = shift;
-			}
-		}
-
-		var noise = function(material) {
-			var rand = Math.random();
-			var duration;
-			var tl;
-
-			if (rand < 0.02 && material.uniforms.nIntensity.value < 0.01) {
-				duration = Math.random()*4 + 1;
-
-				tl = new TimelineLite();
-				tl.to(material.uniforms.nIntensity, duration, {
-					value: 0.2
-				});
-				tl.to(material.uniforms.nIntensity, duration, {
-					value: 0
-				});
-			}
-		}
-
-		var render = function() {
-			var scene = component._scene;
-			var camera = component._camera;
-			var renderer = component._renderer;
-			var buffer = component._buffer;
-			var postMaterial = component._material;
-
-			var tmpTexture;
-
-			//component._composer.render(component._scene, component._camera);
-			renderer.render(buffer.scene, camera, buffer.textureB, true);
-			tmpTexture = buffer.textureA;
-			buffer.textureA = buffer.textureB;
-			buffer.textureB = tmpTexture;
-			buffer.material.uniforms.bufferTexture.value = buffer.textureA.texture;
-			buffer.material.uniforms.st.value = component._step;
-			postMaterial.uniforms.time.value = component._step/10;
-
-			glitch(buffer.material);
-			noise(postMaterial);
-
-			component._step++;
-			if (component._step >= 10000) {
-				component._step = 2;
-			}
+			plane = new THREE.PlaneBufferGeometry(self._sizes.nw, self._sizes.nh);
+			mesh = new THREE.Mesh(plane, material);
+			scene.add(mesh);
 
 			renderer.render(scene, camera);
-		}
 
-		return {
-			init: init,
-			render: render,
-			resize: resize,
-			handleScheme: handleScheme
-		}
+			self._texture = texture;
+			self._mesh = mesh;
+
+			self.loop();
+
+			self.handleResize();
+		});
+
+		this._material = material;
+		this._scene = scene;
+		this._camera = camera;
+		this._renderer = renderer;
 	}
 
-	var rect = function(component) {
-		var planes = [];
-		var vertexShader, fragmentShader;
+	elementProto.loop = function() {
+		var material = this._material;
+		var scene = this._scene;
+		var camera = this._camera;
+		var renderer = this._renderer;
+		var texture = this._texture;
+		var mesh = this._mesh;
+		var r = Math.random()/90;
 
-		var _addPlane = function() {
-			var wh = resizeStore.getData().height;
-			var ww = resizeStore.getData().width;
-			var geometry = new THREE.PlaneGeometry(1, 1);
-			var material = new THREE.ShaderMaterial({
-				transparent: true,
-				vertexShader: vertexShader,
-				fragmentShader: fragmentShader
-			});
-			var plane = new THREE.Mesh(geometry, material);
+		if (!this._active) return;
+		if (this._loopIndex > 10000) this._loopIndex = 0;
+		this._loopIndex++;
 
-			plane.position.x = Math.random()*ww - ww/2;
-			plane.position.y = Math.random()*wh - wh/2;
-			plane.position.z = 0;
+		material.uniforms.r.value = r;
+		material.uniforms.time.value = this._loopIndex;
 
-			plane.speed = Math.floor(Math.random()*5 + 5)/16;
+		renderer.render(scene, camera);
+		requestAnimationFrame(this.loop);
+	}
+	elementProto.handleScheme = function() {
+		var material = this._material;
+		var scheme = schemeStore.getData().scheme;
+		var value;
+		
+		if (scheme === this._currentScheme) return;
 
-			//plane.scale.set(Math.random()*200 + 40, Math.random()*500 + 200, 1);
-			plane.scale.set(Math.random()*200 + 40, 200, 1);
-			planes.push(plane);
-			component._buffer.scene.add(plane);
+		if (scheme === 'bright') {
+			value = 1;
+		}
+		if (scheme === 'dark') {
+			value = 0;
 		}
 
-		var init = function() {
-			vertexShader = document.getElementById('simpleVertexShader').innerHTML;
-			fragmentShader = document.getElementById('gradientFragmentShader').innerHTML;
-
-			for (var i = 0; i < 15; i++) {
-				_addPlane();
-			}
-			
-		}
-
-		var update = function() {
-			var wh = resizeStore.getData().height;
-			var ww = resizeStore.getData().width;
-			var botY = component._camera.position.y + component._camera.bottom; 
-			var topY = component._camera.position.y + component._camera.top;
-
-			planes.forEach(function(plane) {
-				plane.position.y -= plane.speed;
-				if (plane.position.y + plane.scale.y/2 < botY) {
-					plane.position.x = Math.random()*ww - ww/2;
-					plane.position.y = topY + plane.scale.y/2;
-				}
+		if (this._currentScheme === undefined) {
+			material.uniforms.bright.value = value;
+		} else {
+			TweenMax.killTweensOf(material.uniforms.bright);
+			TweenMax.to(material.uniforms.bright, 0.4, {
+				value: value
 			});
 		}
 
-		var handleSlideScroll = function() {
+		this._currentScheme = scheme;
+	}
+	elementProto.handleDispatcher = function(e) {
+	}
+	elementProto.handleResize = function() {
+		var ww = resizeStore.getData().width;
+		var wh = resizeStore.getData().height;
+		var camera = this._camera;
+		var renderer = this._renderer;
+		var mesh = this._mesh;
+		var material;
+		var scaleX, scaleY, scale;
+		var mw, mh;
 
-		}
+		camera.left =   ww / -2;
+		camera.right =  ww / 2;
+		camera.top =    wh / 2;
+		camera.bottom = wh / -2;
 
-		var resize = function() {
+		camera.updateProjectionMatrix();
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(ww, wh);
 
-		}
+		if (this._sizes && mesh) {
+			mw = mesh.geometry.parameters.width;
+			mh = mesh.geometry.parameters.height;
+			scaleX = ww / mw;
+			scaleY = wh / mh;
 
-		return {
-			init: init,
-			resize: resize,
-			update: update,
-			handleSlideScroll: handleSlideScroll
+			scale = Math.max(scaleX, scaleY);
+			mesh.scale.set(scale, scale, 1);
+			this._sizes.mw = mw*scale;
+			this._sizes.mh = mh*scale;
+
+			material = mesh.material;
+			material.uniforms.resolution.value = [
+				this._sizes.mw,
+				this._sizes.mh
+			]
 		}
 	}
 
-	var elementProto = function() {
-		var handleScheme = function() {
-			var scheme = schemeStore.getData().scheme;
-		}
+	elementProto.createdCallback = function() {
+		this._loopIndex = 0;
+		this.build = this.buld.bind(this);
+		this.handleDispatcher = this.handleDispatcher.bind(this);
+		this.handleResize = this.handleResize.bind(this);
+		this.handleScheme = this.handleScheme.bind(this);
+		this.loop = this.loop.bind(this);
+		this._active = true;
+		this._currentScheme = undefined;
+	}
+	elementProto.attachedCallback = function() {
+		this._maskSrc = this.getAttribute('data-mask');
 
-		var loop = function() {
-			this._rect.update();
-			this._base.render();
+		if (Modernizr && !Modernizr.webgl) return;
 
-			requestAnimationFrame(this._loop);
-		}
+		this.build();
+		this.handleScheme();
+		resizeStore.eventEmitter.subscribe(this.handleResize);
+		dispatcher.subscribe(this.handleDispatcher);
+		schemeStore.eventEmitter.subscribe(this.handleScheme);
+	}
+	elementProto.detachedCallback = function() {
+		resizeStore.eventEmitter.unsubscribe(this.handleResize);
+		dispatcher.unsubscribe(this.handleDispatcher);
+		schemeStore.eventEmitter.unsubscribe(this.handleScheme);
+	}
 
-		var createdCallback = function() {
-			this._camera;
-			this._scene;
-			this._composer;
-			this._base = base(this);
-			this._rect = rect(this);
-			this._handleScheme = this._base.handleScheme;
-			this._handleSlideScroll = this._rect.handleSlideScroll;
-			this._loop = loop.bind(this);
-			this._step = 0;
-		}
-		var attachedCallback = function() {
-
-			document.getElementsByTagName('html')[0].classList.add('no-webgl');
-			document.getElementsByTagName('html')[0].classList.remove('webgl');
-			return;
-
-			this._base.init();
-			this._base.resize();
-			this._rect.init();
-
-			this._handleScheme();
-			this._loop();
-			schemeStore.eventEmitter.subscribe(this._handleScheme);
-			slideStore.eventEmitter.subscribe(this._handleSlideScroll);
-
-
-		}
-
-		var detachedCallback = function() {
-			schemeStore.eventEmitter.unsubscribe(this._handleScheme);
-			slideStore.eventEmitter.unsubscribe(this._handleSlideScroll);
-		}
-
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
-
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('stage-component', {
 		prototype: elementProto
 	});

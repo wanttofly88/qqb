@@ -7,6 +7,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var playlistId = null;
 	var playlist = null;
 	var index = null;
+	var paused = false;
 
 	var _handleEvent = function(e) {
 		if (e.type === 'audio-song-changed') {
@@ -24,14 +25,16 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				index = null;
 			}
 
+			paused = e.paused;
+
 			eventEmitter.dispatch();
 		}
 		if (e.type === 'audio-set-playlist') {
+
 			if (playlistId === e.id) return;
 
 			playlist = e.playlist;
 			playlistId = e.id;
-
 			eventEmitter.dispatch();
 		}
 		if (e.type === 'audio-unset-playlist') {
@@ -49,7 +52,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			song: song,
 			playlistId: playlistId,
 			playlist: playlist,
-			index: index
+			index: index,
+			paused: paused
 		}
 	}
 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--путь к ресурсам сайта-->
+    <meta name="resources-path" content="resources/">
+
+    <title>Albums</title>
+    <meta name="viewport" content="initial-scale=1, minimal-ui"/>
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <script src="resources/js/libs/modernizr.js"></script>
+    <script src="resources/js/libs/webcomponents-lite.js"></script>
+    <script src="resources/js/libs/setPrototypeOf.polyfill.js"></script>
+    <script data-main="resources/js/app" src="resources/js/require.js"></script>
+</head>
+<body>
+    <vh-fix></vh-fix>
+    <page-transition></page-transition>
+    <router-component></router-component>
+
+    <preloader-component>
+        <div class="wrapper">
+            <div class="text">
+                <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
+                <div class="perc">0%</div>
+                <div class="nt">Soundtrack to life</div>
+            </div>
+        </div>
+    </preloader-component>
+
+    <audio-player data-ambient="tmp/audio/ambience-loop.wav">
+        <audio src=""></audio>
+        <audio src=""></audio>
+    </audio-player>
+
+
+    <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
+        <header>
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
+                    <g id="Layer_1" data-name="Layer 1">
+                        <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
+                        <polygon class="cls-1" points="57.55 79.5 80.48 99.61 48.29 83.04 57.45 78.57 57.55 79.5"/>
+                        <polygon class="cls-1" points="91.72 90.62 91.42 90.33 72.31 70.84 72.31 70.83 74.11 64.86 79.83 56.42 80.52 58.41 91.42 89.77 91.57 90.19 91.72 90.62"/>
+                        <polygon class="cls-1" points="75.26 66.04 91.72 90.62 79.83 56.42 74.12 64.87 75.26 66.04"/>
+                        <path class="cls-1" d="M41.94,0A42,42,0,1,0,64.39,77.36l0.07,0L59.26,70.4a33.52,33.52,0,1,1,6.93-5.65l6.12,6.08h0a41.83,41.83,0,0,0,3.41-4.07,42.46,42.46,0,0,0,4.78-8.34A41.95,41.95,0,0,0,41.94,0Z"/>
+                        <path class="cls-1" d="M51.24,49.94a12.21,12.21,0,1,0-4.77,3.41l7.64,10.18a24.72,24.72,0,1,1,6-4.76Z"/>
+                        <polygon class="cls-1" points="91.72 90.06 91.57 90.19 91.48 90.27 91.42 90.33 72.31 70.84 72.31 70.83 72.32 70.83 90.61 88.97 90.62 88.98 91.42 89.77 91.72 90.06"/>
+                        <path class="cls-1" d="M72.74,70.39"/>
+                    </g>
+                </svg>
+            </div>
+            <button is="menu-toggle" class="menu-btn">
+                <div class="b b1"></div>
+                <div class="b b2"></div>
+                <div class="b b3"></div>
+                <div class="b b4"></div>
+                <div class="b b5"></div>
+                <div class="b b6"></div>
+            </button>
+            <div class="title">Album:</div>
+        </header>
+
+        <div class="cart">
+            <span>Cart</span>
+            <button class="btn" data-text="[+0]">[+0]</button>
+        </div>
+
+        <audio-progressbar>
+            <div class="ac"></div>
+        </audio-progressbar>
+
+        <popup-component class="menu-popup" data-id="menu-popup">
+            <div class="stage-fallback"></div>
+            <div class="popup-outer">
+                <div class="popup-inner">
+                    <div class="popup-cell">
+                        <nav class="menu">
+                            <div class="item">
+                                <a href="index.html"
+                                    is="menu-link">
+                                    <menu-text data-to="Beats">B%43s</menu-text>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="albums.html"
+                                    is="menu-link"
+                                    class="active">
+                                    <menu-text data-to="Album">Alc5?</menu-text>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="videos.html"
+                                    is="menu-link">
+                                    <menu-text data-to="Video">Vi#d0</menu-text>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="about.html"
+                                    is="menu-link">
+                                    <menu-text data-to="About">A$ou4</menu-text>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="merch.html"
+                                    is="menu-link">
+                                    <menu-text data-to="Merch">M8.c3</menu-text>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </popup-component>
+
+        <div class="replaceable" data-id="popups">
+        </div>
+
+        <div class="stage-fallback"></div>
+        <stage-component data-mask="resources/images/stage-mask.png"></stage-component>
+        <main class="vh-min-height">
+            <div class="stage"></div>
+
+            <div class="content replaceable vh-min-height" data-id="main-content">
+                <merch-helper></merch-helper>
+                <div class="merch-bg"></div>
+
+                <div class="merch-aside">
+                    <div class="left-wrapper">
+                        <div class="inner vh-height">
+                            <button class="arr a-t"
+                                is="slide-scroll-control"
+                                data-id="merch-slides"
+                                data-to="prev">
+                                <div class="ico"></div>
+                            </button>
+                            <button class="arr a-b" 
+                                is="slide-scroll-control"
+                                data-id="merch-slides"
+                                data-to="next">
+                                <div class="ico"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header merch-header">
+                    <print-slider class="left-wrapper" data-id="merch-slides">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </print-slider>
+                </div>
+                <div class="section-footer merch-footer">
+                    <div class="left-wrapper">
+
+                    </div>
+                </div>
+
+                <slide-scroll data-id="merch-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
+                    <div class="slide-scroll-wrapper">
+                        <section class="videos js-slide vh-min-height">
+                            <div class="left-wrapper">
+                                <div class="slide-content merch-content">
+                                    <div class="l">
+                                        <div class="nt">Shorts Jumpsuit</div>
+                                        <h1 is="header-component">Ex.1</h1>
+                                        <div class="price">120.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="merch-popup-1">[Look]</button>
+                                    </div>
+                                    <div class="r">
+                                        <div class="nt">Shorts Jumpsuit</div>
+                                        <h1 is="header-component">Ex.2</h1>
+                                        <div class="price">80.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="merch-popup-2">[Look]</button>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </slide-scroll>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

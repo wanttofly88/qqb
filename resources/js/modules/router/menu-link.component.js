@@ -1,62 +1,69 @@
-define(['dispatcher', 'router/router.store'], function(dispatcher, store) {
+define([
+	'dispatcher',
+	'router/router.store',
+	'utils'
+], function(
+	dispatcher,
+	store,
+	utils
+) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleClick = function(e) {
-			var href = store.getData().page.href;
-			var self = this;
+	var elementProto = Object.create(HTMLAnchorElement.prototype);
+	var ie = utils.getIEVersion();
 
-			e.preventDefault();
-			if (href === this._href) return;
+	elementProto.handleClick = function(e) {
+		var href = store.getData().page.href;
+		var self = this;
 
-			dispatcher.dispatch({
-				type: 'route',
-				href: self._href,
-				transitionData: {
-					animation: 'menu',
-					element: self
-				}
-			});
+		if (ie > -1 && ie < 11) {
+			return;
 		}
-		var handleStore = function() {
-			var href = store.getData().page.href;
 
-			if (href === this._href) {
-				this.classList.add('active');
-			} else {
-				this.classList.remove('active');
+		e.preventDefault();
+		if (href === this.href) return;
+
+		dispatcher.dispatch({
+			type: 'route',
+			href: self.href,
+			transitionData: {
+				animation: 'menu',
+				element: self
 			}
+		});
+	}
+	elementProto.handleStore = function() {
+		var href = store.getData().page.href;
+
+		if (href === this.href) {
+			this.classList.add('active');
+		} else {
+			this.classList.remove('active');
+		}
+	}
+
+	elementProto.createdCallback = function() {
+		this.handleClick = this.handleClick.bind(this);
+		this.handleStore = this.handleStore.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this.href = this.href;
+
+		if (this.href.indexOf('index') !== -1) {
+			this.href = this.href.replace('/index.html', '');
+			this.href = this.href.replace('/index.php', '');
 		}
 
-		var createdCallback = function() {
-			this._handleClick = handleClick.bind(this);
-			this._handleStore = handleStore.bind(this);
-		}
-		var attachedCallback = function() {
-			this._href = this.href;
 
-			if (this._href.indexOf('index') !== -1) {
-				this._href = this.href.split('index')[0];
-			}
+		this.handleStore();
 
-			this._handleStore();
-	
-			this.addEventListener('click', this._handleClick);
-			store.eventEmitter.subscribe(this._handleStore);
-		}
-		var detachedCallback = function() {
-			store.eventEmitter.unsubscribe(this._handleStore);
-		}
+		this.addEventListener('click', this.handleClick);
+		store.eventEmitter.subscribe(this.handleStore);
+	}
+	elementProto.detachedCallback = function() {
+		store.eventEmitter.unsubscribe(this.handleStore);
+	}
 
-
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
-
-	Object.setPrototypeOf(elementProto, HTMLAnchorElement.prototype);
 	document.registerElement('menu-link', {
 		extends: 'a',
 		prototype: elementProto
