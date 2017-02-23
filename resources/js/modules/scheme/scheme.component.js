@@ -1,44 +1,37 @@
 define(['dispatcher', 'scheme/scheme.store'], function(dispatcher, store) {
 	"use strict";
 
-	var elementProto = function() {
-		var handleStore = function() {
-			var storeData = store.getData();
+	var elementProto = Object.create(HTMLDivElement.prototype);
 
-			if (storeData.scheme !== this._scheme) {
-				this._scheme = storeData.scheme;
-				this.setAttribute('data-scheme', this._scheme);
-			}
-			if (storeData.popupState !== this._popupState) {
-				this._popupState = storeData.popupState;
-				this.setAttribute('data-popup', this._popupState);
-			}
-		}
+	elementProto.handleStore = function() {
+		var storeData = store.getData();
 
-		var createdCallback = function() {
-			this._popupState = null;
-			this._scheme = null;
-			this._handleStore = handleStore.bind(this);
+		if (storeData.scheme !== this.scheme) {
+			this.scheme = storeData.scheme;
+			this.setAttribute('data-scheme', this.scheme);
 		}
-		var attachedCallback = function() {
-			this._popupState = this.getAttribute('data-popup');
-			this._scheme = this.getAttribute('data-scheme');
+		if (storeData.popupState !== this.popupState) {
+			this.popupState = storeData.popupState;
+			this.setAttribute('data-popup', this.popupState);
+		}
+	}
 
-			this._handleStore();
-			store.eventEmitter.subscribe(this._handleStore);
-		}
-		var detachedCallback = function() {
-			store.eventEmitter.unsubscribe(this._handleStore);
-		}
+	elementProto.createdCallback = function() {
+		this.popupState = null;
+		this.scheme = null;
+		this.handleStore = this.handleStore.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this.popupState = this.getAttribute('data-popup');
+		this.scheme = this.getAttribute('data-scheme');
 
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
+		this.handleStore();
+		store.eventEmitter.subscribe(this.handleStore);
+	}
+	elementProto.detachedCallback = function() {
+		store.eventEmitter.unsubscribe(this.handleStore);
+	}
 
-	Object.setPrototypeOf(elementProto, HTMLDivElement.prototype);
 	document.registerElement('scheme-component', {
 		extends: 'div',
 		prototype: elementProto

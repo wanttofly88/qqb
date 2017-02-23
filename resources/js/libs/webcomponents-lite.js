@@ -2201,6 +2201,9 @@ window.CustomElements.addModule(function(scope) {
   function customMixin(inTarget, inSrc, inNative) {
     var used = {};
     var p = inSrc;
+
+    if (typeof p !== 'object') return
+
     while (p !== inNative && p !== HTMLElement.prototype) {
       var keys = Object.getOwnPropertyNames(p);
       for (var i = 0, k; k = keys[i]; i++) {
@@ -2265,7 +2268,7 @@ window.CustomElements.addModule(function(scope) {
     return definition.ctor;
   }
   function overrideAttributeApi(prototype) {
-    if (prototype.setAttribute._polyfilled) {
+    if (prototype.setAttribute && prototype.setAttribute._polyfilled) {
       return;
     }
     var setAttribute = prototype.setAttribute;

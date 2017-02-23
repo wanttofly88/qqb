@@ -6,11 +6,13 @@ define(['audio/audio.dispatcher', 'utils'], function(dispatcher, utils) {
 	var time = 0;
 	var duration = 0;
 	var song = null;
+	var audioData = null;
 
 	var _handleEvent = function(e) {
 		if (e.type === 'audio-data-changed') {
 			time = e.time;
 			duration = e.duration;
+			audioData = e.audioData;
 			eventEmitter.dispatch();
 		}
 	}
@@ -19,7 +21,8 @@ define(['audio/audio.dispatcher', 'utils'], function(dispatcher, utils) {
 		return {
 			time: time,
 			duration: duration,
-			song: song
+			song: song,
+			audioData: audioData
 		}
 	}
 

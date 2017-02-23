@@ -1,35 +1,53 @@
 define([
 	'dispatcher',
-	'scheme/scheme.store'
+	'scheme/scheme.store',
+	'preloader/preloader.store',
+	'audio/audio-player.store',
 ], function(
 	dispatcher,
-	schemeStore
+	schemeStore,
+	preloaderStore,
+	playerStore
+
 ) {
 	"use strict";
 
-	var elementProto = function() {
-		var createdCallback = function() {
+	var elementProto = Object.create(HTMLElement.prototype);
 
-		}
-		var attachedCallback = function() {
-			dispatcher.dispatch({
-				type: 'scheme-color-change',
-				scheme: 'dark'
-			});
-		}
-		var detachedCallback = function() {
+	elementProto.handlePreloader = function() {
+		var complete = preloaderStore.getData().complete;
+		var self = this;
+		var playerData = playerStore.getData();
+		if (!complete) return;
 
+		if (playerData.index === 0 && playerData.playlist === null) { // ambient
+			return;
 		}
 
+		dispatcher.dispatch({
+			type: 'audio-unset-playlist'
+		});
+		dispatcher.dispatch({
+			type: 'audio-play',
+			index: 0
+		});
+	}
 
-		return {
-			createdCallback: createdCallback,
-			attachedCallback: attachedCallback,
-			detachedCallback: detachedCallback
-		}
-	}();
+	elementProto.createdCallback = function() {
+		this.handlePreloader = this.handlePreloader.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		dispatcher.dispatch({
+			type: 'scheme-color-change',
+			scheme: 'dark'
+		});
+		this.handlePreloader();
+		preloaderStore.eventEmitter.subscribe(this.handlePreloader);
+	}
+	elementProto.detachedCallback = function() {
+		preloaderStore.eventEmitter.unsubscribe(this.handlePreloader);
+	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('albums-helper', {
 		prototype: elementProto
 	});
