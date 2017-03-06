@@ -18,19 +18,29 @@ define([
 		var complete = preloaderStore.getData().complete;
 		var self = this;
 		var playerData = playerStore.getData();
+		var paused = playerStore.getData().paused;
+
 		if (!complete) return;
 
-		if (playerData.index === 0 && playerData.playlist === null) { // ambient
+		if (playerData.index === 0 && playerData.song === null) { // ambient
 			return;
 		}
 
 		dispatcher.dispatch({
 			type: 'audio-unset-playlist'
 		});
-		dispatcher.dispatch({
-			type: 'audio-play',
-			index: 0
-		});
+
+		if ((Modernizr && !Modernizr.touchevents) || !paused) {
+			dispatcher.dispatch({
+				type: 'audio-play',
+				index:  0,
+			});
+		} else {
+			dispatcher.dispatch({
+				type: 'audio-load',
+				index:  0,
+			});
+		}
 	}
 
 	elementProto.createdCallback = function() {

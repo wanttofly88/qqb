@@ -1,5 +1,6 @@
 varying vec2 vUv;
-uniform sampler2D map;
+uniform sampler2D prevMap;
+uniform sampler2D nextMap;
 uniform vec2 resolution;
 uniform float r;
 uniform float shiftY;
@@ -56,7 +57,7 @@ void main() {
 	p.x = p.x + shx;
 	p.y = p.y + shy;
 
-	vec4 color = texture2D(map, p);
+	vec4 color = texture2D(prevMap, p);
 	vec3 lum  = vec3(0.299, 0.587, 0.114);
 
 	// vec4 blue = vec4(64./255., 219./255., 225./255., 1.);

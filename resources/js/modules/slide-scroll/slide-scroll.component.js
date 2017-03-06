@@ -259,6 +259,7 @@ define([
 
 	elementProto.storeHandler = function() {
 		var storeData = store.getData().items[this._id];
+		var nativeScroll = store.getData().nativeScroll;
 		var wh = window.innerHeight;
 		var self = this;
 		var timeForBlocking = store.getData().timeForBlocking;
@@ -270,21 +271,43 @@ define([
 			self._isScrolling = false;
 		}, timeForBlocking);
 
-		if (this._slides[storeData.index - 1]) {
-			this._slides[storeData.index - 1].classList.add('slide-previous');
-		}
+		// if (this._slides[storeData.index - 1]) {
+		// 	this._slides[storeData.index - 1].classList.add('slide-previous');
+		// }
 
-		this._slides[storeData.index].classList.remove('slide-previous');
-		this._slides[storeData.index].classList.remove('slide-next');
+		// this._slides[storeData.index].classList.remove('slide-previous');
+		// this._slides[storeData.index].classList.remove('slide-next');
 
-		if (this._slides[storeData.index + 1]) {
-			this._slides[storeData.index + 1].classList.add('slide-next');
-		}
+		// if (this._slides[storeData.index + 1]) {
+		// 	this._slides[storeData.index + 1].classList.add('slide-next');
+		// }
 
-		if (this._shift) {
-			translate(this._wrapper, -this._shift*storeData.index, animationSpeed);
+		if (this._active) {
+			Array.prototype.forEach.call(this._slides, function(slide, index) {
+				if (index > storeData.index) {
+					slide.classList.remove('slide-previous');
+					slide.classList.add('slide-next');
+				} else if (index < storeData.index) {
+					slide.classList.remove('slide-next');
+					slide.classList.add('slide-previous');
+				} else {
+					slide.classList.remove('slide-next');
+					slide.classList.remove('slide-previous');
+				}
+			});
+
+			if (this._shift) {
+				translate(this._wrapper, -this._shift*storeData.index, animationSpeed);
+			} else {
+				translate(this._wrapper, -wh*storeData.index, animationSpeed);
+			}
 		} else {
-			translate(this._wrapper, -wh*storeData.index, animationSpeed);
+			if (nativeScroll) return;
+			dispatcher.dispatch({
+				type: 'scroll-to',
+				element: this._slides[storeData.index],
+				speed: 0.8
+			});
 		}
 	}
 
@@ -293,6 +316,7 @@ define([
 		var maxIndex = 0;
 
 		if (this._active === true) return;
+		if (self._isScrolling) return;
 
 		Array.prototype.forEach.call(this._slides, function(slide, index) {
 			if (scrolled + 50 >= slide.offsetTop) {
@@ -322,7 +346,6 @@ define([
 		if (this._active === true) return;
 		this._active = true;
 
-		store.eventEmitter.subscribe(this.storeHandler);
 		this.touchHandler.set();
 		this.wheelHandler.set();
 		this.keyboardHandler.set();
@@ -356,7 +379,6 @@ define([
 		if (this._active === false) return;
 		this._active = false; 
 
-		store.eventEmitter.unsubscribe(this.storeHandler);
 		this.touchHandler.remove();
 		this.wheelHandler.remove();
 		this.keyboardHandler.remove();
@@ -461,6 +483,7 @@ define([
 		this.resizeHandler();
 		window.addEventListener('resize', this.resizeHandler);
 		window.addEventListener('scroll', this.scrollHandler);
+		store.eventEmitter.subscribe(this.storeHandler);
 
 		setTimeout(function() {
 			self.classList.add('slide-scroll-ready');
@@ -470,6 +493,8 @@ define([
 	elementProto.detachedCallback = function() {
 		window.removeEventListener('resize', this.resizeHandler);
 		window.removeEventListener('scroll', this.scrollHandler);
+		store.eventEmitter.unsubscribe(this.storeHandler);
+
 		this.deactivate();
 
 		dispatcher.dispatch({

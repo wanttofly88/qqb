@@ -36,6 +36,7 @@ define([
 	elementProto.handleSlideStore = function() {
 		var preloadComplete = preloaderStore.getData().complete;
 		var storeData = slideStore.getData().items['beat-slides'];
+		var paused = playerStore.getData().paused;
 
 		if (!preloadComplete) return;
 		if (!storeData) {
@@ -45,11 +46,20 @@ define([
 
 		if (storeData.index === this._songIndex) return;
 		this._songIndex = storeData.index;
-		dispatcher.dispatch({
-			type: 'audio-play',
-			index: storeData.index,
-			id: 'beats'
-		});
+
+		if ((Modernizr && !Modernizr.touchevents) || !paused) {
+			dispatcher.dispatch({
+				type: 'audio-play',
+				index: storeData.index,
+				id: 'beats'
+			});
+		} else {
+			dispatcher.dispatch({
+				type: 'audio-load',
+				index: storeData.index,
+				id: 'beats'
+			});
+		}
 	}
 
 	elementProto.handlePlayerStore = function() {
@@ -72,11 +82,9 @@ define([
 		var self = this;
 		if (!complete) return;
 
-		setTimeout(function() {
-			self.handlePopupStore();
-			self.handleSlideStore();
-			self.handlePlayerStore();
-		}, 0);
+		self.handlePopupStore();
+		self.handleSlideStore();
+		self.handlePlayerStore();
 	}
 
 	elementProto.createdCallback = function() {
@@ -115,10 +123,6 @@ define([
 		dispatcher.dispatch({
 			type: 'audio-unset-playlist',
 			id: 'beats'
-		});
-		dispatcher.dispatch({
-			type: 'audio-play',
-			index: 0
 		});
 	}
 

@@ -15,6 +15,7 @@ define([
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
 	var elementProto = Object.create(HTMLElement.prototype);
+	var ambientGain = 0.02;
 
 	elementProto.playSong = function(song, position) {
 		var self = this;
@@ -38,12 +39,13 @@ define([
 					name: song.name,
 					index: song.index,
 					playlistId: playerStore.getData().playlistId
-				}
+				},
+				paused: false
 			});
 
 			if (this._mode === 'webaudio') {
 				if (song === this._ambient) {
-					this._audio.current.gainNode.gain.value = 0.02;
+					this._audio.current.gainNode.gain.value = ambientGain;
 				} else {
 					this._audio.current.gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + this._crossfadeDuration);
 				}
@@ -86,6 +88,7 @@ define([
 	elementProto.unpauseSong = function() {
 		var element = this._audio.current.element;
 		var current = this._audio.current;
+		var gn = 1;
 
 		this._paused = 0;
 
@@ -99,8 +102,13 @@ define([
 			}
 		});
 
+		console.log(this._songNfo === this._ambient);
+
 		if (this._mode === 'webaudio') {
-			current.gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + this._crossfadeDuration);
+			if (this._songNfo === this._ambient) {
+				gn = ambientGain;
+			}
+			current.gainNode.gain.linearRampToValueAtTime(gn, this._context.currentTime + this._crossfadeDuration);
 		}
 
 		element.play();
@@ -158,7 +166,7 @@ define([
 				}
 
 				this.playSong(this._songNfo);
-				if (e.upause === true && this._paused) {
+				if (e.unpause === true && this._paused) {
 					this.unpauseSong();
 				}
 			} else {
@@ -167,6 +175,19 @@ define([
 				} else {
 					this.playSong(this._songNfo);
 				}
+			}
+		}
+
+		// for mobiles to load first song insted of autoplaying;
+		if (e.type === 'audio-load') { 
+			if (e.playlistId && e.playlistId !== playlistId) {
+				console.log('audio error. wrong playlist id specified');
+				return;
+			}
+			if (playlist && playlist[e.index]) {
+				this._songNfo = playlist[e.index];
+			} else {
+				this._songNfo = this._ambient;
 			}
 		}
 

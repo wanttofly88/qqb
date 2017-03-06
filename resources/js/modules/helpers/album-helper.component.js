@@ -45,11 +45,20 @@ define([
 
 		if (storeData.index === this._songIndex) return;
 		this._songIndex = storeData.index;
-		dispatcher.dispatch({
-			type: 'audio-play',
-			index: storeData.index,
-			id: 'album'
-		});
+
+		if ((Modernizr && !Modernizr.touchevents) || !paused) {
+			dispatcher.dispatch({
+				type: 'audio-play',
+				index: storeData.index,
+				id: 'album'
+			});
+		} else {
+			dispatcher.dispatch({
+				type: 'audio-load',
+				index: storeData.index,
+				id: 'album'
+			});
+		}
 	}
 
 	elementProto.handlePlayerStore = function() {
@@ -115,10 +124,6 @@ define([
 		dispatcher.dispatch({
 			type: 'audio-unset-playlist',
 			id: 'album'
-		});
-		dispatcher.dispatch({
-			type: 'audio-play',
-			index: 0
 		});
 	}
 

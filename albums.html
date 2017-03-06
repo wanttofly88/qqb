@@ -20,6 +20,7 @@
     <router-component></router-component>
 
     <preloader-component>
+        <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
                 <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
@@ -28,6 +29,7 @@
             </div>
         </div>
     </preloader-component>
+
 
     <audio-player data-ambient="tmp/audio/ambience-loop.wav">
         <audio src=""></audio>
@@ -118,7 +120,12 @@
         </div>
 
         <div class="stage-fallback"></div>
-        <stage-component data-mask="resources/images/stage-mask.png"></stage-component>
+        <stage-component>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+        </stage-component>
+
         <main class="vh-min-height">
             <div class="stage"></div>
 
@@ -126,8 +133,8 @@
                 <albums-helper></albums-helper>
                 <div class="stage-fallback albums-bg"></div>
 
-                <div class="albums-aside">
-                    <div class="left-wrapper">
+                <div class="section-aside albums-aside">
+                    <div class="wrapper">
                         <div class="inner vh-height">
                             <slide-scroll-index 
                                 data-id="albums-slides"
@@ -136,13 +143,23 @@
                                 is="slide-scroll-control"
                                 data-id="albums-slides"
                                 data-to="prev">
-                                <div class="ico"></div>
+                                <div class="ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="14" viewBox="0 0 18 16">
+                                      <path d="M18,2 L0,2" class="cls-2"/>
+                                      <path d="M9,2 L17,14 L1,14 L9,2 Z" class="cls-3"/>
+                                    </svg>
+                                </div>
                             </button>
                             <button class="arr a-b" 
                                 is="slide-scroll-control"
                                 data-id="albums-slides"
                                 data-to="next">
-                                <div class="ico"></div>
+                                <div class="ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="14" viewBox="0 0 18 16">
+                                      <path d="M18,2 L0,2" class="cls-2"/>
+                                      <path d="M9,2 L17,14 L1,14 L9,2 Z" class="cls-3"/>
+                                    </svg>
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -155,6 +172,7 @@
                         <div></div>
                     </print-slider>
                 </div>
+
                 <div class="section-footer albums-footer">
                     <div class="left-wrapper">
                         <!--здесь не надо заполнять data-product-id-->

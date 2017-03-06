@@ -60,7 +60,8 @@ define([
 
 		material = new THREE.ShaderMaterial({
 			uniforms: {
-				map: {type: 't', value: texture},
+				prevMap: {type: 't', value: texture},
+				nextMap: {type: 't', value: null},
 				r: {type: 'f', value: 0},
 				shiftY: {type: 'f', value: 0},
 				time: {type: 'f', value: 0},
@@ -82,7 +83,7 @@ define([
 			texture.magFilter = THREE.NearestFilter;
 			texture.minFilter = THREE.NearestFilter;
 
-			material.uniforms.map.value = texture;
+			material.uniforms.prevMap.value = texture;
 
 			plane = new THREE.PlaneBufferGeometry(self._sizes.nw, self._sizes.nh);
 			mesh = new THREE.Mesh(plane, material);
@@ -104,12 +105,29 @@ define([
 		this._renderer = renderer;
 	}
 
+	elementProto.setMaps = function(prevMapSrc, nextMapSrc) {
+		var material = this._material;
+
+		var loadMap = function(map, type) {
+			var texture = texloader.load(map, function(e) {
+				texture.premultiplyAlpha = true;
+				texture.needsUpdate = true;
+				texture.magFilter = THREE.NearestFilter;
+				texture.minFilter = THREE.NearestFilter;
+
+				material.uniforms[type].value = texture;
+			});
+		}
+
+		loadMap(prevMapSrc, 'prevMap');
+		loadMap(nextMapSrc, 'nextMap');
+	}
+
 	elementProto.loop = function() {
 		var material = this._material;
 		var scene = this._scene;
 		var camera = this._camera;
 		var renderer = this._renderer;
-		var texture = this._texture;
 		var mesh = this._mesh;
 		var r = Math.random()/90;
 
@@ -199,12 +217,18 @@ define([
 		this._currentScheme = undefined;
 	}
 	elementProto.attachedCallback = function() {
-		this._maskSrc = this.getAttribute('data-mask');
+		this._maskElements = this.getElementsByClassName('mask');
+		this._maskSrc = this._maskElements[0].getAttribute('data-texture');
+		if (Modernizr && (!Modernizr.webgl || Modernizr.touchevents)) return;
 
-		if (Modernizr && !Modernizr.webgl) return;
+		Array.prototype.forEach.call(this._maskElements, function(element) {
+			var img = document.createElement('img');
+			img.src = element.getAttribute('data-texture');
+		});
 
 		this.build();
 		this.handleScheme();
+
 		resizeStore.eventEmitter.subscribe(this.handleResize);
 		dispatcher.subscribe(this.handleDispatcher);
 		schemeStore.eventEmitter.subscribe(this.handleScheme);
