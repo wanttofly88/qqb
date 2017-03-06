@@ -71,11 +71,17 @@ require([
 
 	'slider/cover-bg-slider.component',
 	'slider/cover-slider.component',
+	'slider/video-slider.component',
 
 	'decor/header.component',
 	'decor/text-print.component',
 
+	'video/video.component',
+	'video/video-play.component',
+
 	'loading-screen/loading-screen.component',
 	'stage/stage.component',
-	'preloader/preloader.component'
+	'preloader/preloader.component',
+
+	's-scroll/s-scroll.view'
 ]);

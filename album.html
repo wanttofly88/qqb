@@ -20,6 +20,7 @@
     <router-component></router-component>
 
     <preloader-component>
+        <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
                 <h1 class="loaded-text" data-text="Qualia Qua Beats">Qualia Qua Beats</h1>
@@ -155,9 +156,12 @@
             </popup-component>
         </div>
 
-
         <div class="stage-fallback"></div>
-        <stage-component data-mask="resources/images/stage-mask.png"></stage-component>
+        <stage-component>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+        </stage-component>
 
         <main class="vh-min-height">
             <div class="stage"></div>

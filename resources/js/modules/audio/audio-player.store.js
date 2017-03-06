@@ -7,7 +7,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var playlistId = null;
 	var playlist = null;
 	var index = null;
-	var paused = false;
+	var paused = true;
 
 	var _handleEvent = function(e) {
 		if (e.type === 'audio-song-changed') {

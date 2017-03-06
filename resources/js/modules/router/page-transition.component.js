@@ -34,6 +34,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			var fakeInnerFinish = document.createElement('div');
 			var fakeInnerStart = document.createElement('div');
 			var delay = 400;
+			var pw = document.getElementsByClassName('page-wrapper')[0];
 
 			dispatcher.dispatch({
 				type: 'preload-start',
@@ -84,6 +85,11 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				dispatcher.dispatch({
 					type: 'popup-close-all'
 				});
+				pw.setAttribute('data-popup', 'active');
+				dispatcher.dispatch({
+					type: 'scheme-color-change',
+					scheme: 'dark'
+				});
 			}, 200);
 
 			setTimeout(function() {
@@ -97,6 +103,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		var end = function(e) {
 			var self = this;
 			var fake = this.tmpElements.fake;
+			var pw = document.getElementsByClassName('page-wrapper')[0];
 
 			window.scrollTo(0, 0);
 
@@ -115,6 +122,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 				setTimeout(function() {
 					self.classList.remove('active');
+					pw.setAttribute('data-popup', 'inactive');
 				}, 100);
 
 				setTimeout(function() {
@@ -142,6 +150,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			var menuActive = menu.querySelector('a.active');
 			var el;
 			var delay = 400;
+			var pw = document.getElementsByClassName('page-wrapper')[0];
 
 			if (menuActive) {
 				el = menuActive;
@@ -206,6 +215,11 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 				dispatcher.dispatch({
 					type: 'popup-close-all'
 				});
+				pw.setAttribute('data-popup', 'active');
+				dispatcher.dispatch({
+					type: 'scheme-color-change',
+					scheme: 'dark'
+				});
 			}, 200);
 
 			setTimeout(function() {
@@ -219,6 +233,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		var end = function(e) {
 			var self = this;
 			var fake = this.tmpElements.fake;
+			var pw = document.getElementsByClassName('page-wrapper')[0];
 
 			window.scrollTo(0, 0);
 
@@ -237,6 +252,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 				setTimeout(function() {
 					self.classList.remove('active');
+					pw.setAttribute('data-popup', 'inactive');
 				}, 100);
 
 				setTimeout(function() {
