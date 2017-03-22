@@ -10,7 +10,6 @@ define(['dispatcher'], function(dispatcher) {
 	elementProto.detachedCallback = function() {
 	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('blog-post', {
 		prototype: elementProto
 	});

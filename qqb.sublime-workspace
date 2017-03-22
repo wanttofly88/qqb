@@ -4,6 +4,166 @@
 		"selected_items":
 		[
 			[
+				"pop",
+				"popupStore"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"_",
+				"_inner"
+			],
+			[
+				"r",
+				"remove"
+			],
+			[
+				"se",
+				"self"
+			],
+			[
+				"ele",
+				"element"
+			],
+			[
+				"data",
+				"dataItem"
+			],
+			[
+				"crea",
+				"create"
+			],
+			[
+				"dat",
+				"dataItem"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"cl",
+				"className"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"tra",
+				"transform"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"ta",
+				"table"
+			],
+			[
+				"prod",
+				"product-1"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"ha",
+				"handleStore"
+			],
+			[
+				"ca",
+				"cart-component"
+			],
+			[
+				"pr",
+				"price"
+			],
+			[
+				"de",
+				"description"
+			],
+			[
+				"des",
+				"_description"
+			],
+			[
+				"li",
+				"license-component"
+			],
+			[
+				"tran",
+				"transition"
+			],
+			[
+				"eas",
+				"ease-out"
+			],
+			[
+				"trans",
+				"transition"
+			],
+			[
+				"st",
+				"storeItems"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"tr",
+				"translateZ()"
+			],
+			[
+				"res",
+				"resizeStore"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"lh",
+				"line-height"
+			],
+			[
+				"le",
+				"letter-spacing"
+			],
+			[
+				"c",
+				"cover"
+			],
+			[
+				"u",
+				"url()"
+			],
+			[
+				"back",
+				"background-image"
+			],
+			[
+				"merch-",
+				"merch-content"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
 				"na",
 				"nativeScroll"
 			],
@@ -18,10 +178,6 @@
 			[
 				"ty",
 				"type"
-			],
-			[
-				"di",
-				"dispatch"
 			],
 			[
 				"pl",
@@ -42,14 +198,6 @@
 			[
 				"get",
 				"getData"
-			],
-			[
-				"data",
-				"data-popup"
-			],
-			[
-				"se",
-				"setAttribute"
 			],
 			[
 				"nex",
@@ -76,22 +224,6 @@
 				"_maskElements"
 			],
 			[
-				"trans",
-				"translateY"
-			],
-			[
-				"tran",
-				"transform"
-			],
-			[
-				"tra",
-				"transform"
-			],
-			[
-				"_",
-				"_index"
-			],
-			[
 				"sl",
 				"slide"
 			],
@@ -100,16 +232,8 @@
 				"slide-scroll"
 			],
 			[
-				"ba",
-				"background-size"
-			],
-			[
 				"pos",
 				"position"
-			],
-			[
-				"pr",
-				"preloadComplete"
 			],
 			[
 				"set",
@@ -136,24 +260,12 @@
 				"valueWithSpaces"
 			],
 			[
-				"tr",
-				"translateX()"
-			],
-			[
 				"data-",
 				"data-product"
 			],
 			[
-				"ele",
-				"elementProto"
-			],
-			[
 				"rou",
 				"routerStore"
-			],
-			[
-				"ha",
-				"handleRouter"
 			],
 			[
 				"re",
@@ -200,10 +312,6 @@
 				"menu"
 			],
 			[
-				"u",
-				"url"
-			],
-			[
 				"pb",
 				"padding-bottom"
 			],
@@ -240,10 +348,6 @@
 				"floor"
 			],
 			[
-				"col",
-				"colGs"
-			],
-			[
 				"ra",
 				"rand"
 			],
@@ -254,10 +358,6 @@
 			[
 				"ma",
 				"material"
-			],
-			[
-				"c",
-				"color"
 			],
 			[
 				"ce",
@@ -292,10 +392,6 @@
 				"_audioData"
 			],
 			[
-				"for",
-				"for\tfor (…) {…}"
-			],
-			[
 				"wo",
 				"word"
 			],
@@ -318,18 +414,6 @@
 			[
 				"o",
 				"other"
-			],
-			[
-				"st",
-				"start"
-			],
-			[
-				"de",
-				"delay"
-			],
-			[
-				"li",
-				"line"
 			],
 			[
 				"def",
@@ -396,16 +480,8 @@
 				"innerHTML"
 			],
 			[
-				"ca",
-				"canvasInverted"
-			],
-			[
 				"cle",
 				"clientWidth"
-			],
-			[
-				"res",
-				"resize"
 			],
 			[
 				"app",
@@ -424,16 +500,8 @@
 				"clamp"
 			],
 			[
-				"cl",
-				"clamp"
-			],
-			[
 				"ap",
 				"appendChild"
-			],
-			[
-				"le",
-				"letter"
 			],
 			[
 				"sp",
@@ -446,128 +514,26 @@
 			[
 				"fi",
 				"function"
-			],
-			[
-				"crea",
-				"createElement"
-			],
-			[
-				"fo",
-				"forEach"
-			],
-			[
-				"TR",
-				"THREE"
-			],
-			[
-				"_l",
-				"_loopIndex"
-			],
-			[
-				"bl",
-				"block"
-			],
-			[
-				"wi",
-				"width"
-			],
-			[
-				"fu",
-				"function"
-			],
-			[
-				"clip",
-				"clips"
-			],
-			[
-				"ctx",
-				"ctxInvert"
-			],
-			[
-				"b",
-				"block"
-			],
-			[
-				"img",
-				"imgCoef"
-			],
-			[
-				"im",
-				"imgCoef"
-			],
-			[
-				"_pa",
-				"_playerStore"
-			],
-			[
-				"cu",
-				"currentTime"
-			],
-			[
-				"gai",
-				"gainNode"
-			],
-			[
-				"con",
-				"connect"
-			],
-			[
-				"au",
-				"audioSource1"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "resources/images/arr.svg",
+			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 912,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "videos.html",
-			"settings":
-			{
-				"buffer_size": 13979,
+				"buffer_size": 24487,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/sites/for redcollar/wargaming/resources/js/script.js",
+			"file": "resources/js/modules/cart/cart.component.js",
 			"settings":
 			{
-				"buffer_size": 24862,
+				"buffer_size": 3117,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/css/styles.css",
-			"settings":
-			{
-				"buffer_size": 37322,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/js/modules/audio/audio-player.component.js",
-			"settings":
-			{
-				"buffer_size": 8280,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/sites/eldey/resources/js/modules/scroll/scroll.store.js",
-			"settings":
-			{
-				"buffer_size": 1105,
 				"line_ending": "Windows"
 			}
 		},
@@ -575,8 +541,52 @@
 			"file": "resources/js/app.js",
 			"settings":
 			{
-				"buffer_size": 2003,
+				"buffer_size": 2235,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/js/modules/helpers/beats-helper.component.js",
+			"settings":
+			{
+				"buffer_size": 3249,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/js/modules/cart/cart.store.js",
+			"settings":
+			{
+				"buffer_size": 726,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/js/modules/cart/cart-item.component.js",
+			"settings":
+			{
+				"buffer_size": 1888,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/js/modules/cart/cart-total.component.js",
+			"settings":
+			{
+				"buffer_size": 1048,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/sites/cart/scripts/modules/cart/cart-total.view.js",
+			"settings":
+			{
+				"buffer_size": 1613,
 				"line_ending": "Windows"
 			}
 		}
@@ -672,58 +682,82 @@
 		"/D/sites/qqb/resources/images",
 		"/D/sites/qqb/resources/js",
 		"/D/sites/qqb/resources/js/modules",
-		"/D/sites/qqb/resources/js/modules/audio",
-		"/D/sites/qqb/resources/js/modules/s-scroll",
-		"/D/sites/qqb/resources/js/modules/slide-scroll",
-		"/D/sites/qqb/resources/js/modules/video",
+		"/D/sites/qqb/resources/js/modules/cart",
+		"/D/sites/qqb/resources/js/modules/helpers",
+		"/D/sites/qqb/resources/js/modules/popup",
+		"/D/sites/qqb/resources/js/modules/resize",
+		"/D/sites/qqb/resources/js/modules/slider",
 		"/D/sites/qqb/tmp",
 		"/D/sites/qqb/tmp/video"
 	],
 	"file_history":
 	[
+		"/D/sites/qqb/resources/js/modules/popup/popup.helper.js",
+		"/D/sites/qqb/resources/js/modules/popup/popup.component.js",
+		"/D/sites/qqb/resources/js/modules/popup/popup.store.js",
+		"/D/sites/qqb/resources/js/modules/cart/buy-fixed.component.js",
+		"/D/sites/qqb/resources/css/styles.css",
+		"/D/sites/qqb/resources/js/modules/popup/popup-helper.component.js",
+		"/D/sites/qqb/resources/js/modules/component.dummy.js",
+		"/D/sites/qqb/cart.json",
+		"/D/sites/qqb/resources/js/modules/cart/cart-item.component.js",
+		"/D/sites/qqb/resources/js/modules/popup/menu-toggle.component.js",
+		"/D/sites/qqb/cart-testing-add.json",
+		"/D/sites/qqb/resources/js/modules/popup/popup-toggle.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/cart.store.js",
+		"/D/sites/qqb/resources/js/app.js",
+		"/D/sites/qqb/resources/js/modules/cart/cart-total.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/cart.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/license.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/buy-licensed.component.js",
+		"/D/sites/qqb/resources/js/modules/attribute-slider/buy-licensed.component.js",
+		"/D/sites/qqb/resources/js/modules/resize/breakpoint.store.js",
+		"/D/sites/eldey/resources/js/modules/img/img.component.js",
+		"/D/sites/qqb/resources/js/modules/attribute-slider/href-slider.component.js",
+		"/D/sites/qqb/resources/js/modules/slider/video-slider.component.js",
+		"/D/sites/qqb/videos.html",
+		"/D/sites/qqb/resources/js/modules/attribute-slider/buy-slider.component.js",
+		"/D/sites/qqb/resources/js/modules/attribute-slider/id-slider.helper.js",
+		"/D/sites/qqb/resources/js/modules/slider/video-slider-old.component.js",
+		"/D/sites/qqb/resources/js/modules/slider/cover-slider.component.js",
+		"/D/sites/qqb/resources/js/modules/slider/merch-slider.component.js",
+		"/D/sites/for redcollar/wargaming/index.html",
+		"/D/sites/qqb/resources/images/arr.svg",
+		"/D/sites/qqb/merch.html",
+		"/D/sites/eldey/resources/js/modules/scroll/scroll.store.js",
+		"/D/sites/qqb/album.html",
+		"/D/sites/qqb/resources/js/modules/audio/audio-player.component.js",
+		"/D/sites/qqb/index.html",
+		"/D/sites/qqb/resources/js/modules/helpers/merch-helper.component.js",
+		"/D/sites/qqb/albums.html",
+		"/D/sites/qqb/resources/js/modules/helpers/videos-helper.component.js",
+		"/D/sites/qqb/resources/js/modules/helpers/albums-helper.component.js",
+		"/D/sites/qqb/resources/js/modules/stage/stage.component.js",
+		"/D/sites/qqb/resources/js/modules/decor/header.component.js",
+		"/D/sites/for redcollar/wargaming/resources/js/script.js",
 		"/D/sites/qqb/resources/js/modules/s-scroll/s-scroll.view.js",
 		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll.component.js",
 		"/D/sites/qqb/resources/js/modules/video/video.component.js",
 		"/D/sites/for redcollar/grey/resources/js/modules/synthetic-scroll/synthetic-scroll.view.js",
 		"/D/sites/qqb/resources/js/modules/video/video-play.component.js",
-		"/D/sites/qqb/albums.html",
-		"/D/sites/qqb/resources/js/app.js",
-		"/D/sites/qqb/album.html",
-		"/D/sites/qqb/index.html",
-		"/D/sites/qqb/videos.html",
-		"/D/sites/qqb/merch.html",
 		"/D/sites/qqb/resources/js/modules/helpers/album-helper.component.js",
-		"/D/sites/qqb/resources/js/modules/helpers/albums-helper.component.js",
 		"/D/sites/qqb/resources/js/modules/helpers/beats-helper.component.js",
-		"/D/sites/qqb/resources/js/modules/audio/audio-player.component.js",
 		"/D/sites/qqb/resources/js/modules/router/page-transition.component.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-pause.component.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-player.store.js",
-		"/D/sites/qqb/resources/css/styles.css",
 		"/D/sites/qqb/resources/js/modules/scheme/scheme.store.js",
-		"/D/sites/qqb/resources/js/modules/stage/stage.component.js",
 		"/D/sites/qqb/resources/js/modules/glsl/dot-fragment.glsl",
 		"/D/sites/qqb/resources/js/modules/video/video.componet.js",
-		"/D/sites/for redcollar/wargaming/resources/js/script.js",
-		"/D/sites/for redcollar/wargaming/index.html",
-		"/D/sites/qqb/resources/js/modules/slider/video-slider.component.js",
 		"/D/sites/for redcollar/wargaming/resources/css/styles.css",
 		"/D/sites/qqb/resources/js/modules/print-slider/print-slider.component.js",
 		"/D/sites/qqb/resources/merch.html",
-		"/D/sites/qqb/resources/js/modules/popup/menu-toggle.component.js",
 		"/D/sites/qqb/resources/js/modules/resize/proportional-height.component.js",
-		"/D/sites/qqb/resources/js/modules/attribute-slider/href-slider.component.js",
-		"/D/sites/qqb/resources/js/modules/popup/popup-toggle.component.js",
-		"/D/sites/qqb/resources/js/modules/popup/popup.component.js",
-		"/D/sites/qqb/resources/js/modules/attribute-slider/buy-slider.component.js",
 		"/D/sites/qqb/resources/js/modules/router/inner-link.component.js",
 		"/D/sites/qqb/resources/js/modules/router/menu-link.component.js",
 		"/D/sites/qqb/resources/js/modules/router/router.component.js",
 		"/D/sites/qqb/resources/js/modules/glsl/loading-fragment.glsl",
 		"/D/sites/qqb/resources/js/modules/utils.js",
-		"/D/sites/qqb/resources/js/modules/component.dummy.js",
 		"/D/sites/qqb/resources/js/modules/track-list/track-list.component.js",
-		"/D/sites/qqb/resources/js/modules/slider/cover-slider.component.js",
 		"/D/sites/qqb/resources/js/modules/preloader/preloader.component.js",
 		"/D/sites/qqb/resources/js/modules/text-glitch/menu-text.component.js",
 		"/D/sites/qqb/resources/js/modules/slider/cover-bg-slider.component.js",
@@ -735,8 +769,6 @@
 		"/D/sites/qqb/resources/js/modules/audio/audio-progress.component.js",
 		"/D/sites/qqb/resources/js/modules/popup/popup-close.component.js",
 		"/D/sites/qqb/resources/js/modules/loading-screen/loading-screen.component.js",
-		"/D/sites/qqb/resources/js/modules/helpers/videos-helper.component.js",
-		"/D/sites/qqb/resources/js/modules/decor/header.component.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-progressbar.component.js",
 		"/D/sites/qqb/resources/js/modules/resize/contain-resize.component.js",
 		"/D/sites/qqb/resources/js/modules/scheme/scheme.component.js",
@@ -787,28 +819,7 @@
 		"/D/sites/qqb/resources/js/modules/touch/touch.view.js",
 		"/D/sites/qqb/resources/js/modules/touch/touch.store.js",
 		"/D/sites/for redcollar/redcollar/resources/js/modules/touch/touch.view.js",
-		"/D/sites/for redcollar/redcollar/resources/js/modules/touch/touch.store.js",
-		"/D/sites/blog/resources/css/styles.css",
-		"/D/sites/qqb/resources/images/arr-white.svg",
-		"/D/sites/qqb/design/readme.txt",
-		"/D/sites/qqb/resources/js/modules/router/router.store.js",
-		"/D/sites/for redcollar/redcollar/resources/js/modules/router/links.view.js",
-		"/D/sites/blog/resources/js/modules/post/post.component.js",
-		"/D/sites/qqb/resources/js/modules/audio/playlist.store.js",
-		"/D/sites/qqb/resources/images/qqb.svg",
-		"/D/sites/for redcollar/Myau/resources/js/modules/dispatcher.js",
-		"/D/sites/YTong/resources/js/modules/slider/slider-masked.view.js",
-		"/D/sites/for redcollar/grey/resources/css/styles.css",
-		"/D/sites/for redcollar/grey/resources/js/modules/slider/home-slider.view.js",
-		"/D/sites/qqb/resources/js/modules/slide-scroll/beat-bg-slider.component.js",
-		"/D/sites/for redcollar/mac2015/заглушка/resources/js/modules/animations/logo.view.js",
-		"/D/sites/qqb/resources/js/modules/audio/audio.dispatcher.js",
-		"/D/sites/qqb/resources/js/modules/audio/playlist-autoplay.component.js",
-		"/D/sites/qqb/resources/js/modules/menu/menu-scheme.view.js",
-		"/F/torrents/Loader 9 Demo/Mods/Anime/Toradora/Taiga Aisaka/code.txt",
-		"/D/sites/valerka2/resources/js/modules/preload/img-preload.component.js",
-		"/D/sites/qqb/resources/js/modules/audio/audio-player.view.js",
-		"/D/sites/qqb/resources/js/modules/filters/filters.store.js"
+		"/D/sites/for redcollar/redcollar/resources/js/modules/touch/touch.store.js"
 	],
 	"find":
 	{
@@ -827,134 +838,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"0.02",
-			"scrollPos",
-			"storeHandler",
-			"audio-song-changed",
-			".video {",
-			"popup-c",
-			"menu-f",
-			"data-popup",
-			"touch",
-			"page-tra",
-			"stage",
-			"video",
-			"stage",
-			"albums",
-			"videos",
-			"arr",
-			".section-aside",
-			".all",
-			"bright",
-			"arr",
-			"arr.svg",
-			"prevTexture",
-			"texture",
-			"_texture",
-			"map",
-			"stage-fa",
-			"iframe",
-			" 0.9",
-			"0.9",
-			"1.05",
-			"0.8",
-			"\n    <preloader-component>\n        <div class=\"wrapper\">\n            <div class=\"text\">\n                <h1 class=\"loaded-text\" data-text=\"Qualia Qua Beats\">Qualia Qua Beats</h1>\n                <div class=\"perc\">0%</div>\n                <div class=\"nt\">Soundtrack to life</div>\n            </div>\n        </div>\n    </preloader-component>",
-			"nfo",
-			".nt",
-			".nfo",
-			"nfo",
-			"price-data",
-			"slidescroll-fallbac",
-			"slidescroll-f",
-			"all-",
-			"all",
-			"all-be",
-			"video",
-			"all-",
-			"all-b",
-			"all",
-			"albums",
-			"albusm",
-			"fireResize",
-			"shift",
-			"table",
-			"auto",
-			"1800",
-			"1900",
-			"slide-c",
-			"beat-c",
-			"aside",
-			"фышву",
-			".album",
-			"albums",
-			"scroll-block",
-			"marginRight",
-			"slide-sc",
-			"album-footer",
-			"                    <div class=\"left-wrapper\"></div>",
-			"album-footer",
-			"nfo-print",
-			"0.5",
-			"menu-b",
-			"6",
-			"0.2",
-			"blinkFast",
-			"alternate",
-			"0.5s",
-			"blink",
-			"menu-b",
-			"blink",
-			"22px",
-			"menu-btn",
-			"menu-toggle",
-			"menu-popup",
-			"_hrefData",
-			"'');\n",
-			"TweenMax",
-			"256",
-			"mix",
-			"albums",
-			"album-content",
-			"beat-content",
-			".slide-scroll-inactive",
-			"slidescroll-fallback",
-			"slidescroll-fallback ",
-			"html",
-			"htmlE",
-			"();\n",
-			"slidescr",
-			"data-hi",
-			"data-hidden",
-			"slide-scroll",
-			"data-hidden",
-			"this.component",
-			"inner-l",
-			"ejec",
-			"handleHistory",
-			"hist",
-			".stage-fallback",
-			"album-bg",
-			"beat-bg",
-			"beat-b",
-			"stage-c",
-			"stage",
-			"menu-fa",
-			"glitch-start",
+			"no-fade",
+			"createElemen",
+			"buy-licensed",
+			"licensed",
+			".cart",
+			"20px",
+			"remove",
+			".cart",
+			"cart-remove",
+			"cart-remov",
+			"cart",
+			"90px",
+			"license",
+			"popup-togg",
+			"ease",
+			"licens",
+			"linear",
+			"text",
+			"\"#",
+			"#",
+			"all-tracks",
+			"\"#\";",
+			"popup-t",
+			".all-tracks",
+			"left-wrapper",
+			"all-tr",
 			"menu",
-			"menu-fa",
-			"page-tran",
-			"albums-he",
-			"album-he",
-			"albums ",
+			".arr",
+			"arr",
+			"4s",
+			"menu",
+			"transition: all 0.6s ease 0.3s;",
+			"100px",
+			"all-tra",
+			"left-wr",
+			"all-tracks",
 			".btn",
-			"menu-fake",
-			"fakeInner",
-			"var ",
-			",\n",
-			"window.histo",
-			"histo",
-			"his",
-			"_handleStore"
+			"select",
+			"button",
+			"[Play",
+			"[play",
+			"{play",
+			"play",
+			"will-c",
+			"pause",
+			"btn",
+			"btn\\",
+			"btn",
+			"button",
+			"a {",
+			"a:ho",
+			"button",
+			"btn:ho",
+			"video-s",
+			"title",
+			"menu-btn",
+			"menu-t",
+			"header",
+			"video-s",
+			"fb-btns",
+			".album ",
+			"slide-contr",
+			"slide0control",
+			"merch-s",
+			"merch-i",
+			"merch-ite",
+			"merch-i",
+			"slidescroll-fallback",
+			"fallba",
+			".section-footer",
+			"merch-i",
+			"price-nfo",
+			"XL",
+			"25",
+			"btn.bi",
+			"btn-b",
+			"buy",
+			"merch-po",
+			"section",
+			"merch",
+			"merch-popup",
+			"mp1",
+			"slide-sc",
+			"page-wra",
+			"data-popup",
+			"album",
+			".img",
+			"юшьп",
+			"merch-s",
+			"blink",
+			"arr",
+			"vido",
+			"merch-aside",
+			"general-a",
+			"!important",
+			"merch",
+			"price-nf",
+			".l {",
+			".l",
+			"h1",
+			"merch",
+			"left-wra",
+			"merch",
+			"16px",
+			"text-pr",
+			"albums-bg",
+			"content",
+			"general-h",
+			"albums-asi",
+			"albums-foo",
+			"albums-he",
+			"albums",
+			"index",
+			"album-content",
+			"albums-index",
+			"albums",
+			"albums-as",
+			"album-as",
+			"album-a",
+			"print-slider",
+			"nfo",
+			"setMaps",
+			".arr:h",
+			".arr",
+			"video-aside",
+			"blink",
+			"Moderni",
+			"Moder"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -973,54 +984,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/images/arr.svg",
+					"file": "index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 912,
+						"buffer_size": 24487,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								849,
-								849
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "videos.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13979,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6657,
-								6657
+								6369,
+								6369
 							]
 						],
 						"settings":
@@ -1030,27 +1011,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 700.0,
+						"translation.y": 1426.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/D/sites/for redcollar/wargaming/resources/js/script.js",
+					"buffer": 1,
+					"file": "resources/js/modules/cart/cart.component.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24862,
+						"buffer_size": 3117,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23773,
-								23753
+								1090,
+								1090
 							]
 						],
 						"settings":
@@ -1059,56 +1040,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 19371.0,
+						"translation.y": 120.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "resources/css/styles.css",
+					"buffer": 2,
+					"file": "resources/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 37322,
+						"buffer_size": 2235,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26179,
-								26179
+								696,
+								696
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 29411.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "resources/js/modules/audio/audio-player.component.js",
+					"buffer": 3,
+					"file": "resources/js/modules/helpers/beats-helper.component.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8280,
+						"buffer_size": 3249,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								157,
-								157
+								579,
+								483
 							]
 						],
 						"settings":
@@ -1120,24 +1101,82 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/D/sites/eldey/resources/js/modules/scroll/scroll.store.js",
+					"buffer": 4,
+					"file": "resources/js/modules/cart/cart.store.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1105,
+						"buffer_size": 726,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								345,
-								206
+								573,
+								573
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "resources/js/modules/cart/cart-item.component.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1888,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								794,
+								794
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 480.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "resources/js/modules/cart/cart-total.component.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1048,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								725,
+								725
 							]
 						],
 						"settings":
@@ -1153,20 +1192,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "resources/js/app.js",
+					"buffer": 7,
+					"file": "/D/sites/cart/scripts/modules/cart/cart-total.view.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2003,
+						"buffer_size": 1613,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2003,
-								2003
+								927,
+								669
 							]
 						],
 						"settings":
@@ -1174,11 +1213,11 @@
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 840.0,
+						"translation.x": -0.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

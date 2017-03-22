@@ -15,23 +15,23 @@ define([
 
 	var elementProto = Object.create(HTMLElement.prototype);
 
-	elementProto.handlePopupStore = function() {
-		var active = popupStore.getData().active;
-		var pw = document.getElementsByClassName('page-wrapper')[0];
+	// elementProto.handlePopupStore = function() {
+	// 	var active = popupStore.getData().active;
+	// 	var pw = document.getElementsByClassName('page-wrapper')[0];
 
-		if (active) {
-			dispatcher.dispatch({
-				type: 'scheme-popup-change',
-				state: 'active'
-			});
-		}
-		if (!active) {
-			dispatcher.dispatch({
-				type: 'scheme-popup-change',
-				state: 'inactive'
-			});
-		}
-	}
+	// 	if (active) {
+	// 		dispatcher.dispatch({
+	// 			type: 'scheme-popup-change',
+	// 			state: 'active'
+	// 		});
+	// 	}
+	// 	if (!active) {
+	// 		dispatcher.dispatch({
+	// 			type: 'scheme-popup-change',
+	// 			state: 'inactive'
+	// 		});
+	// 	}
+	// }
 
 	elementProto.handleSlideStore = function() {
 		var preloadComplete = preloaderStore.getData().complete;
@@ -82,14 +82,14 @@ define([
 		var self = this;
 		if (!complete) return;
 
-		self.handlePopupStore();
+		// self.handlePopupStore();
 		self.handleSlideStore();
 		self.handlePlayerStore();
 	}
 
 	elementProto.createdCallback = function() {
 		this._songIndex = null;
-		this.handlePopupStore = this.handlePopupStore.bind(this);
+		// this.handlePopupStore = this.handlePopupStore.bind(this);
 		this.handleSlideStore = this.handleSlideStore.bind(this);
 		this.handlePlayerStore = this.handlePlayerStore.bind(this);
 		this.handlePreloader = this.handlePreloader.bind(this);

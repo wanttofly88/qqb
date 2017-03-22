@@ -1,9 +1,11 @@
 define([
 	'dispatcher',
-	'slide-scroll/slide-scroll.store'
+	'slide-scroll/slide-scroll.store',
+	'resize/breakpoint.store'
 ], function(
 	dispatcher,
-	store
+	store,
+	bpStore
 ) {
 	"use strict";
 
@@ -36,9 +38,14 @@ define([
 		}
 	}
 	elementProto.hideSlide = function(slide, way) {
+		var bp = bpStore.getData().name;
+		var dist = 200;
+		if (bp !== 'desktop') {
+			dist = 50;
+		}
 		slide.classList.add('hidden');
 		if (way === 'bottom') {
-			translatePos(slide, -200, 0, 800);
+			translatePos(slide, -dist, 0, 800);
 		} else {
 			translateScale(slide, 1.1, 0, 800);
 		}

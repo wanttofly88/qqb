@@ -102,8 +102,6 @@ define([
 			}
 		});
 
-		console.log(this._songNfo === this._ambient);
-
 		if (this._mode === 'webaudio') {
 			if (this._songNfo === this._ambient) {
 				gn = ambientGain;

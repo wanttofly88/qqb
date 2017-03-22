@@ -54,11 +54,13 @@ require([
 	'popup/popup-toggle.component',
 	'popup/popup-close.component',
 	'popup/menu-toggle.component',
+	'popup/popup.helper',
 
 	'helpers/beats-helper.component',
 	'helpers/albums-helper.component',
 	'helpers/videos-helper.component',
 	'helpers/album-helper.component',
+	'helpers/merch-helper.component',
 
 	'slide-scroll/slide-scroll.component',
 	'slide-scroll/slide-scroll-index.component',
@@ -69,9 +71,16 @@ require([
 	'attribute-slider/href-slider.component',
 	'attribute-slider/buy-slider.component',
 
+	'cart/buy-fixed.component',
+	'cart/license.component',
+	'cart/cart.component',
+	'cart/cart-item.component',
+	'cart/cart-total.component',
+
 	'slider/cover-bg-slider.component',
 	'slider/cover-slider.component',
 	'slider/video-slider.component',
+	'slider/merch-slider.component',
 
 	'decor/header.component',
 	'decor/text-print.component',
