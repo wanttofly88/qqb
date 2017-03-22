@@ -11,8 +11,6 @@ define([
 ) {
 	"use strict";
 
-	var il = document.createElement('inner-link');
-
 	var elementProto = Object.create(HTMLAnchorElement.prototype);
 	var ie = utils.getIEVersion();
 

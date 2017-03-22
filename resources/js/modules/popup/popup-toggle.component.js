@@ -24,10 +24,6 @@ define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 	}
 	elementProto.attachedCallback = function() {
 		this._id = this.getAttribute('data-id');
-		if (!this._id) {
-			console.warn('data-id attribute is missing');
-		}
-
 		this.addEventListener('click', this.handleClick);
 		popupStore.eventEmitter.subscribe(this.handleStore);
 	}
@@ -40,4 +36,6 @@ define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 		extends: 'button',
 		prototype: elementProto
 	});
+
+	return elementProto;
 });

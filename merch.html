@@ -6,7 +6,7 @@
     <!--путь к ресурсам сайта-->
     <meta name="resources-path" content="resources/">
 
-    <title>Albums</title>
+    <title>Merch</title>
     <meta name="viewport" content="initial-scale=1, minimal-ui"/>
     <link rel="stylesheet" href="resources/css/styles.css">
     <script src="resources/js/libs/modernizr.js"></script>
@@ -19,7 +19,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-    <preloader-component>
+<!--     <preloader-component>
         <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
@@ -28,12 +28,12 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-    </preloader-component>
+    </preloader-component> -->
 
-    <audio-player data-ambient="tmp/audio/ambience-loop.wav">
+<!--     <audio-player data-ambient="tmp/audio/ambience-loop.wav">
         <audio src=""></audio>
         <audio src=""></audio>
-    </audio-player>
+    </audio-player> -->
 
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
@@ -60,7 +60,7 @@
                 <div class="b b5"></div>
                 <div class="b b6"></div>
             </button>
-            <div class="title">Album:</div>
+            <div class="title">Merch:</div>
         </header>
 
         <div class="cart">
@@ -116,35 +116,112 @@
         </popup-component>
 
         <div class="replaceable" data-id="popups">
+            <popup-component class="merch-popup no-fade" data-id="mp1">
+                <div class="bg" style="background-image: url(tmp/mf.jpg);"></div>
+                <section class="merch-item ">
+                    <div class="wrapper">
+                        <div class="outer slide-content">
+                            <div class="cell">
+                                <div class="nt">Shorts Jumpsuit</div>
+                                <h1>ex.1</h1>
+                                <div class="price-nfo">120.00 $</div>
+                                <div class="fake-btn"></div>
+                            </div>
+                        </div>
+
+                        <div class="section-footer">
+                            <!--data-product-id id продукта, отправляется на сервер-->
+                            <!--data-size-id id размера, отправляется на сервер. на случай если S-M-L-XL не подойдут-->
+                            <div class="sizes" data-product-id="merch-shirt-1">
+                                <div class="item" data-size-id="S">
+                                    <span>S</span>
+                                </div>
+                                <div class="item" data-size-id="M">
+                                    <span>M</span>
+                                </div>
+                                <div class="item" data-size-id="L">
+                                    <span>L</span>
+                                </div>
+                                <div class="item" data-size-id="XXXL">
+                                    <span>XXXL</span>
+                                </div>
+                            </div>
+                            <button class="btn big buy" data-product-id="merch-shirt-1" class="btn">[Buy]</button>
+                        </div>
+                    </div>
+                </section>
+            </popup-component>
         </div>
 
         <div class="stage-fallback"></div>
-        <stage-component data-mask="resources/images/stage-mask.png"></stage-component>
+        <stage-component>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+        </stage-component>
+
         <main class="vh-min-height">
             <div class="stage"></div>
 
             <div class="content replaceable vh-min-height" data-id="main-content">
                 <merch-helper></merch-helper>
-                <div class="merch-bg"></div>
+                <div class="merch-bg">
+                    <merch-slider data-id="merch-slides">
+                        <div class="l">
+                            <div class="slide">
+                                <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
+                            </div>
+                            <div class="slide">
+                                <div class="img" style="background-image:url(tmp/m2.jpg);"></div>
+                            </div>
+                            <div class="slide">
+                                <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
+                            </div>
+                        </div>
+                        <div class="r">
+                            <div class="slide">
+                                <div class="img" style="background-image:url(tmp/m2.jpg);"></div>
+                            </div>
+                            <div class="slide">
+                                <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
+                            </div>
+                            <!--если нечетное колличество, добить пустым слайдом-->
+                            <div class="slide">
+                                <div class="img"></div>
+                            </div>
+                        </div>
+                    </merch-slider>
+                </div>
 
-                <div class="section-aside merch-aside">
-                    <div class="left-wrapper">
+                <div class="section-aside general-aside merch-aside">
+                    <div class="wrapper">
                         <div class="inner vh-height">
-                            <button class="arr a-t"
+                            <button class="arr arr-hover a-t"
                                 is="slide-scroll-control"
                                 data-id="merch-slides"
                                 data-to="prev">
-                                <div class="ico"></div>
+                                <div class="ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="14" viewBox="0 0 18 16">
+                                      <path d="M18,2 L0,2" class="cls-2"/>
+                                      <path d="M9,2 L17,14 L1,14 L9,2 Z" class="cls-3"/>
+                                    </svg>
+                                </div>
                             </button>
-                            <button class="arr a-b" 
+                            <button class="arr arr-hover a-b" 
                                 is="slide-scroll-control"
                                 data-id="merch-slides"
                                 data-to="next">
-                                <div class="ico"></div>
+                                <div class="ico">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="18" height="14" viewBox="0 0 18 16">
+                                      <path d="M18,2 L0,2" class="cls-2"/>
+                                      <path d="M9,2 L17,14 L1,14 L9,2 Z" class="cls-3"/>
+                                    </svg>
+                                </div>
                             </button>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="section-header merch-header">
                     <print-slider class="left-wrapper" data-id="merch-slides">
@@ -161,22 +238,56 @@
 
                 <slide-scroll data-id="merch-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
                     <div class="slide-scroll-wrapper">
-                        <section class="videos js-slide vh-min-height">
+                        <section class="merch js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content merch-content">
-                                    <div class="l">
+                                <div class="slide-content l merch-content">
+                                    <div class="slide-inner">
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.1</h1>
-                                        <div class="price">120.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="merch-popup-1">[Look]</button>
+                                        <div class="price-nfo">120.00 $</div>
+                                        <!--data-id это id соответствующего попапа для шмотки-->
+                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
                                     </div>
-                                    <div class="r">
+                                </div>
+                                <div class="slide-content r merch-content">
+                                    <div class="slide-inner">
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.2</h1>
-                                        <div class="price">80.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="merch-popup-2">[Look]</button>
+                                        <div class="price-nfo">80.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
                                     </div>
-                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="merch js-slide vh-min-height">
+                            <div class="left-wrapper">
+                                <div class="slide-content l merch-content">
+                                    <div class="slide-inner">
+                                        <div class="nt">Shorts</div>
+                                        <h1 is="header-component">Ex.3</h1>
+                                        <div class="price-nfo">50.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                    </div>
+                                </div>
+                                <div class="slide-content r merch-content">
+                                    <div class="slide-inner">
+                                        <div class="nt">Shorts Jumpsuit</div>
+                                        <h1 is="header-component">Ex.4</h1>
+                                        <div class="price-nfo">20.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="merch js-slide vh-min-height">
+                            <div class="left-wrapper">
+                                <div class="slide-content l merch-content">
+                                    <div class="slide-inner">
+                                        <div class="nt">Shorts</div>
+                                        <h1 is="header-component">Ex.5</h1>
+                                        <div class="price-nfo">50.00 $</div>
+                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>

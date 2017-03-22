@@ -147,13 +147,13 @@ define([
 			}, 0);
 			setTimeout(function() {
 				glitch(word);
-			}, 200);
+			}, 100);
+			setTimeout(function() {
+				glitch(word);
+			}, 140);
 			setTimeout(function() {
 				glitch(word);
 			}, 240);
-			setTimeout(function() {
-				glitch(word);
-			}, 280);
 			setTimeout(function() {
 				glitch(word);
 			}, 320);

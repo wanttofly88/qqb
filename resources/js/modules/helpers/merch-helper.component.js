@@ -8,7 +8,6 @@ define([
 	schemeStore,
 	preloaderStore,
 	playerStore
-
 ) {
 	"use strict";
 
@@ -44,21 +43,21 @@ define([
 	}
 
 	elementProto.createdCallback = function() {
-		this.handlePreloader = this.handlePreloader.bind(this);
+
 	}
 	elementProto.attachedCallback = function() {
 		dispatcher.dispatch({
 			type: 'scheme-color-change',
 			scheme: 'dark'
 		});
-		this.handlePreloader();
 		preloaderStore.eventEmitter.subscribe(this.handlePreloader);
 	}
 	elementProto.detachedCallback = function() {
 		preloaderStore.eventEmitter.unsubscribe(this.handlePreloader);
+
 	}
 
-	document.registerElement('albums-helper', {
+	document.registerElement('merch-helper', {
 		prototype: elementProto
 	});
 });

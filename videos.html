@@ -20,7 +20,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-    <preloader-component>
+<!--     <preloader-component>
         <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
@@ -35,7 +35,7 @@
         <audio src=""></audio>
         <audio src=""></audio>
     </audio-player>
-
+ -->
     <div is="scheme-component" class="page-wrapper" data-scheme="dark" data-popup="inactive">
         <header>
             <div class="logo">
@@ -118,7 +118,7 @@
         <div class="replaceable" data-id="popups">
             <popup-component class="video-popup" data-id="video-popup">
                 <video-component>
-
+                    <iframe id="videoPlayer" width="560" height="315" src="https://www.youtube.com/embed/nN-Uu6yhweo?enablejsapi=1&amp;version=3&amp;playerapiid=ytplayer&amp;showinfo=0&amp;rel=0&amp;vq=hd720" frameborder="0" allowfullscreen=""></iframe>
                 </video-component>
             </popup-component>
         </div>
@@ -136,7 +136,7 @@
                 <videos-helper></videos-helper>
                 <div class="video-bg stage-fallback"></div>
 
-                <div class="section-header video-header">
+                <div class="section-header general-header">
                     <print-slider class="left-wrapper" data-id="video-slides">
                         <div></div>
                         <div></div>
@@ -145,12 +145,12 @@
                 </div>
 
 
-                <div class="section-aside video-aside">
+                <div class="section-aside general-aside">
                     <div class="wrapper">
                         <div class="inner vh-height">
                             <slide-scroll-index 
                                 data-id="video-slides"
-                                class="video-index">1</slide-scroll-index>
+                                class="video-index general-index">1</slide-scroll-index>
                             <button class="arr a-t"
                                 is="slide-scroll-control"
                                 data-id="video-slides"
@@ -177,7 +177,7 @@
                     </div>
                 </div>
 
-                <div class="section-footer video-footer">
+                <div class="section-footer general-footer">
                     <div class="left-wrapper">
                         <button class="btn">[View]</button>
                     </div>
@@ -185,80 +185,95 @@
 
 
                 <video-slider data-id="video-slides">
-                    <div class="slide" style="background-image: url('tmp/video/p1.jpg')"></div>
-                    <div class="slide" style="background-image: url('tmp/video/p2.jpg')"></div>
-                    <div class="slide" style="background-image: url('tmp/video/p1.jpg')"></div>
-                    <div class="slide" style="background-image: url('tmp/video/p2.jpg')"></div>
-                    <div class="slide" style="background-image: url('tmp/video/p1.jpg')"></div>
+                    <div class="slide">
+                        <div class="bg" style="background-image: url('tmp/video/p1.jpg')"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="bg" style="background-image: url('tmp/video/p2.jpg')"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="bg" style="background-image: url('tmp/video/p1.jpg')"></div>
+                    </div>
+                    <div class="slide">
+                        <div class="bg" style="background-image: url('tmp/video/p2.jpg')"></div>
+                    </div>
                 </video-slider>
 
                 <slide-scroll data-id="video-slides" 
                     data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
                     <div class="slide-scroll-wrapper">
-                        <section class="video-slide js-slide vh-min-height">
+                        <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <div class="slidescroll-fallback">
-                                        <div class="data-text" data-id="video-slides">
-                                            <div>Cinematic Soulful</div>
-                                            <div>Date: 2016 feb</div>
-                                            <div>Prod: Abyss</div>
+                                    <div class="slide-inner">
+                                        <div class="slidescroll-fallback">
+                                            <div class="data-text" data-id="video-slides">
+                                                <div>Cinematic Soulful</div>
+                                                <div>Date: 2016 feb</div>
+                                                <div>Prod: Abyss</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h1 is="header-component">moderat reminder</h1>
-                                    <div class="slidescroll-fallback fb-btns">
-                                        <button is="video-play" class="btn">[View]</button>
+                                        <h1 is="header-component">moderat reminder</h1>
+                                        <div class="slidescroll-fallback slide-controls">
+                                            <button is="video-play" class="btn">[View]</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <section class="video-slide js-slide vh-min-height">
+                        <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <div class="slidescroll-fallback">
-                                        <div class="data-text" data-id="video-slides">
-                                            <div>Cinematic</div>
-                                            <div>Date: 2013 feb</div>
-                                            <div>Prod</div>
+                                    <div class="slide-inner">
+                                        <div class="slidescroll-fallback">
+                                            <div class="data-text" data-id="video-slides">
+                                                <div>Cinematic</div>
+                                                <div>Date: 2013 feb</div>
+                                                <div>Prod</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h1 is="header-component">moderat reminder</h1>
-                                    <div class="slidescroll-fallback fb-btns">
-                                        <button is="video-play" class="btn">[View]</button>
+                                        <h1 is="header-component">moderat reminder</h1>
+                                        <div class="slidescroll-fallback slide-controls">
+                                            <button is="video-play" class="btn">[View]</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <section class="video-slide js-slide vh-min-height">
+                        <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <div class="slidescroll-fallback">
-                                        <div class="data-text" data-id="video-slides">
-                                            <div>Soulful</div>
-                                            <div></div>
-                                            <div></div>
+                                    <div class="slide-inner">
+                                        <div class="slidescroll-fallback">
+                                            <div class="data-text" data-id="video-slides">
+                                                <div>Soulful</div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h1 is="header-component">moderat reminder</h1>
-                                    <div class="slidescroll-fallback fb-btns">
-                                        <button is="video-play" class="btn">[View]</button>
+                                        <h1 is="header-component">moderat reminder</h1>
+                                        <div class="slidescroll-fallback slide-controls">
+                                            <button is="video-play" class="btn">[View]</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <section class="video-slide js-slide vh-min-height">
+                        <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
                                 <div class="slide-content album-content">
-                                    <div class="slidescroll-fallback">
-                                        <div class="data-text" data-id="video-slides">
-                                            <div>Cinematic Soulful</div>
-                                            <div>Date: 2016 feb</div>
-                                            <div>Prod: Abyss</div>
+                                    <div class="slide-inner">
+                                        <div class="slidescroll-fallback">
+                                            <div class="data-text" data-id="video-slides">
+                                                <div>Cinematic Soulful</div>
+                                                <div>Date: 2016 feb</div>
+                                                <div>Prod: Abyss</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h1 is="header-component">moderat reminder</h1>
-                                    <div class="slidescroll-fallback fb-btns">
-                                        <button is="video-play" class="btn">[View]</button>
+                                        <h1 is="header-component">moderat reminder</h1>
+                                        <div class="slidescroll-fallback slide-controls">
+                                            <button is="video-play" class="btn">[View]</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
