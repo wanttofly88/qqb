@@ -1,24 +1,13 @@
-define(['dispatcher', 'cart/cart.store'], function(dispatcher, cartStore) {
+define([
+	'dispatcher',
+	'cart/cart.store'
+], function(
+	dispatcher,
+	cartStore
+) {
 	"use strict";
 
-	var elementProto = Object.create(HTMLElement.prototype);
-
-	elementProto.handleClick = function() {
-		if (this._active) return;
-		dispatcher.dispatch({
-			type: 'cart-add',
-			id: this._id
-		});
-
-		this._active = true;
-		this.classList.add('active');
-
-		setTimeout(function() {
-			dispatcher.dispatch({
-				type: 'popup-close'
-			});
-		}, 200);
-	}
+	var elementProto = Object.create(HTMLButtonElement.prototype);
 
 	elementProto.handleCart = function() {
 		var data = cartStore.getData().items;
@@ -28,16 +17,32 @@ define(['dispatcher', 'cart/cart.store'], function(dispatcher, cartStore) {
 		if (!data) return;
 
 		data.forEach(function(item) {
-			if (item.id === self._id) found = true;
+			if (item.id === self._productId) found = true;
 		});
 
 		if (found && !this._active) {
+			// this.innerHTML = '[Cart]';
 			this._active = true;
-			this.classList.add('active');
 		} else if (!found && this._active) {
+			// this.innerHTML = '[Buy]';
 			this._active = false;
-			this.classList.remove('active');
 		}
+	}
+
+	elementProto.handleClick = function() {
+		// var self = this;
+
+		// if (this._active) {
+			dispatcher.dispatch({
+				type: 'popup-open',
+				id: 'cart-popup'
+			});
+		// } else {
+		// 	dispatcher.dispatch({
+		// 		type: 'popup-open',
+		// 		id: self._popupId
+		// 	});
+		// }
 	}
 
 	elementProto.createdCallback = function() {
@@ -46,19 +51,21 @@ define(['dispatcher', 'cart/cart.store'], function(dispatcher, cartStore) {
 		this.handleCart = this.handleCart.bind(this);
 	}
 	elementProto.attachedCallback = function() {
-		this._id = this.getAttribute('data-product-id');
+		this._productId = this.getAttribute('data-productId');
+		this._popupId = this.getAttribute('data-popupId');
 
 		this.handleCart();
 		this.addEventListener('click', this.handleClick);
 		cartStore.eventEmitter.subscribe(this.handleCart);
 	}
+
 	elementProto.detachedCallback = function() {
 		this.removeEventListener('click', this.handleClick);
 		cartStore.eventEmitter.unsubscribe(this.handleCart);
 	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
-	document.registerElement('license-component', {
+	document.registerElement('buy-btn', {
+		extends: 'button',
 		prototype: elementProto
 	});
 });

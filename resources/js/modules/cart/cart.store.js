@@ -3,7 +3,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 	var eventEmitter = new utils.EventEmitter();
 
-	var items = {}
+	var items = []
 	var total = 0;
 	var price = 0;
 
@@ -11,12 +11,10 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		total = 0;
 		price = 0;
 
-		for (var id in items) {
-			if (!items.hasOwnProperty(id)) return;
-
+		items.forEach(function(item) {
 			total++;
-			price += items[id].price;
-		}
+			price += parseFloat(item.price);
+		});
 	}
 
 	var _handleEvent = function(e) {

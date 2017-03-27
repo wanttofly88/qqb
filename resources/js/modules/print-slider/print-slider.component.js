@@ -57,7 +57,6 @@ define([
 		this.start = function() {
 			var charNum = 0;
 			var tmpValue = '';
-			var way = this.line.way;
 			var self = this;
 			var currentValue = this.line.element.innerHTML;
 			var valueWithSpaces = this.value;
