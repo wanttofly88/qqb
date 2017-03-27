@@ -20,7 +20,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-<!--     <preloader-component>
+    <preloader-component>
         <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
@@ -35,7 +35,7 @@
         <audio src=""></audio>
         <audio src=""></audio>
     </audio-player>
- -->
+
     <div is="scheme-component" class="page-wrapper" data-scheme="dark" data-popup="inactive">
         <header>
             <div class="logo">
@@ -60,7 +60,7 @@
                 <div class="b b5"></div>
                 <div class="b b6"></div>
             </button>
-            <div class="title">Video:</div>
+            <page-name class="title">Video:</page-name>
         </header>
 
         <div class="cart">
@@ -118,7 +118,7 @@
         <div class="replaceable" data-id="popups">
             <popup-component class="video-popup" data-id="video-popup">
                 <video-component>
-                    <iframe id="videoPlayer" width="560" height="315" src="https://www.youtube.com/embed/nN-Uu6yhweo?enablejsapi=1&amp;version=3&amp;playerapiid=ytplayer&amp;showinfo=0&amp;rel=0&amp;vq=hd720" frameborder="0" allowfullscreen=""></iframe>
+                    <iframe id="videoPlayer" width="560" height="315" src="https://www.youtube.com/embed/?enablejsapi=1&amp;version=3&amp;playerapiid=ytplayer&amp;showinfo=0&amp;rel=0&amp;vq=hd720" frameborder="0" allowfullscreen=""></iframe>
                 </video-component>
             </popup-component>
         </div>
@@ -179,7 +179,7 @@
 
                 <div class="section-footer general-footer">
                     <div class="left-wrapper">
-                        <button class="btn">[View]</button>
+                        <button is="video-play-fixed" class="btn">[View]</button>
                     </div>
                 </div>
 
@@ -215,7 +215,7 @@
                                         </div>
                                         <h1 is="header-component">moderat reminder</h1>
                                         <div class="slidescroll-fallback slide-controls">
-                                            <button is="video-play" class="btn">[View]</button>
+                                            <button is="video-play" class="btn" data-src="nN-Uu6yhweo">[View]</button>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +234,7 @@
                                         </div>
                                         <h1 is="header-component">moderat reminder</h1>
                                         <div class="slidescroll-fallback slide-controls">
-                                            <button is="video-play" class="btn">[View]</button>
+                                            <button is="video-play" class="btn" data-src="uHgqWg3OIIo">[View]</button>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
                                         </div>
                                         <h1 is="header-component">moderat reminder</h1>
                                         <div class="slidescroll-fallback slide-controls">
-                                            <button is="video-play" class="btn">[View]</button>
+                                            <button is="video-play" class="btn" data-src="nN-Uu6yhweo">[View]</button>
                                         </div>
                                     </div>
                                 </div>

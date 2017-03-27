@@ -23,8 +23,9 @@ define(['dispatcher', 'utils', 'cart/cart.store'], function(dispatcher, utils, c
 			});
 
 			if (!exists) {
-				console.log(1);
-				self._inner.removeChild(item.element);
+				if (item.element) {
+					self._inner.removeChild(item.element);
+				}
 				item.element.remove();
 			}
 

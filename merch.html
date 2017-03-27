@@ -19,7 +19,7 @@
     <page-transition></page-transition>
     <router-component></router-component>
 
-<!--     <preloader-component>
+    <preloader-component>
         <loading-screen data-id="preloader-screen"></loading-screen> 
         <div class="wrapper">
             <div class="text">
@@ -28,12 +28,45 @@
                 <div class="nt">Soundtrack to life</div>
             </div>
         </div>
-    </preloader-component> -->
+    </preloader-component>
 
-<!--     <audio-player data-ambient="tmp/audio/ambience-loop.wav">
+    <audio-player data-ambient="tmp/audio/ambience-loop.wav">
         <audio src=""></audio>
         <audio src=""></audio>
-    </audio-player> -->
+    </audio-player>
+
+    <popup-component class="cart-popup" data-id="cart-popup">
+        <div class="stage-fallback"></div>
+        <div class="popup-outer">
+            <div class="popup-inner">
+                <div class="popup-cell">
+                    <div class="wrapper">
+                        <!--data-route это роут, куда обращаться к апи корзины-->
+                        <!--PUT - добавление товара-->
+                        <!--DELETE - удаление товара-->
+                        <!--POST - подтверждение покупки-->
+                        <!--GET - получение объекта корзины-->
+                        <cart-component data-route="cart.json">
+                            <div class="inner">
+                                <div class="items">
+                                </div>
+
+                                <div class="cart-data">
+                                    <div class="total">
+                                        <div class="t">Total</div>
+                                        <cart-price class="p">270.00 $</cart-price>
+                                    </div>
+                                    <div class="checkout">
+                                        <button is="cart-checkout" class="btn big">[Checkout]</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </cart-component>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </popup-component>
 
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
@@ -60,12 +93,12 @@
                 <div class="b b5"></div>
                 <div class="b b6"></div>
             </button>
-            <div class="title">Merch:</div>
+            <page-name class="title">Merch:</page-name>
         </header>
 
         <div class="cart">
             <span>Cart</span>
-            <button class="btn" data-text="[+0]">[+0]</button>
+            <button is="cart-total" class="btn">[+0]</button>
         </div>
 
         <audio-progressbar>
@@ -131,22 +164,21 @@
 
                         <div class="section-footer">
                             <!--data-product-id id продукта, отправляется на сервер-->
-                            <!--data-size-id id размера, отправляется на сервер. на случай если S-M-L-XL не подойдут-->
-                            <div class="sizes" data-product-id="merch-shirt-1">
-                                <div class="item" data-size-id="S">
+                            <merch-sizes class="sizes">
+                                <div class="item" data-productId="merch-shirt-1">
                                     <span>S</span>
                                 </div>
-                                <div class="item" data-size-id="M">
+                                <div class="item" data-productId="merch-shirt-2">
                                     <span>M</span>
                                 </div>
-                                <div class="item" data-size-id="L">
+                                <div class="item" data-productId="merch-shirt-3">
                                     <span>L</span>
                                 </div>
-                                <div class="item" data-size-id="XXXL">
+                                <div class="item" data-productId="merch-shirt-4">
                                     <span>XXXL</span>
                                 </div>
-                            </div>
-                            <button class="btn big buy" data-product-id="merch-shirt-1" class="btn">[Buy]</button>
+                            </merch-sizes>
+                            <button is="buy-merch-btn" class="btn big buy disabled" class="btn">[Buy]</button>
                         </div>
                     </div>
                 </section>

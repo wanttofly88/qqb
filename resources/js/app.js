@@ -61,6 +61,7 @@ require([
 	'helpers/videos-helper.component',
 	'helpers/album-helper.component',
 	'helpers/merch-helper.component',
+	'helpers/about-helper.component',
 
 	'slide-scroll/slide-scroll.component',
 	'slide-scroll/slide-scroll-index.component',
@@ -71,11 +72,14 @@ require([
 	'attribute-slider/href-slider.component',
 	'attribute-slider/buy-slider.component',
 
-	'cart/buy-fixed.component',
+	'cart/buy-fixed-btn.component',
+	'cart/buy-btn.component',
 	'cart/license.component',
 	'cart/cart.component',
 	'cart/cart-item.component',
 	'cart/cart-total.component',
+	'cart/cart-price.component',
+	'cart/buy-merch-btn.component',
 
 	'slider/cover-bg-slider.component',
 	'slider/cover-slider.component',
@@ -87,10 +91,14 @@ require([
 
 	'video/video.component',
 	'video/video-play.component',
+	'video/video-play-fixed.component',
 
 	'loading-screen/loading-screen.component',
 	'stage/stage.component',
 	'preloader/preloader.component',
 
-	's-scroll/s-scroll.view'
+	's-scroll/s-scroll.view',
+	'page-name/page-name.component',
+
+	'merch/merch-sizes.component'
 ]);

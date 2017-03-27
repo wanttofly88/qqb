@@ -26,10 +26,15 @@ define(['dispatcher'], function(dispatcher) {
 		});
 	}
 
-	elementProto.playVideo = function() {
+	elementProto.playVideo = function(src) {
 		dispatcher.dispatch({
 			type: 'popup-open',
 			id: 'video-popup'
+		});
+
+		this.player.loadVideoById({
+			videoId: src,
+			suggestedQuality: 'large'
 		});
 
 		dispatcher.dispatch({
@@ -55,7 +60,7 @@ define(['dispatcher'], function(dispatcher) {
 
 	elementProto.handleDispatcher = function(e) {
 		if (e.type === 'video-play') {
-			this.playVideo();
+			this.playVideo(e.src);
 		}
 		if (e.type === 'video-stop' || e.type === 'popup-close') {
 			this.stopVideo();
