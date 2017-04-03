@@ -86,6 +86,9 @@ define([
 				nw: texture.image.naturalWidth,
 				nh: texture.image.naturalHeight
 			}
+
+			self._currentMap = self._maskSrc;
+
 			texture.premultiplyAlpha = true;
 			texture.needsUpdate = true;
 
@@ -114,18 +117,19 @@ define([
 		this._renderer = renderer;
 	}
 
-	elementProto.setMaps = function(prevMapSrc, nextMapSrc) {
+	elementProto.switchMap = function(map, speed) {
 		var material = this._material;
 		var texloader = new THREE.TextureLoader();
+		var self = this;
 
-		var loadMap = function(map, type) {
+		var loadMap = function(map) {
 			var promise = new Promise(function(resolve, reject) {
 				var texture = texloader.load(map, function(e) {
 					texture.premultiplyAlpha = true;
 					texture.needsUpdate = true;
 					texture.magFilter = THREE.NearestFilter;
 					texture.minFilter = THREE.NearestFilter;
-					material.uniforms[type].value = texture;
+					material.uniforms['nextMap'].value = texture;
 
 					resolve();
 				});
@@ -133,39 +137,46 @@ define([
 			return promise;
 		}
 
-		var p1 = loadMap(prevMapSrc, 'prevMap');
-		var p2 = loadMap(nextMapSrc, 'nextMap');
-
-		var promise = Promise.all([p1, p2]);
-
-		return promise;
-	}
-
-	elementProto.handleSlide = function() {
-		var material = this._material;
-		var index = sSStore.getData().items[sSStore.getData().lastAdded].index;
-		// var easing = bezier(0.9, 0, 0.4, 1);
-		var i1, i2;
-		var self = this;
-
-		if (index === this._slide) return;
-
-		i1 = index % this._maps.length;
-		i2 = (this._slide) % this._maps.length;
+		if (this._currentMap === map) return;
 
 		TweenMax.killChildTweensOf(material.uniforms.transition);
 
-		this.setMaps(this._maps[i2], this._maps[i1]).then(function() {
-			TweenMax.set(material.uniforms.transition, {
-				value: 1
-			});
-
-			TweenMax.to(material.uniforms.transition, 0.7, {
+		loadMap(map).then(function() {
+			TweenMax.to(material.uniforms.transition, speed/1000, {
 				value: 0,
-				ease: Power1.easeInOut
+				ease: Power1.easeInOut,
+				onComplete: function() {
+					material.uniforms.transition.value = 1;
+					material.uniforms.prevMap.value = material.uniforms.nextMap.value;
+					self._currentMap = map;
+				}
 			});
 		});
+	}
 
+	elementProto.updateMaps = function(maps) {
+		var self = this;
+		this._maskElements = maps;
+		this._maps = [];
+
+		Array.prototype.forEach.call(this._maskElements, function(element) {
+			var img = document.createElement('img');
+			img.src = element.getAttribute('data-texture');
+			self._maps.push(img.src);
+		});
+
+		if (this._currentMap !== this._maps[0]) {
+			this.switchMap(this._maps[0], 700);
+		}
+	}
+
+	elementProto.handleSlide = function() {
+		var index = sSStore.getData().items[sSStore.getData().lastAdded].index;
+		var i2;
+		if (index === this._slide) return;
+		i2 = index % this._maps.length;
+
+		this.switchMap(this._maps[i2], 700);
 		this._slide = index;
 	}
 
@@ -229,24 +240,24 @@ define([
 
 		if (active) {
 			TweenMax.killTweensOf(material.uniforms.statics);
-			TweenMax.to(material.uniforms.statics, 0.5, {
+			TweenMax.to(material.uniforms.statics, 0.4, {
 				value: 0.6,
-				ease: Power1.easeOut
+				ease: Power0.linear
 			});
 		} else {
 			TweenMax.killTweensOf(material.uniforms.statics);
-			TweenMax.to(material.uniforms.statics, 0.5, {
+			TweenMax.to(material.uniforms.statics, 0.4, {
 				value: 0,
-				ease: Power1.easeIn
+				ease: Power0.linear
 			});
 		}
 	}
 
 	elementProto.handleDispatcher = function(e) {
 		var material = this._material;
-		if (!material) return;
 
 		if (e.type === 'transition-start') {
+			if (!material) return;
 			TweenMax.killTweensOf(material.uniforms.statics);
 			TweenMax.to(material.uniforms.statics, 0.9, {
 				value: 1,
@@ -254,11 +265,16 @@ define([
 			});
 		}
 		if (e.type === 'transition-end') {
+			if (!material) return;
 			TweenMax.killTweensOf(material.uniforms.statics);
 			TweenMax.to(material.uniforms.statics, 2, {
 				value: 0,
-				ease: Power1.easeIn
+				ease: Power1.easeIn,
+				delay: 0.4
 			});
+		}
+		if (e.type === 'update-maps') {
+			this.updateMaps(e.maps);
 		}
 	}
 
@@ -308,6 +324,8 @@ define([
 		this.handleScheme = this.handleScheme.bind(this);
 		this.handleSlide = this.handleSlide.bind(this);
 		this.handlePopup = this.handlePopup.bind(this);
+		this.switchMap = this.switchMap.bind(this);
+		this.updateMaps = this.updateMaps.bind(this);
 		this.loop = this.loop.bind(this);
 		this._active = true;
 		this._currentScheme = undefined;
@@ -328,7 +346,7 @@ define([
 
 		this.build();
 		this.handleScheme();
-		this.setMaps(self._maps[0], self._maps[1]);
+		// this.setMaps(self._maps[0], self._maps[1]);
 
 		resizeStore.eventEmitter.subscribe(this.handleResize);
 		dispatcher.subscribe(this.handleDispatcher);
