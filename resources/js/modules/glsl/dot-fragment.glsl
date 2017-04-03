@@ -3,9 +3,10 @@ uniform sampler2D prevMap;
 uniform sampler2D nextMap;
 uniform vec2 resolution;
 uniform float r;
-uniform float shiftY;
+uniform float transition;
 uniform float time;
 uniform float bright;
+uniform float statics;
 
 const float scale = 4.;
 const float Pi = 3.14159265359;
@@ -30,7 +31,7 @@ void main() {
    	float g1Int = step(0.95, sin(T/1.5));
    	float g2Int = step(1.3, sin(T/1.5));
 
-   	vy += shiftY;
+   	float oy = vy;
 
    	// vx = vx + sin(vx*resolution.x*Pi)/2.;
    	// vy = vy + cos(vy*resolution.y*Pi)/2.;
@@ -57,7 +58,11 @@ void main() {
 	p.x = p.x + shx;
 	p.y = p.y + shy;
 
-	vec4 color = texture2D(prevMap, p);
+	vec4 color;
+	float rm = rand(p);
+	float tr = step(rm, transition);
+	color = (1.0 - statics) * ((tr * texture2D(prevMap, p) + (1.0 - tr) * texture2D(nextMap, p))) + (statics)*(rm);
+
 	vec3 lum  = vec3(0.299, 0.587, 0.114);
 
 	// vec4 blue = vec4(64./255., 219./255., 225./255., 1.);
@@ -87,6 +92,5 @@ void main() {
 
 	vec4 resultColor = vec4(colGs*sx*sy, 1.);
 
-	//gl_FragColor = vec4(colGs*sx*sy, 1.);
 	gl_FragColor = mix(colStart, colEnd, (colGs*sx*sy).r);
 }

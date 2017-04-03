@@ -6,7 +6,11 @@ define([
 	'text!glsl/simple-vertex.glsl',
 	'text!glsl/dot-fragment.glsl',
 	'scheme/scheme.store',
-	'TweenMax'
+	'TweenMax',
+	'slide-scroll/slide-scroll.store',
+	'popup/popup.store',
+	'router/router.store',
+	'bezier'
 ], function(
 	dispatcher,
 	THREE,
@@ -15,7 +19,11 @@ define([
 	simpleVertexShader,
 	dotFragmentShader,
 	schemeStore,
-	TweenMax
+	TweenMax,
+	sSStore,
+	popupStore,
+	routerStore,
+	bezier
 ) {
 	"use strict";
 
@@ -63,7 +71,8 @@ define([
 				prevMap: {type: 't', value: texture},
 				nextMap: {type: 't', value: null},
 				r: {type: 'f', value: 0},
-				shiftY: {type: 'f', value: 0},
+				transition: {type: 'f', value: 1},
+				statics: {type: 'f', value: 0},
 				time: {type: 'f', value: 0},
 				resolution: {type: 'v2', value: [1, 1]},
 				bright: {type: 'f', value: 0}
@@ -107,20 +116,57 @@ define([
 
 	elementProto.setMaps = function(prevMapSrc, nextMapSrc) {
 		var material = this._material;
+		var texloader = new THREE.TextureLoader();
 
 		var loadMap = function(map, type) {
-			var texture = texloader.load(map, function(e) {
-				texture.premultiplyAlpha = true;
-				texture.needsUpdate = true;
-				texture.magFilter = THREE.NearestFilter;
-				texture.minFilter = THREE.NearestFilter;
+			var promise = new Promise(function(resolve, reject) {
+				var texture = texloader.load(map, function(e) {
+					texture.premultiplyAlpha = true;
+					texture.needsUpdate = true;
+					texture.magFilter = THREE.NearestFilter;
+					texture.minFilter = THREE.NearestFilter;
+					material.uniforms[type].value = texture;
 
-				material.uniforms[type].value = texture;
+					resolve();
+				});
 			});
+			return promise;
 		}
 
-		loadMap(prevMapSrc, 'prevMap');
-		loadMap(nextMapSrc, 'nextMap');
+		var p1 = loadMap(prevMapSrc, 'prevMap');
+		var p2 = loadMap(nextMapSrc, 'nextMap');
+
+		var promise = Promise.all([p1, p2]);
+
+		return promise;
+	}
+
+	elementProto.handleSlide = function() {
+		var material = this._material;
+		var index = sSStore.getData().items[sSStore.getData().lastAdded].index;
+		// var easing = bezier(0.9, 0, 0.4, 1);
+		var i1, i2;
+		var self = this;
+
+		if (index === this._slide) return;
+
+		i1 = index % this._maps.length;
+		i2 = (this._slide) % this._maps.length;
+
+		TweenMax.killChildTweensOf(material.uniforms.transition);
+
+		this.setMaps(this._maps[i2], this._maps[i1]).then(function() {
+			TweenMax.set(material.uniforms.transition, {
+				value: 1
+			});
+
+			TweenMax.to(material.uniforms.transition, 0.7, {
+				value: 0,
+				ease: Power1.easeInOut
+			});
+		});
+
+		this._slide = index;
 	}
 
 	elementProto.loop = function() {
@@ -141,11 +187,17 @@ define([
 		renderer.render(scene, camera);
 		requestAnimationFrame(this.loop);
 	}
+
 	elementProto.handleScheme = function() {
 		var material = this._material;
 		var scheme = schemeStore.getData().scheme;
 		var value;
-		
+		var speed = 0.5;
+
+		if (routerStore.getData().routing) {
+			speed = 0.9;
+		}
+		if (!material) return;
 		if (scheme === this._currentScheme) return;
 
 		if (scheme === 'bright') {
@@ -159,15 +211,57 @@ define([
 			material.uniforms.bright.value = value;
 		} else {
 			TweenMax.killTweensOf(material.uniforms.bright);
-			TweenMax.to(material.uniforms.bright, 0.4, {
-				value: value
+			TweenMax.to(material.uniforms.bright, speed, {
+				value: value,
+				ease: Power1.easeInOut
 			});
 		}
 
 		this._currentScheme = scheme;
 	}
-	elementProto.handleDispatcher = function(e) {
+
+	elementProto.handlePopup = function() {
+		var material = this._material;
+		var active = popupStore.getData().active;
+
+		if (!material) return;
+		if (routerStore.getData().routing) return;
+
+		if (active) {
+			TweenMax.killTweensOf(material.uniforms.statics);
+			TweenMax.to(material.uniforms.statics, 0.5, {
+				value: 0.6,
+				ease: Power1.easeOut
+			});
+		} else {
+			TweenMax.killTweensOf(material.uniforms.statics);
+			TweenMax.to(material.uniforms.statics, 0.5, {
+				value: 0,
+				ease: Power1.easeIn
+			});
+		}
 	}
+
+	elementProto.handleDispatcher = function(e) {
+		var material = this._material;
+		if (!material) return;
+
+		if (e.type === 'transition-start') {
+			TweenMax.killTweensOf(material.uniforms.statics);
+			TweenMax.to(material.uniforms.statics, 0.9, {
+				value: 1,
+				ease: Power1.easeOut
+			});
+		}
+		if (e.type === 'transition-end') {
+			TweenMax.killTweensOf(material.uniforms.statics);
+			TweenMax.to(material.uniforms.statics, 2, {
+				value: 0,
+				ease: Power1.easeIn
+			});
+		}
+	}
+
 	elementProto.handleResize = function() {
 		var ww = resizeStore.getData().width;
 		var wh = resizeStore.getData().height;
@@ -212,31 +306,44 @@ define([
 		this.handleDispatcher = this.handleDispatcher.bind(this);
 		this.handleResize = this.handleResize.bind(this);
 		this.handleScheme = this.handleScheme.bind(this);
+		this.handleSlide = this.handleSlide.bind(this);
+		this.handlePopup = this.handlePopup.bind(this);
 		this.loop = this.loop.bind(this);
 		this._active = true;
 		this._currentScheme = undefined;
+		this._slide = 0;
 	}
 	elementProto.attachedCallback = function() {
+		var self = this;
 		this._maskElements = this.getElementsByClassName('mask');
 		this._maskSrc = this._maskElements[0].getAttribute('data-texture');
+		this._maps = [];
 		if (Modernizr && (!Modernizr.webgl || Modernizr.touchevents)) return;
 
 		Array.prototype.forEach.call(this._maskElements, function(element) {
 			var img = document.createElement('img');
 			img.src = element.getAttribute('data-texture');
+			self._maps.push(img.src);
 		});
 
 		this.build();
 		this.handleScheme();
+		this.setMaps(self._maps[0], self._maps[1]);
 
 		resizeStore.eventEmitter.subscribe(this.handleResize);
 		dispatcher.subscribe(this.handleDispatcher);
 		schemeStore.eventEmitter.subscribe(this.handleScheme);
+		sSStore.eventEmitter.subscribe(this.handleSlide);
+		popupStore.eventEmitter.subscribe(this.handlePopup);
+		dispatcher.subscribe(this.handleDispatcher);
 	}
 	elementProto.detachedCallback = function() {
 		resizeStore.eventEmitter.unsubscribe(this.handleResize);
 		dispatcher.unsubscribe(this.handleDispatcher);
 		schemeStore.eventEmitter.unsubscribe(this.handleScheme);
+		sSStore.eventEmitter.unsubscribe(this.handleSlide);
+		popupStore.eventEmitter.unsubscribe(this.handlePopup);
+		dispatcher.unsubscribe(this.handleDispatcher);
 	}
 
 	document.registerElement('stage-component', {

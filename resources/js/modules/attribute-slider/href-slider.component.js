@@ -41,7 +41,6 @@ define([
 		var href;
 
 		if (!storeItems[this._parentId]) {
-			console.warn('object with id ' + this._parentId + ' is missing in store');
 			return;
 		};
 

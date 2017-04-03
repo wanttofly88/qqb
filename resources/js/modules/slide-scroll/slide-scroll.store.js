@@ -9,6 +9,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 	var nativeScroll = false;
 
+	var lastAdded = '';
+
 	var defaultProps = {
 		timeForBlocking: timeForBlocking,
 		animationSpeed: animationSpeed
@@ -19,6 +21,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		if (e.type === 'slide-scroll-add') {
 			if (items.hasOwnProperty(e.id)) return;
 
+			lastAdded = e.id;
 			items[e.id] = {
 				id: e.id,
 				index: e.index,
@@ -99,7 +102,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			items: items,
 			timeForBlocking: timeForBlocking,
 			animationSpeed: animationSpeed,
-			nativeScroll: nativeScroll
+			nativeScroll: nativeScroll,
+			lastAdded: lastAdded
 		}
 	}
 

@@ -3,26 +3,6 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 	var elementProto = Object.create(HTMLElement.prototype);
 
-	elementProto.basicTranisiton = function() {
-		var start = function(e) {
-			dispatcher.dispatch({
-				type: 'transition-check',
-				step: 1
-			});
-		}
-		var end = function(e) {
-			dispatcher.dispatch({
-				type: 'transition-check',
-				step: 3
-			});
-		}
-
-		return {
-			start: start.bind(this),
-			end: end.bind(this)
-		}
-	}
-
 	elementProto.menuTransition = function() {
 		var start = function (e) {
 			this.tmpElements;
@@ -114,11 +94,15 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 
 			this.tmpElements = {};
 
+			pw.classList.remove('preload-complete');
+
 			setTimeout(function() {
 				dispatcher.dispatch({
 					type: 'preload-complete',
 					transitionData: this._tmpTransitionData
 				});
+
+				pw.classList.add('preload-complete');
 
 				setTimeout(function() {
 					self.classList.remove('active');
@@ -235,6 +219,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			var fake = this.tmpElements.fake;
 			var pw = document.getElementsByClassName('page-wrapper')[0];
 
+			pw.classList.remove('preload-complete');
+
 			window.scrollTo(0, 0);
 
 			if (fake) {
@@ -249,6 +235,8 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 					type: 'preload-complete',
 					transitionData: this._tmpTransitionData
 				});
+
+				pw.classList.add('preload-complete');
 
 				setTimeout(function() {
 					self.classList.remove('active');

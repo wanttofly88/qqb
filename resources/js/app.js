@@ -16,11 +16,15 @@ require.config({
 		text: '../libs/text',
 		TweenMax: '../libs/TweenMax',
 		THREE: '../libs/THREE',
-		THREEShaders: '../libs/THREE-Shaders'
+		THREEShaders: '../libs/THREE-Shaders',
+		bezier: '../libs/bezier-easing',
 	},
 	shim: {
 		THREE: {
 			exports: 'THREE'
+		},
+		bezier: {
+			exports: 'bezier'
 		}
 	}
 });
