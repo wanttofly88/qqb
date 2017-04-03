@@ -68,7 +68,7 @@ void main() {
 	// vec4 blue = vec4(64./255., 219./255., 225./255., 1.);
 	// vec4 grey = vec4(vec3(10./255.), 1.);
 
-	vec4 brightStart  = vec4(64./255., 219./255., 225./255., 1.);
+	vec4 brightStart  = vec4(89./255., 234./255., 240./255., 1.);
 	vec4 brightEnd  = vec4(234./255., 35./255., 255./255., 1.);
 
 	vec4 darkStart  = vec4(vec3(10./255.), 1.);

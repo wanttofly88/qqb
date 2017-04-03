@@ -120,37 +120,36 @@
                 <div class="stage-fallback"></div>
                 <div class="popup-outer">
                     <div class="popup-inner">
-                        <div class="section-header">
-                            <div class="left-wrapper">
-                                <button is="popup-close" class="btn close">[Close]</button>
-                            </div>
-                        </div>
-                        <section class="all-tracks">
-                            <track-list class="tracks-list" data-id="album">
-                                <div class="tracks-group">
-                                    <h3># Album name</h3>
-                                    <ol>
-                                        <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">
-                                            <audio-visual></audio-visual>
-                                            <span>Mt. Zion</span>
-                                        </li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">
-                                            <audio-visual></audio-visual>
-                                            <span>Spaced Out</span>
-                                        </li>
-                                        <li class="track" data-src="tmp/audio/Gulag_BPM130_Tag.mp3">
-                                            <audio-visual></audio-visual>
-                                            <span>Gulag_BPM130_Tag</span>
-                                        </li>
-                                        <li class="track" data-src="tmp/audio/Spaced Out.mp3">
-                                            <audio-visual></audio-visual>
-                                            <span>Spaced Out</span>
-                                        </li>
-                                    </ol>
+                        <div class="popup-cell">
+                            <section class="all-tracks">
+                                <div class="padded-wrapper">
+                                    <track-list class="tracks-list" data-id="album">
+                                        <div class="tracks-group">
+                                            <h3># Album name</h3>
+                                            <ol>
+                                                <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">
+                                                    <audio-visual></audio-visual>
+                                                    <span>Mt. Zion</span>
+                                                </li>
+                                                <li class="track" data-src="tmp/audio/Spaced Out.mp3">
+                                                    <audio-visual></audio-visual>
+                                                    <span>Spaced Out</span>
+                                                </li>
+                                                <li class="track" data-src="tmp/audio/Gulag_BPM130_Tag.mp3">
+                                                    <audio-visual></audio-visual>
+                                                    <span>Gulag_BPM130_Tag</span>
+                                                </li>
+                                                <li class="track" data-src="tmp/audio/Spaced Out.mp3">
+                                                    <audio-visual></audio-visual>
+                                                    <span>Spaced Out</span>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </track-list>
                                 </div>
-                            </track-list>
-                            <div class="clear"></div>
-                        </section>
+                                <div class="clear"></div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </popup-component>
@@ -158,9 +157,7 @@
 
         <div class="stage-fallback"></div>
         <stage-component>
-            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
-            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
-            <div class="mask" data-texture="resources/images/stage-mask.png"></div>
+            <div class="mask" data-texture="tmp/back-maps/album-map1.jpg"></div>
         </stage-component>
 
         <main class="vh-min-height">

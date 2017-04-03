@@ -58,6 +58,7 @@ define([
 		var titleValue;
 		var containers;
 		var url = store.getData().page.href;
+		var maps, stage;
 
 		var replaceConteiner = function(container) {
 			var id = container.getAttribute('data-id');
@@ -89,6 +90,19 @@ define([
 		});
 
 		document.title = titleValue;
+
+		dispatcher.dispatch({
+			type: 'title-change',
+			value: titleValue
+		});
+
+		stage = this.tmpDocument.getElementsByTagName('stage-component')[0];
+		maps = stage.getElementsByClassName('mask');
+
+		dispatcher.dispatch({
+			type: 'update-maps',
+			maps: maps
+		});
 
 		if (!this.routingByHistory && window.history) {
 			window.history.pushState({url: url}, titleValue, url);

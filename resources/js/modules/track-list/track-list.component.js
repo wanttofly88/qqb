@@ -74,7 +74,7 @@ define([
 					type: 'audio-play',
 					index: index,
 					playlistId: self._id,
-					upause: true
+					unpause: true
 				});
 				dispatcher.dispatch({
 					type: 'audio-low-freq'

@@ -270,6 +270,7 @@ header .title {
 	transform-origin: 0 50%;
 	display: none;
 	pointer-events: auto;
+	white-space: nowrap;
 }
 @media screen and (min-width: 1000px) {
 	header .title {
@@ -509,7 +510,7 @@ main {
 }
 .content {
 	position: relative;
-	transition: opacity 0.2s linear 0s;
+	transition: opacity 0.4s linear 0s;
 	opacity: 1;
 }
 .no-touchevents.webgl .page-wrapper[data-popup="active"] .content {
@@ -1403,6 +1404,8 @@ text-print div {
 	display: inline-block;
 	font-size: 23px;
 	letter-spacing: -0.05em;
+}
+.beat-footer .price {
 	color: #252525;
 }
 .price-nfo {
@@ -2025,17 +2028,25 @@ merch-slider .img {
 .merch-popup.active .slide-content {
 	opacity: 1;
 	transform: translateX(0px);
-	transition: all 0.6s ease 0.3s;
+	transition: all 0.6s ease 0.5s;
 }
 .merch-popup .section-footer {
 	opacity: 0;
 	transform: translateX(-10px);
-	transition: all 0.3s ease 0.3s;
+	transition: all 0.3s ease 0.6s;
 }
 .merch-popup.active .section-footer {
 	opacity: 1;
 	transform: translateX(0px);
-	transition: all 0.6s ease 0.5s;
+	transition: all 0.6s ease 0.7s;
+}
+.merch-popup .bg {
+	transform: scale(1.02);
+	transition: transform 0s ease 0.6s;
+}
+.merch-popup.active .bg {
+	transform: scale(1);
+	transition: transform 1.6s ease 0s;
 }
 /*.slide-scroll-inactive .merch-item .section-footer {
 	display: none;
@@ -2286,16 +2297,18 @@ h1 .wd-inv:before {
 	display: block;
 	max-width: 450px;
 	margin-bottom: 50px;
-	opacity: 0.6;
 	cursor: pointer;
 	transition: opacity 0.1s, transform 0.6s;
+}
+.no-touchevents .license .item {
+	opacity: 0.6;
 }
 .license .item.active {
 	opacity: 0.3;
 	cursor: default;
 	transition: opacity 0.5s;
 }
-.license .item:not(.active):hover {
+.no-touchevents .license .item:not(.active):hover {
 	opacity: 1;
 }
 .license .item:last-child {
@@ -2500,13 +2513,19 @@ popup-component {
 	width: 0;
 	opacity: 0;
 	pointer-events: none;
-	transition: opacity 0.4s ease 0s, transform 0.4s ease 0s, width 0s ease 0.4s;
+	transition: opacity 0.6s ease 0s, transform 0.4s ease 0s, width 0s ease 0.4s;
 }
 popup-component.active {
 	width: 100%;
 	opacity: 1;
 	pointer-events: auto;
-	transition: opacity 0.2s ease 0s, transform 0.2s ease 0s, width 0s ease 0s;
+	transition: opacity 0.4s ease 0s, transform 0.2s ease 0s, width 0s ease 0s;
+}
+popup-component.merch-popup {
+
+}
+popup-component.merch-popup.active {
+	transition: opacity 0.4s ease 0s, transform 0.4s ease 0s, width 0s ease 0s;
 }
 
 page-transition {
@@ -2520,7 +2539,7 @@ page-transition {
 	overflow: hidden;
 	width: 0;
 	opacity: 0;
-	transition: opacity 0.8s linear 0s, transform 0.4s ease 0s, width 0s linear 0.8s;
+	transition: opacity 1.2s linear 0s, transform 0.4s ease 0s, width 0s linear 1.2s;
 	background: #101010;
 }
 .no-touchevents.webgl page-transition {
