@@ -12,7 +12,6 @@ define([
 	"use strict";
 
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
-
 	var elementProto = Object.create(HTMLElement.prototype);
 
 	elementProto.start = function() {
@@ -75,9 +74,6 @@ define([
 			});
 
 			setTimeout(function() {
-				dispatcher.dispatch({
-					type: 'preload-complete'
-				});
 				self._active = false;
 
 				// self-destructing in 900 milliseconds =)
@@ -124,6 +120,8 @@ define([
 		this._active = true;
 	}
 	elementProto.attachedCallback = function() {
+		var pw = document.getElementsByClassName('page-wrapper')[0];
+
 		this._perc = this.getElementsByClassName('perc')[0];
 		this._perc.innerHTML = '0%';
 		this._text = this.getElementsByClassName('loaded-text')[0];
@@ -134,6 +132,7 @@ define([
 			this.start();
 			setTimeout(this.finish, 1000);
 		} else {
+			pw.classList.add('preload-complete');
 			dispatcher.dispatch({
 				type: 'preload-complete'
 			});

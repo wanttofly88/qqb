@@ -184,7 +184,7 @@ define([
 	}
 	elementProto.attachedCallback = function() {
 		var url = location.origin + location.pathname;
-
+		
 		var ie = utils.getIEVersion();
 
 		if (ie > -1 && ie < 11) {

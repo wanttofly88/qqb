@@ -2,7 +2,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	'use strict';
 
 	var eventEmitter = new utils.EventEmitter();
-
+	var routing = false;
 	var page = {};
 
 	var _handleEvent = function(e) {
@@ -12,11 +12,18 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 			page.href = e.href;
 			eventEmitter.dispatch();
 		}
+		if (e.type === 'transition-start') {
+			routing = true;
+		}
+		if (e.type === 'transition-end') {
+			routing = false;
+		}
 	}
 
 	var getData = function() {
 		return {
-			page: page
+			page: page,
+			routing: routing
 		}
 	}
 
