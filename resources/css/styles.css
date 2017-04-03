@@ -2520,7 +2520,7 @@ page-transition {
 	overflow: hidden;
 	width: 0;
 	opacity: 0;
-	transition: opacity 0.4s linear 0s, transform 0.4s ease 0s, width 0s linear 0.4s;
+	transition: opacity 0.8s linear 0s, transform 0.4s ease 0s, width 0s linear 0.8s;
 	background: #101010;
 }
 .no-touchevents.webgl page-transition {
@@ -2719,7 +2719,7 @@ button[is="buy-fixed-btn"] .in {
 	transform: translateY(0px);
 	transition: all 1.2s ease 0.6s;
 }
-.csstransitions .video-bg,
+/*.csstransitions .video-bg,
 .csstransitions .merch-bg {
 	opacity: 0;
 }
@@ -2727,4 +2727,4 @@ button[is="buy-fixed-btn"] .in {
 .csstransitions .preload-complete .merch-bg {
 	opacity: 1;
 	transition: opacity 1.2s;
-}
+}*/
