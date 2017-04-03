@@ -1403,6 +1403,7 @@ text-print div {
 	display: inline-block;
 	font-size: 23px;
 	letter-spacing: -0.05em;
+	color: #252525;
 }
 .price-nfo {
 	margin-bottom: 10px;
