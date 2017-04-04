@@ -47,12 +47,12 @@ define([
 		this.handleStore = this.handleStore.bind(this);
 	}
 	elementProto.attachedCallback = function() {
-		this.href = this.href;
+		// this.href = this.href;
 
-		if (this.href.indexOf('index') !== -1) {
-			this.href = this.href.replace('/index.html', '');
-			this.href = this.href.replace('/index.php', '');
-		}
+		// if (this.href.indexOf('index') !== -1) {
+		// 	this.href = this.href.replace('/index.html', '');
+		// 	this.href = this.href.replace('/index.php', '');
+		// }
 
 
 		this.handleStore();
