@@ -21,6 +21,14 @@ define([
 
 		var songData = audioStore.getData();
 
+		if (!songData.song && this._active) {
+			this._active = false;
+			this.style.display = 'none';
+		} else if (songData.song && !this._active) {
+			this._active = true;
+			this.style.display = 'block';
+		}
+
 		if (songData.song && songData.song.name === '__ambient__') {
 			this._ac.style.transform = 'scaleX(0)';
 		} else {
@@ -43,10 +51,12 @@ define([
 
 	elementProto.createdCallback = function() {
 		this.handleStore = this.handleStore.bind(this);
+		this._active = true;
 	}
 	elementProto.attachedCallback = function() {
 		this._ac = document.getElementsByClassName('ac')[0];
 
+		this.handleStore();
 		dataStore.eventEmitter.subscribe(this.handleStore);
 	}
 	elementProto.detachedCallback = function() {

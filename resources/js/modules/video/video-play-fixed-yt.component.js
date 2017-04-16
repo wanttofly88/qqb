@@ -14,18 +14,18 @@ define([
 		var index;
 		var storeItems = slideStore.getData().items;
 		var dataElement;
-		var popupId;
+		var src;
 
 		if (!storeItems.hasOwnProperty(this._parentId)) return;
 
 		index = storeItems[this._parentId].index;
 
 		dataElement = this._sections[index].querySelector('button[is="video-play"]');
-		popupId = dataElement.getAttribute('data-popup');
+		src = dataElement.getAttribute('data-src');
 
 		dispatcher.dispatch({
-			type: 'popup-open',
-			id: popupId
+			type: 'video-play',
+			src: src
 		});
 	}
 
