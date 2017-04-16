@@ -7,15 +7,16 @@ define([
 ) {
 	"use strict";
 
-	var timeForBlocking = 800;
-
 	var elementProto = Object.create(HTMLButtonElement.prototype);
 
 	elementProto.handleStore = function() {
 		var storeData = store.getData().items[this._id];
 		var self = this;
+		var timeForBlocking;
 
 		if (!storeData || storeData.index === this._index) return;
+
+		timeForBlocking = storeData.timeForBlocking || 800;
 
 		this._index = storeData.index;
 		this._animating = true;

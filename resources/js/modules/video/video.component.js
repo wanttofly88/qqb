@@ -1,104 +1,148 @@
-define(['dispatcher'], function(dispatcher) {
+define([
+	'dispatcher',
+	'popup/popup.store',
+	'utils'
+], function(
+	dispatcher,
+	popupStore,
+	utils
+) {
 	"use strict";
 
 	var elementProto = Object.create(HTMLElement.prototype);
-	var isTouchDevice = (Modernizr && Modernizr.touchevents);
+	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
-	elementProto.onPlayerReady = function() {
-	}
-
-	elementProto.onPlayerStateChange = function(event) {
-		if (event.data === 2 && Modernizr && Modernizr.touchevents) {
-			this.stopVideo();
-		}
-		// if (event.data === 3 && isTouchDevice) {
-		// 	close.style.display = 'none';
-		// }
-	}
-
-	elementProto.onYouTubePlayerAPIReady = function() {
+	elementProto.handlePopup = function() {
+		var active = popupStore.getData().active;
 		var self = this;
-		this.player = new YT.Player('videoPlayer', {
-			events: {
-				'onReady': self.onPlayerReady,
-				'onStateChange': self.onPlayerStateChange
-			}
-		});
-	}
 
-	elementProto.playVideo = function(src) {
-		dispatcher.dispatch({
-			type: 'popup-open',
-			id: 'video-popup'
-		});
+		if (active === this._parentId && !this._playing) {
+			this._video.currentTime = 0;
+			this.play();
+		}
 
-		this.player.loadVideoById({
-			videoId: src,
-			suggestedQuality: 'large'
-		});
-
-		dispatcher.dispatch({
-			type: 'audio-stop'
-		});
-
-		if (!this.player) return;
-
-		if (Modernizr && !Modernizr.touchevents) {
-			this.player.playVideo();
+		if (active !== this._parentId && this._playing) {
+			setTimeout(function() {
+				self.stop();
+			}, 400);
 		}
 	}
 
-	elementProto.stopVideo = function() {
-		dispatcher.dispatch({
-			type: 'audio-play'
-		});
+	elementProto.play = function() {
+		this._video.play();
 
-		if (!this.player) return;
+		this._playing = true;
+		this.loop();
 
-		this.player.pauseVideo();
+		if (this._pause) {
+			this._pause.innerHTML = '[pause]';
+		}
+	}
+	elementProto.stop = function() {
+		this._video.pause();
+
+		this._playing = false;
+
+		if (this._pause) {
+			this._pause.innerHTML = '[play]';
+		}
 	}
 
-	elementProto.handleDispatcher = function(e) {
-		if (e.type === 'video-play') {
-			this.playVideo(e.src);
+	elementProto.loop = function() {
+		var coef;
+		var time = this._video.currentTime;
+		var minutes = Math.floor(time / 60);
+		var seconds = Math.floor(time % 60);
+		var milliseconds = (time - Math.floor(time)).toFixed(3);
+
+		coef = this._video.currentTime / this._video.duration;
+		if (coef > 1) {
+			coef = 1;
 		}
-		if (e.type === 'video-stop' || e.type === 'popup-close') {
-			this.stopVideo();
+
+		this._progressAc.style.transform = 'scaleX(' + coef + ')';
+
+
+
+		if (seconds < 10) {
+			seconds = '0' + seconds;
+		}
+		if (minutes < 10) {
+			minutes = '0' + minutes;
+		}
+
+		seconds = seconds + '.';
+		minutes = minutes + '.';
+		milliseconds = milliseconds.substring(2);
+
+		this._mnElement.innerHTML = minutes;
+		this._scElement.innerHTML = seconds;
+		this._msElement.innerHTML = milliseconds;
+
+		if (!this._playing) return;
+
+		requestAnimationFrame(this.loop);
+	}
+
+	elementProto.handleLoad = function() {
+		this._duration = this._video.duration;
+	}
+	elementProto.handlePauseClick = function() {
+		if (this._playing) {
+			this.stop();
+		} else {
+			this.play();
+		}
+	}
+
+	elementProto.handleProgressClick = function(e) {
+		var x = e.clientX;
+		var w = this.clientWidth;
+		var coef = x/w;
+
+		this._video.currentTime = this._video.duration*coef;
+
+		if (!this._playing) {
+			this.loop();
 		}
 	}
 
 	elementProto.createdCallback = function() {
 		this._playing = false;
-		this.onYouTubePlayerAPIReady = this.onYouTubePlayerAPIReady.bind(this);
-		this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
-		this.handleDispatcher = this.handleDispatcher.bind(this);
-		this.playVideo = this.playVideo.bind(this);
-		this.stopVideo = this.stopVideo.bind(this);
+		this.handlePopup = this.handlePopup.bind(this);
+		this.handleLoad = this.handleLoad.bind(this);
+		this.play = this.play.bind(this);
+		this.stop = this.stop.bind(this);
+		this.loop = this.loop.bind(this);
+		this.handlePauseClick = this.handlePauseClick.bind(this);
+		this.handleProgressClick = this.handleProgressClick.bind(this);
 	}
 	elementProto.attachedCallback = function() {
-		var iframe = this.getElementsByTagName('iframe')[0];
-		var tag = document.createElement('script');
-		var firstScriptTag;
+		this._video = this.getElementsByTagName('video')[0];
+		this._pause = this.getElementsByClassName('pause')[0];
+		this._parentId = this.parentNode.getAttribute('data-id');
+		this._progressBar = this.getElementsByClassName('video-progressbar')[0];
+		this._progressAc = this._progressBar.getElementsByClassName('ac')[0];
 
-		if (typeof YT === 'undefined') {
-			tag.src = 'http://www.youtube.com/player_api';
-			firstScriptTag = document.getElementsByTagName('script')[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		} else {
-			this.onYouTubePlayerAPIReady();
+		this._mnElement = this.getElementsByClassName('mn')[0];
+		this._scElement = this.getElementsByClassName('sc')[0];
+		this._msElement = this.getElementsByClassName('ms')[0];
+
+		this._progressBar.addEventListener('click', this.handleProgressClick);
+
+		if (this._pause) {
+			this._pause.addEventListener('click', this.handlePauseClick);
 		}
 
-		window.onYouTubePlayerAPIReady = this.onYouTubePlayerAPIReady;
+		this._video.addEventListener('canplaythrough', this.handleLoad);
 
-		// play.onclick = enable;
-		// close.onclick = disable;
-		dispatcher.subscribe(this.handleDispatcher);
+		popupStore.eventEmitter.subscribe(this.handlePopup);
 	}
 	elementProto.detachedCallback = function() {
-		dispatcher.unsubscribe(this.handleDispatcher);
+		this.stop();
+		popupStore.eventEmitter.unsubscribe(this.handlePopup);
 	}
 
-	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('video-component', {
 		prototype: elementProto
 	});

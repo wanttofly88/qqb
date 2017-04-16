@@ -36,6 +36,7 @@ define([
 	elementProto.handleSlideStore = function() {
 		var preloadComplete = preloaderStore.getData().complete;
 		var storeData = slideStore.getData().items['album-slides'];
+		var paused = playerStore.getData().paused;
 
 		if (!preloadComplete) return;
 		if (!storeData) {

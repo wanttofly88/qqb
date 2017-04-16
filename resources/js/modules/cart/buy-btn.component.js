@@ -33,35 +33,35 @@ define([
 		// var self = this;
 
 		// if (this._active) {
-			dispatcher.dispatch({
-				type: 'popup-open',
-				id: 'cart-popup'
-			});
-		// } else {
 		// 	dispatcher.dispatch({
 		// 		type: 'popup-open',
-		// 		id: self._popupId
+		// 		id: 'cart-popup'
 		// 	});
+		// } else {
+			dispatcher.dispatch({
+				type: 'popup-open',
+				id: self._popupId
+			});
 		// }
 	}
 
 	elementProto.createdCallback = function() {
 		this._active = false;
 		this.handleClick = this.handleClick.bind(this);
-		this.handleCart = this.handleCart.bind(this);
+		// this.handleCart = this.handleCart.bind(this);
 	}
 	elementProto.attachedCallback = function() {
 		this._productId = this.getAttribute('data-productId');
 		this._popupId = this.getAttribute('data-popupId');
 
-		this.handleCart();
+		// this.handleCart();
 		this.addEventListener('click', this.handleClick);
-		cartStore.eventEmitter.subscribe(this.handleCart);
+		// cartStore.eventEmitter.subscribe(this.handleCart);
 	}
 
 	elementProto.detachedCallback = function() {
 		this.removeEventListener('click', this.handleClick);
-		cartStore.eventEmitter.unsubscribe(this.handleCart);
+		// cartStore.eventEmitter.unsubscribe(this.handleCart);
 	}
 
 	document.registerElement('buy-btn', {

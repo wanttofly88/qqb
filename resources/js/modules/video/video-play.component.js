@@ -3,19 +3,22 @@ define(['dispatcher'], function(dispatcher) {
 
 	var elementProto = Object.create(HTMLButtonElement.prototype);
 
-	elementProto.createdCallback = function() {
-	}
-	elementProto.attachedCallback = function() {
-		var src = this.getAttribute('data-src');
-
-		this.addEventListener('click', function(e) {
-			dispatcher.dispatch({
-				type: 'video-play',
-				src: src
-			});
+	elementProto.handleClick = function() {
+		var popup = this.getAttribute('data-popup');
+		dispatcher.dispatch({
+			type: 'popup-open',
+			id: popup
 		});
 	}
+
+	elementProto.createdCallback = function() {
+		this.handleClick = this.handleClick.bind(this);
+	}
+	elementProto.attachedCallback = function() {
+		this.addEventListener('click', this.handleClick);
+	}
 	elementProto.detachedCallback = function() {
+		this.removeEventListener('click', this.handleClick);
 	}
 
 	document.registerElement('video-play', {
