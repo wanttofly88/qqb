@@ -144,6 +144,7 @@ define([
 		this.build = this.buld.bind(this);
 		this.handleDispatcher = this.handleDispatcher.bind(this);
 		this.loop = this.loop.bind(this);
+		this._active = true;
 	}
 	elementProto.attachedCallback = function() {
 		if (!Modernizr || !Modernizr.webgl) return;

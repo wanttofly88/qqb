@@ -128,6 +128,10 @@ define([
 		this._text.innerHTML = '';
 		this._textData = this._text.getAttribute('data-text');
 
+		console.log(9999);
+		console.log(Modernizr);
+		console.log(Modernizr.csstransitions);
+
 		if (Modernizr && Modernizr.csstransitions) {
 			this.start();
 			setTimeout(this.finish, 1000);
