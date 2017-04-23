@@ -77,6 +77,8 @@ define([
 		this._camera = camera;
 		this._renderer = renderer;
 
+		console.log(111);
+
 		renderer.render(scene, camera);
 	}
 
@@ -85,6 +87,8 @@ define([
 		var scene = this._scene;
 		var camera = this._camera;
 		var renderer = this._renderer;
+
+		console.log('lp');
 
 		if (!this._active) return;
 
@@ -109,6 +113,7 @@ define([
 	elementProto.handleDispatcher = function(e) {
 		var self = this;
 		if (e.type === 'preload-starting') {
+			console.log('preload-starting');
 			this._active = true;
 			this.loop();
 			setTimeout(function() {
@@ -118,6 +123,7 @@ define([
 			}, 100);
 		}
 		if (e.type === 'preload-finishing') {
+			console.log('preload-finishing');
 			setTimeout(function() {
 				TweenMax.to(self._material.uniforms.disA, 0.6, {
 					value: -0.25
@@ -125,6 +131,7 @@ define([
 			}, 1300);
 		}
 		if (e.type === 'preload-complete' && this._active) {
+			console.log('preload-complete');
 			setTimeout(function() {
 				// can be destructed by the time though
 				self._active = false;
@@ -139,7 +146,7 @@ define([
 		this.loop = this.loop.bind(this);
 	}
 	elementProto.attachedCallback = function() {
-		if (Modernizr && !Modernizr.webgl) return;
+		if (!Modernizr || !Modernizr.webgl) return;
 
 		this.build();
 		dispatcher.subscribe(this.handleDispatcher);

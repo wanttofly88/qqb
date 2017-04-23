@@ -479,7 +479,7 @@ define([
 
 	elementProto.createdCallback = function() {
 		this._ctrl = false;
-		this._active = undefined;
+		this._active = false;
 		this.storeHandler  = this.storeHandler.bind(this);
 		this.resizeHandler = this.resizeHandler.bind(this);
 		this.scrollHandler = this.scrollHandler.bind(this);
