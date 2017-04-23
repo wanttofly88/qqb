@@ -21,10 +21,10 @@ define([
 
 		var songData = audioStore.getData();
 
-		if (!songData.song && this._active) {
+		if (!songData.song && !songData.paused && this._active) {
 			this._active = false;
 			this.style.display = 'none';
-		} else if (songData.song && !this._active) {
+		} else if ((songData.song || songData.paused) && !this._active) {
 			this._active = true;
 			this.style.display = 'block';
 		}
@@ -49,17 +49,33 @@ define([
 		}
 	}
 
+	elementProto.handleClick = function(e) {
+		var duration = dataStore.getData().duration;
+
+		var x = e.clientX;
+		var w = this.clientWidth;
+		var coef = x/w;
+
+		dispatcher.dispatch({
+			type: 'audio-goto',
+			time: duration*coef
+		});
+	}
+
 	elementProto.createdCallback = function() {
 		this.handleStore = this.handleStore.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 		this._active = true;
 	}
 	elementProto.attachedCallback = function() {
 		this._ac = document.getElementsByClassName('ac')[0];
 
 		this.handleStore();
+		this.addEventListener('click', this.handleClick);
 		dataStore.eventEmitter.subscribe(this.handleStore);
 	}
 	elementProto.detachedCallback = function() {
+		this.removeEventListener('click', this.handleClick);
 		dataStore.eventEmitter.unsubscribe(this.handleStore);
 	}
 

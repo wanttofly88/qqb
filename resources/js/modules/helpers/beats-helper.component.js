@@ -33,7 +33,7 @@ define([
 	// 	}
 	// }
 
-	elementProto.handleSlideStore = function() {
+	elementProto.handleSlideStore = function(first) {
 		var preloadComplete = preloaderStore.getData().complete;
 		var storeData = slideStore.getData().items['beat-slides'];
 		var paused = playerStore.getData().paused;
@@ -47,13 +47,20 @@ define([
 		if (storeData.index === this._songIndex) return;
 		this._songIndex = storeData.index;
 
-		if ((Modernizr && !Modernizr.touchevents) || !paused) {
+		if (Modernizr && !Modernizr.touchevents) {
 			dispatcher.dispatch({
 				type: 'audio-play',
 				index: storeData.index,
 				id: 'beats'
 			});
 		} else {
+			if (!paused) {
+				dispatcher.dispatch({
+					type: 'audio-play',
+					index: storeData.index,
+					id: 'beats'
+				});
+			}
 			dispatcher.dispatch({
 				type: 'audio-load',
 				index: storeData.index,

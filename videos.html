@@ -38,7 +38,7 @@
 
     <div is="scheme-component" class="page-wrapper" data-scheme="dark" data-popup="inactive">
         <header>
-            <div class="logo">
+            <a href="index.html" is="inner-link" class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
                     <g id="Layer_1" data-name="Layer 1">
                         <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
@@ -51,7 +51,7 @@
                         <path class="cls-1" d="M72.74,70.39"/>
                     </g>
                 </svg>
-            </div>
+            </a>
             <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
@@ -114,6 +114,50 @@
                 </div>
             </div>
         </popup-component>
+
+        <popup-component class="cart-popup" data-id="cart-popup">
+            <div class="stage-fallback"></div>
+            <div class="popup-outer">
+                <div class="popup-inner">
+                    <div class="popup-cell">
+                        <div class="wrapper">
+                            <!--data-route это роут, куда обращаться к апи корзины-->
+                            <!--PUT - добавление товара-->
+                            <!--DELETE - удаление товара-->
+                            <!--POST - подтверждение покупки-->
+                            <!--GET - получение объекта корзины-->
+                            <cart-component data-route="cart.json">
+                                <div class="inner">
+                                    <div class="items">
+                                    </div>
+
+                                    <div class="cart-data show320 show640">
+                                        <div class="total">
+                                            <div class="t">Total</div>
+                                            <cart-price class="p">270.00 $</cart-price>
+                                        </div>
+                                        <div class="checkout">
+                                            <button is="cart-checkout" class="btn big">[Checkout]</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </cart-component>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-data abs show1000">
+                    <div class="total">
+                        <div class="t">Total</div>
+                        <cart-price class="p">270.00 $</cart-price>
+                    </div>
+                    <div class="checkout">
+                        <button is="cart-checkout" class="btn big">[Checkout]</button>
+                    </div>
+                </div>
+            </div>
+        </popup-component>
+        
 
         <div class="replaceable" data-id="popups">
             <!--для каждого слайда свой попап с видосом-->
@@ -284,11 +328,11 @@
                 </video-slider>
 
                 <slide-scroll data-id="video-slides" 
-                    data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
+                    data-min-heights="0:460;640:640;1000:600;1400:700;1800:720" data-shift="150">
                     <div class="slide-scroll-wrapper">
                         <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content album-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
                                         <div class="slidescroll-fallback">
                                             <div class="data-text" data-id="video-slides">
@@ -307,7 +351,7 @@
                         </section>
                         <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content album-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
                                         <div class="slidescroll-fallback">
                                             <div class="data-text" data-id="video-slides">
@@ -326,7 +370,7 @@
                         </section>
                         <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content album-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
                                         <div class="slidescroll-fallback">
                                             <div class="data-text" data-id="video-slides">
@@ -345,7 +389,7 @@
                         </section>
                         <section class="video-slide general-slide js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content album-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
                                         <div class="slidescroll-fallback">
                                             <div class="data-text" data-id="video-slides">

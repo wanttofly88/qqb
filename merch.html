@@ -51,7 +51,7 @@
                                 <div class="items">
                                 </div>
 
-                                <div class="cart-data">
+                                <div class="cart-data show320 show640">
                                     <div class="total">
                                         <div class="t">Total</div>
                                         <cart-price class="p">270.00 $</cart-price>
@@ -65,13 +65,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="cart-data abs show1000">
+                <div class="total">
+                    <div class="t">Total</div>
+                    <cart-price class="p">270.00 $</cart-price>
+                </div>
+                <div class="checkout">
+                    <button is="cart-checkout" class="btn big">[Checkout]</button>
+                </div>
+            </div>
         </div>
     </popup-component>
-
+    
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
-            <div class="logo">
+            <a href="index.html" is="inner-link" class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
                     <g id="Layer_1" data-name="Layer 1">
                         <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
@@ -84,7 +94,7 @@
                         <path class="cls-1" d="M72.74,70.39"/>
                     </g>
                 </svg>
-            </div>
+            </a>
             <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
@@ -149,12 +159,27 @@
         </popup-component>
 
         <div class="replaceable" data-id="popups">
+            <!--каждому попапу нужен уникальный data-id такой же как ниже у <button is="popup-toggle">-->
             <popup-component class="merch-popup no-fade" data-id="mp1">
-                <div class="bg" style="background-image: url(tmp/mf.jpg);"></div>
+                <!-- каждому slide-scroll-у в попапе нужно указать уникальный data-id. здесь можно любой, они ни с чем не взаимодействуют-->
+                <!-- так же каждому slide-scroll-у нужен data-popup-id такой же как у попапа. чтобы отслкживать активый и не скроллить все на события мыши/клавиатуры/тачискрина-->
+                <!-- и здесь не нужен data-min-heights -->
+
+                <slide-scroll data-id="merch-bg-slide-1" data-popup-id="mp1" data-shift="null">
+                    <div class="slide-scroll-wrapper">
+                        <div class="js-slide vh-min-height merch-bg">
+                            <div class="bg" style="background-image: url(tmp/mf.jpg);"></div>
+                        </div>
+                        <div class="js-slide vh-min-height merch-bg">
+                            <div class="bg" style="background-image: url(tmp/m2.jpg);"></div>
+                        </div>
+                    </div>
+                </slide-scroll>
+
                 <section class="merch-item ">
                     <div class="wrapper">
-                        <div class="outer slide-content">
-                            <div class="cell">
+                        <div class="outer slide-content padded">
+                            <div class="slide-inner">
                                 <div class="nt">Shorts Jumpsuit</div>
                                 <h1>ex.1</h1>
                                 <div class="price-nfo">120.00 $</div>
@@ -175,6 +200,55 @@
                                     <span>L</span>
                                 </div>
                                 <div class="item" data-productId="merch-shirt-4">
+                                    <span>XXXL</span>
+                                </div>
+                            </merch-sizes>
+                            <button is="buy-merch-btn" class="btn big buy disabled" class="btn">[Buy]</button>
+                        </div>
+                    </div>
+                </section>
+            </popup-component>
+
+            <popup-component class="merch-popup no-fade" data-id="mp2">
+                <!-- каждому slide-scroll-у в попапе нужно указать уникальный data-id. здесь можно любой, они ни с чем не взаимодействуют-->
+                <!-- так же каждому slide-scroll-у нужен data-popup-id такой же как у попапа. чтобы отслкживать активый и не скроллить все на события мыши/клавиатуры/тачискрина-->
+                <!-- и здесь не нужен data-min-heights -->
+
+                <slide-scroll data-id="merch-bg-slide-2" data-popup-id="mp2" data-shift="null">
+                    <div class="slide-scroll-wrapper">
+                        <div class="js-slide vh-min-height merch-bg">
+                            <div class="bg" style="background-image: url(tmp/m2.jpg);"></div>
+                        </div>
+                        <div class="js-slide vh-min-height merch-bg">
+                            <div class="bg" style="background-image: url(tmp/mf.jpg);"></div>
+                        </div>
+                    </div>
+                </slide-scroll>
+
+                <section class="merch-item ">
+                    <div class="wrapper">
+                        <div class="outer slide-content padded">
+                            <div class="slide-inner">
+                                <div class="nt">Shorts Jumpsuit</div>
+                                <h1>ex.1</h1>
+                                <div class="price-nfo">120.00 $</div>
+                                <div class="fake-btn"></div>
+                            </div>
+                        </div>
+
+                        <div class="section-footer">
+                            <!--data-product-id id продукта, отправляется на сервер-->
+                            <merch-sizes class="sizes">
+                                <div class="item" data-productId="merch-shirt-5">
+                                    <span>S</span>
+                                </div>
+                                <div class="item" data-productId="merch-shirt-6">
+                                    <span>M</span>
+                                </div>
+                                <div class="item" data-productId="merch-shirt-7">
+                                    <span>L</span>
+                                </div>
+                                <div class="item" data-productId="merch-shirt-8">
                                     <span>XXXL</span>
                                 </div>
                             </merch-sizes>
@@ -265,58 +339,59 @@
 
                     </div>
                 </div>
-
-                <slide-scroll data-id="merch-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
+                
+                <!--здесь нужен аттрибут data-popup-id="null" так как несколько slide-scroll-ов на странице-->
+                <slide-scroll data-id="merch-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720" data-shift="150" data-popup-id="null">
                     <div class="slide-scroll-wrapper">
                         <section class="merch js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content l merch-content">
+                                <div class="slide-content padded l merch-content">
                                     <div class="slide-inner">
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.1</h1>
                                         <div class="price-nfo">120.00 $</div>
                                         <!--data-id это id соответствующего попапа для шмотки-->
-                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
-                                <div class="slide-content r merch-content">
+                                <div class="slide-content padded r merch-content">
                                     <div class="slide-inner">
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.2</h1>
                                         <div class="price-nfo">80.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                        <button is="popup-toggle" class="btn" data-id="mp2">[Look]</button>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <section class="merch js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content l merch-content">
+                                <div class="slide-content padded l merch-content">
                                     <div class="slide-inner">
                                         <div class="nt">Shorts</div>
                                         <h1 is="header-component">Ex.3</h1>
                                         <div class="price-nfo">50.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
-                                <div class="slide-content r merch-content">
+                                <div class="slide-content padded r merch-content">
                                     <div class="slide-inner">
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.4</h1>
                                         <div class="price-nfo">20.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <section class="merch js-slide vh-min-height">
                             <div class="left-wrapper">
-                                <div class="slide-content l merch-content">
+                                <div class="slide-content padded l merch-content">
                                     <div class="slide-inner">
                                         <div class="nt">Shorts</div>
                                         <h1 is="header-component">Ex.5</h1>
                                         <div class="price-nfo">50.00 $</div>
-                                        <button is="popup-toggle" class="btn all" data-id="mp1">[Look]</button>
+                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                             </div>

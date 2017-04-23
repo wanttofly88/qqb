@@ -54,6 +54,13 @@ define([
 				id: 'album'
 			});
 		} else {
+			if (!paused) {
+				dispatcher.dispatch({
+					type: 'audio-play',
+					index: storeData.index,
+					id: 'album'
+				});
+			}
 			dispatcher.dispatch({
 				type: 'audio-load',
 				index: storeData.index,

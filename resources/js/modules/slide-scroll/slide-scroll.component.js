@@ -9,10 +9,22 @@ define([
 ) {
 	"use strict";
 
+
+	// data-id id элемента который будет сохранен в store
+
+	// data-min-heights минимальные высоты экрана в формате 320:500;640:100; итд 
+	// где 1-е число в группе - ширина экрана, 2-е - минимальная высота
+
+	// data-popup-id если указан, то id попапа будет означать что скролл работает только если открыт попап с этим id
+	// если указан 'null' то скролл будет работать только если все попапы закрыты
+
+	// data-shift - вертекальное смещение слайдов при скролле. если не выставлен, то будет смещаться на высоту экрана
+
+	// внизу в attachedCallback и detachedCallback подписка и отписка на store-ы. если хочется оменять или у store-ов другое апи
+	// не забывать отписываться от сторов только, иначе будет потенциальная утечка памяти
+
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
-
-	var SHIFT  = 150; // if set, this is a value in pixel which slide will trevel;
 
 	var fireResize = function() {
 		var evt = document.createEvent("HTMLEvents");
@@ -38,7 +50,6 @@ define([
 			}
 
 			if (this.component._isScrolling) return;
-			if (popupStore.getData().active) return;
 
 			if (keyCode === 38 || keyCode === 33) {
 				dispatcher.dispatch({
@@ -105,7 +116,6 @@ define([
 			this._scrollBuffer.shift();
 
 			if (this.component._isScrolling) return;
-			if (popupStore.getData().active) return;
 
 			bufferNew = this._scrollBuffer.slice(20, 40);
 			bufferOld = this._scrollBuffer.slice(0, 20);
@@ -346,9 +356,7 @@ define([
 		if (this._active === true) return;
 		this._active = true;
 
-		this.touchHandler.set();
-		this.wheelHandler.set();
-		this.keyboardHandler.set();
+		this.setInputHandlers();
 		this.classList.add('slide-mode');
 		this.classList.remove('scroll-mode');
 		this.scrollTop = 0;
@@ -379,9 +387,7 @@ define([
 		if (this._active === false) return;
 		this._active = false; 
 
-		this.touchHandler.remove();
-		this.wheelHandler.remove();
-		this.keyboardHandler.remove();
+		this.removeInputHandlers();
 		this.classList.remove('slide-mode');
 		this.classList.add('scroll-mode');
 
@@ -397,6 +403,22 @@ define([
 
 		translate(this._wrapper, 0, 0);
 		setTimeout(fireResize, 20);
+	}
+
+	elementProto.setInputHandlers = function() {
+		if (this._hadlersSet) return;
+		this._hadlersSet = true;
+		this.touchHandler.set();
+		this.wheelHandler.set();
+		this.keyboardHandler.set();
+	}
+
+	elementProto.removeInputHandlers = function() {
+		if (!this._hadlersSet) return;
+		this._hadlersSet = false;
+		this.touchHandler.remove();
+		this.wheelHandler.remove();
+		this.keyboardHandler.remove();
 	}
 
 	elementProto.resizeHandler = function() {
@@ -418,11 +440,13 @@ define([
 
 			this._minHeight = minHeight;
 
-			if (wh < minHeight.h) {
+			if (wh < minHeight.h && this._active) {
 				this.deactivate();
-			} else if (wh >= minHeight.h) {
+			} else if (wh >= minHeight.h && !this._active) {
 				this.activate();
 			}
+		} else if (!this._active) {
+			this.activate();
 		}
 
 		if (this._active) {
@@ -434,19 +458,41 @@ define([
 		}
 	}
 
+	elementProto.popupHandler = function() {
+		var active = popupStore.getData().active;
+		if (!this._popupId) return;
+
+		if (this._popupId === 'null') {
+			if (!active) {
+				this.setInputHandlers();
+			} else {
+				this.removeInputHandlers();
+			}
+		} else {
+			if (active === this._popupId) {
+				this.setInputHandlers();
+			} else {
+				this.removeInputHandlers();
+			}
+		}
+	}
+
 	elementProto.createdCallback = function() {
 		this._ctrl = false;
 		this._active = undefined;
 		this.storeHandler  = this.storeHandler.bind(this);
 		this.resizeHandler = this.resizeHandler.bind(this);
 		this.scrollHandler = this.scrollHandler.bind(this);
+		this.popupHandler = this.popupHandler.bind(this);
 		this.touchHandler  = new this.TouchHandler(this);
 		this.wheelHandler  = new this.WheelHandler(this);
 		this.keyboardHandler  = new this.KeyboardHandler(this);
 		this.activate   = this.activate.bind(this);
 		this.deactivate = this.deactivate.bind(this);
+		this.setInputHandlers = this.setInputHandlers.bind(this);
+		this.removeInputHandlers = this.removeInputHandlers.bind(this);
 		this.index = 0;
-		this._shift = SHIFT || null;
+		this._hadlersSet = false;
 	}
 
 	elementProto.attachedCallback = function() {
@@ -457,6 +503,11 @@ define([
 		this._id = this.getAttribute('data-id') || (idName + (idNum++));
 		this._total = this._slides.length;
 		this.setAttribute('data-id', this._id);
+		this._popupId = this.getAttribute('data-popup-id');
+		this._shift = this.getAttribute('data-shift');
+		if (this._shift) {
+			this._shift = parseInt(this._shift);
+		}
 
 		this._minHeights = this.getAttribute('data-min-heights');
 		this._minHeights = this._minHeights ? this._minHeights.split(';').map(function(item) {
@@ -481,8 +532,10 @@ define([
 		});
 
 		this.resizeHandler();
+		this.popupHandler();
 		window.addEventListener('resize', this.resizeHandler);
 		window.addEventListener('scroll', this.scrollHandler);
+		popupStore.eventEmitter.subscribe(this.popupHandler);
 		store.eventEmitter.subscribe(this.storeHandler);
 
 		setTimeout(function() {
@@ -493,6 +546,7 @@ define([
 	elementProto.detachedCallback = function() {
 		window.removeEventListener('resize', this.resizeHandler);
 		window.removeEventListener('scroll', this.scrollHandler);
+		popupStore.eventEmitter.unsubscribe(this.popupHandler);
 		store.eventEmitter.unsubscribe(this.storeHandler);
 
 		this.deactivate();

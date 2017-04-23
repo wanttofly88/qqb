@@ -5,13 +5,25 @@ define(['dispatcher', 'cart/cart.store'], function(dispatcher, store) {
 
 	elementProto.handleStore = function() {
 		var total = store.getData().total;
-		this.innerHTML = '[+' + total + ']';
+		var self = this;
 
-		if (this._total !== null && this._total !== total) {
-
+		if (this._total !== null && this._total < total) {
+			setTimeout(this.blink, 700);
 		}
 
+		setTimeout(function() {
+			self.innerHTML = '[+' + total + ']';
+		}, 700);
+
 		this._total = total;
+	}
+
+	elementProto.blink = function() {
+		var self = this;
+		this.parentNode.classList.add('blink');
+		setTimeout(function() {
+			self.parentNode.classList.remove('blink');
+		}, 1400);
 	}
 
 	elementProto.handleClick = function() {
@@ -24,6 +36,7 @@ define(['dispatcher', 'cart/cart.store'], function(dispatcher, store) {
 	elementProto.createdCallback = function() {
 		this.handleStore = this.handleStore.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.blink = this.blink.bind(this);
 		this._total = null;
 	}
 	elementProto.attachedCallback = function() {

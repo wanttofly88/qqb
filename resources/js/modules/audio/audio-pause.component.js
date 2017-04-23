@@ -37,6 +37,7 @@ define([
 		this.handleStore = this.handleStore.bind(this);
 	}
 	elementProto.attachedCallback = function() {
+		this.handleStore();
 		this.addEventListener('click', this.handleClick);
 		playerStore.eventEmitter.subscribe(this.handleStore);
 	}

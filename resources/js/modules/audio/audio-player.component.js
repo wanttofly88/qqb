@@ -205,6 +205,10 @@ define([
 			}
 			this.playSong(this._songNfo);
 		}
+
+		if (e.type === 'audio-goto') {
+			this._audio.current.element.currentTime = e.time;
+		}
 	}
 
 	elementProto.build = function() {

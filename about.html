@@ -39,7 +39,7 @@
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
-            <div class="logo">
+            <a href="index.html" is="inner-link" class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
                     <g id="Layer_1" data-name="Layer 1">
                         <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
@@ -52,7 +52,7 @@
                         <path class="cls-1" d="M72.74,70.39"/>
                     </g>
                 </svg>
-            </div>
+            </a>
             <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
@@ -132,7 +132,7 @@
                                     <div class="items">
                                     </div>
 
-                                    <div class="cart-data">
+                                    <div class="cart-data show320 show640">
                                         <div class="total">
                                             <div class="t">Total</div>
                                             <cart-price class="p">270.00 $</cart-price>
@@ -146,8 +146,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="cart-data abs show1000">
+                    <div class="total">
+                        <div class="t">Total</div>
+                        <cart-price class="p">270.00 $</cart-price>
+                    </div>
+                    <div class="checkout">
+                        <button is="cart-checkout" class="btn big">[Checkout]</button>
+                    </div>
+                </div>
             </div>
         </popup-component>
+        
         
         <div class="replaceable" data-id="popups">
         </div>
@@ -180,7 +191,7 @@
                 </div>
                 
                 <slide-scroll data-id="about-slides" 
-                    data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
+                    data-min-heights="0:460;640:640;1000:600;1400:700;1800:720" data-shift="150">
                     <div class="slide-scroll-wrapper">
                         <section class="about general-slide vh-min-height js-slide">
                             <div class="left-wrapper">

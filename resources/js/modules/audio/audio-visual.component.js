@@ -37,6 +37,7 @@ define([
 
 		this._bars.forEach(function(bar, index) {
 			var avg = self.getAverageFreq(freqData, step*index, step*(index + 1));
+			avg = Math.max(0.1, avg);
 			bar.element.style.transform = 'scaleY(' + avg + ')';
 		});
 	}
