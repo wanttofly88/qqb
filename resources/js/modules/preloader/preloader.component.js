@@ -1,11 +1,13 @@
 define([
 	'dispatcher',
 	'preloader/preloader.store',
+	'preloader/preloader-screen.store',
 	'TweenMax',
 	'utils'
 ], function(
 	dispatcher,
 	preloaderStore,
+	preloaderScreenStore,
 	TweenMax,
 	utils
 ) {
@@ -127,10 +129,6 @@ define([
 		this._text = this.getElementsByClassName('loaded-text')[0];
 		this._text.innerHTML = '';
 		this._textData = this._text.getAttribute('data-text');
-
-		console.log(9999);
-		console.log(Modernizr);
-		console.log(Modernizr.csstransitions);
 
 		if (Modernizr && Modernizr.csstransitions) {
 			this.start();
