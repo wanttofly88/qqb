@@ -52,7 +52,7 @@
                                 <div class="items">
                                 </div>
 
-                                <div class="cart-data">
+                                <div class="cart-data show320 show640">
                                     <div class="total">
                                         <div class="t">Total</div>
                                         <cart-price class="p">270.00 $</cart-price>
@@ -66,12 +66,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="cart-data abs show1000">
+                <div class="total">
+                    <div class="t">Total</div>
+                    <cart-price class="p">270.00 $</cart-price>
+                </div>
+                <div class="checkout">
+                    <button is="cart-checkout" class="btn big">[Checkout]</button>
+                </div>
+            </div>
         </div>
     </popup-component>
+    
 
     <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
         <header>
-            <div class="logo">
+            <a href="index.html" is="inner-link" class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
                     <g id="Layer_1" data-name="Layer 1">
                         <polygon class="cls-1" points="64.38 77.36 80.48 99.61 48.29 83.04 57.45 78.57 64.38 77.36"/>
@@ -84,7 +95,7 @@
                         <path class="cls-1" d="M72.74,70.39"/>
                     </g>
                 </svg>
-            </div>
+            </a>
             <button is="menu-toggle" class="menu-btn">
                 <div class="b b1"></div>
                 <div class="b b2"></div>
@@ -263,24 +274,22 @@
                     </div>
                 </div>
 
-                <slide-scroll data-id="albums-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720">
+                <slide-scroll data-id="albums-slides"  data-min-heights="0:460;640:640;1000:600;1400:700;1800:720" data-shift="150">
                     <div class="slide-scroll-wrapper">
                         <section class="albums general-slide js-slide vh-min-height">
                             <div class="left-wrapper shifted-wrapper">
-                                <div class="slide-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
-                                        <div class="slidescroll-fallback">
-                                            <div class="data-text" data-id="albums-slides">
-                                                <div>New release album</div>
-                                                <div>Date: 2017 Feb</div>
-                                                <div>2LP Limited ed</div>
-                                            </div>
-                                        </div>
                                         <h1 is="header-component">The Heart Gently Weeps</h1>
                                         <div class="price-nfo">
                                             <div class="price">$35.00</div>
                                         </div>
                                         <div class="slidescroll-fallback fb-btns">
+                                            <div class="data-text" data-id="albums-slides">
+                                                <div>New release album</div>
+                                                <div>Date: 2017 Feb</div>
+                                                <div>2LP Limited ed</div>
+                                            </div>
                                             <!--data-product-id это id продукта, который будет посылаться на сервер-->
                                             <!--data-product-id это id продукта, который будет посылаться на сервер-->
                                             <button is="buy-btn" class="btn data-toggle"
@@ -299,20 +308,18 @@
                         </section>
                         <section class="albums general-slide js-slide vh-min-height">
                             <div class="left-wrapper shifted-wrapper">
-                                <div class="slide-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
-                                        <div class="slidescroll-fallback">
-                                            <div class="data-text" data-id="albums-slides">
-                                            <div>Album New release</div>
-                                            <div>Date: 2018 Aug</div>
-                                            <div>2LP</div>
-                                            </div>
-                                        </div>
                                         <h1 is="header-component">The Heart</h1>
                                         <div class="price-nfo">
                                             <div class="price">$15.00</div>
                                         </div>
                                         <div class="slidescroll-fallback fb-btns">
+                                            <div class="data-text" data-id="albums-slides">
+                                                <div>New release album</div>
+                                                <div>Date: 2017 Feb</div>
+                                                <div>2LP Limited ed</div>
+                                            </div>
                                             <button is="buy-btn" class="btn data-toggle"
                                                 data-productId="product-5"
                                                 data-popupId="license-popup-1">[Buy album]</button>
@@ -328,20 +335,18 @@
                         </section>
                         <section class="albums general-slide js-slide vh-min-height">
                             <div class="left-wrapper shifted-wrapper">
-                                <div class="slide-content">
+                                <div class="slide-content padded">
                                     <div class="slide-inner">
-                                        <div class="slidescroll-fallback">
-                                            <div class="data-text" data-id="albums-slides">
-                                            <div>Album release</div>
-                                            <div>Date: 2013 Aug</div>
-                                            <div>3LP</div>
-                                            </div>
-                                        </div>
                                         <h1 is="header-component">The Heart</h1>
                                         <div class="price-nfo">
                                             <div class="price">$15.00</div>
                                         </div>
                                         <div class="slidescroll-fallback fb-btns">
+                                            <div class="data-text" data-id="albums-slides">
+                                                <div>New release album</div>
+                                                <div>Date: 2017 Feb</div>
+                                                <div>2LP Limited ed</div>
+                                            </div>
                                             <button is="buy-btn" class="btn data-toggle"
                                                 data-productId="product-5"
                                                 data-popupId="license-popup-1">[Buy album]</button>
@@ -358,13 +363,17 @@
                     </div>
                 </slide-scroll>
                 <aside class="cover">
-
-                    <!--data-id такой же как у slide-scroll. так как к нему привязывается-->
                     <cover-slider class="cover-img" data-id="albums-slides">
                         <proportional-height>
-                            <img class="slide" src="tmp/beat-lables/1.jpg" alt="">
-                            <img class="slide" src="tmp/beat-lables/2.jpg" alt="">
-                            <img class="slide" src="tmp/beat-lables/3.jpg" alt="">
+                            <a is="inner-link" class="slide" href="album.html">
+                                <img src="tmp/beat-lables/1.jpg" alt="">
+                            </a>
+                            <a is="inner-link" class="slide" href="album.html">
+                                <img src="tmp/beat-lables/2.jpg" alt="">
+                            </a>
+                            <a is="inner-link" class="slide" href="album.html">
+                                <img src="tmp/beat-lables/3.jpg" alt="">
+                            </a>
                         </proportional-height>
                     </cover-slider>
                 </aside>

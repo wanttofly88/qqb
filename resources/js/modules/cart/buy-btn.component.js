@@ -30,7 +30,7 @@ define([
 	}
 
 	elementProto.handleClick = function() {
-		// var self = this;
+		var self = this;
 
 		// if (this._active) {
 		// 	dispatcher.dispatch({
@@ -51,8 +51,8 @@ define([
 		// this.handleCart = this.handleCart.bind(this);
 	}
 	elementProto.attachedCallback = function() {
-		this._productId = this.getAttribute('data-productId');
-		this._popupId = this.getAttribute('data-popupId');
+		this._productId = this.getAttribute('data-productid');
+		this._popupId = this.getAttribute('data-popupid');
 
 		// this.handleCart();
 		this.addEventListener('click', this.handleClick);
