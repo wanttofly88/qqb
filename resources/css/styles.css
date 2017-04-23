@@ -529,16 +529,16 @@ button {
 	opacity: 0;
 	transition: all 0.1s;
 }
-.menu-btn:not(.active):hover:before {
+.no-touchevents .menu-btn:not(.active):hover:before {
 	opacity: 1;
 }
-.menu-btn:not(.active):hover .b {
+.no-touchevents .menu-btn:not(.active):hover .b {
 	background: #252525;
 }
 .page-wrapper[data-scheme="bright"] .menu-btn:before {
 	background-color: #252525;
 }
-.page-wrapper[data-scheme="bright"] .menu-btn:not(.active):hover .b {
+.no-touchevents .page-wrapper[data-scheme="bright"] .menu-btn:not(.active):hover .b {
 	background-color: #ffffff;
 }
 
@@ -1410,18 +1410,18 @@ text-print div {
 	transition: all 0.2s;
 	fill: transparent;
 }
-.arr:hover:not(.inactive) .cls-3,
-.arr:hover:not(.inactive) .cls-2 {
+.no-touchevents .arr:hover:not(.inactive) .cls-3,
+.no-touchevents .arr:hover:not(.inactive) .cls-2 {
 	stroke: #252525;
 /*	fill: #252525;*/
 
 }
-.arr:hover:not(.inactive) .cls-3 {
+.no-touchevents .arr:hover:not(.inactive) .cls-3 {
 /*	animation: fill-blink-black 0.5s infinite alternate;
 	-webkit-animation: fill-blink-black 0.5s infinite alternate;*/
 }
-.page-wrapper[data-scheme="bright"] .arr:hover:not(.inactive) .cls-3,
-.page-wrapper[data-scheme="bright"] .arr:hover:not(.inactive) .cls-2 {
+.no-touchevents .page-wrapper[data-scheme="bright"] .arr:hover:not(.inactive) .cls-3,
+.no-touchevents .page-wrapper[data-scheme="bright"] .arr:hover:not(.inactive) .cls-2 {
 /*	fill: #ffffff;*/
 	stroke: #ffffff;
 /*	animation: fill-blink 0.5s infinite alternate;
@@ -1443,7 +1443,7 @@ text-print div {
 .page-wrapper[data-scheme="dark"] .arr:before {
 	background: #ffffff;
 }
-.arr:not(.inactive):hover:before {
+.no-touchevents .arr:not(.inactive):hover:before {
 /*	transform: scaleX(1);*/
 	opacity: 1;
 }
@@ -1504,14 +1504,14 @@ text-print div {
 	transition: all 0.1s;
 
 }
-.section-aside .all:hover:before {
+.no-touchevents .section-aside .all:hover:before {
 	opacity: 1;
 	transition: all 0.1s cubic-bezier(0.9, 0, 0.4, 1);
 }
-.section-aside .all:hover .b {
+.no-touchevents .section-aside .all:hover .b {
 	background: #ffffff;
 }
-.section-aside .all:hover .b:before {
+.no-touchevents .section-aside .all:hover .b:before {
 	background: #ffffff;
 }
 /*.section-aside .all:hover .b:last-child {
@@ -2220,11 +2220,11 @@ merch-slider .img {
 	opacity: 0;
 	transition: opacity 0.1s;
 }
-.merch-item .sizes .item:hover,
+.no-touchevents .merch-item .sizes .item:hover,
 .merch-item .sizes .item.active {
 	color: #101010;
 }
-.merch-item .sizes .item:hover span:before,
+.no-touchevents .merch-item .sizes .item:hover span:before,
 .merch-item .sizes .item.active span:before {
 	opacity: 1;
 }
@@ -2295,7 +2295,7 @@ a.link {
 	color: #ffffff;
 	transition: 0.3s;
 }
-a.link:hover {
+.no-touchevents a.link:hover {
 	opacity: 0.6;
 }
 
@@ -2430,7 +2430,7 @@ slide-scroll.slide-mode .js-slide.slide-previous .left-wrapper {
 	opacity: 1;
 	margin-bottom: 2px;
 }
-.all-tracks .track:not(.active):hover {
+.no-touchevents .all-tracks .track:not(.active):hover {
 	transition: opacity 0.2s;
 	opacity: 0.6;
 }
@@ -2641,7 +2641,7 @@ cart-item .remove {
 	transition: opacity 0.1s;
 	transform: translateZ(0px);
 }
-cart-item .remove:hover {
+.no-touchevents cart-item .remove:hover {
 	opacity: 0.5;
 }
 cart-item .remove:before,

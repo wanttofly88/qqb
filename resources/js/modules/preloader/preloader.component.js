@@ -128,7 +128,7 @@ define([
 		this._text.innerHTML = '';
 		this._textData = this._text.getAttribute('data-text');
 
-		if (Modernizr.csstransitions) {
+		if (Modernizr && Modernizr.csstransitions) {
 			this.start();
 			setTimeout(this.finish, 1000);
 		} else {
