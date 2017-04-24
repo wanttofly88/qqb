@@ -350,8 +350,8 @@ define([
 		var r = document.getElementsByTagName('html')[0];
 		var wh = window.innerHeight;
 
-		r.classList.add('slide-scroll-active');
-		r.classList.remove('slide-scroll-inactive');
+		// r.classList.add('slide-scroll-active');
+		// r.classList.remove('slide-scroll-inactive');
 
 		if (this._active === true) return;
 		this._active = true;
@@ -381,8 +381,8 @@ define([
 		var self = this;
 		var r = document.getElementsByTagName('html')[0];
 
-		r.classList.remove('slide-scroll-active');
-		r.classList.add('slide-scroll-inactive');
+		// r.classList.remove('slide-scroll-active');
+		// r.classList.add('slide-scroll-inactive');
 
 		if (this._active === false) return;
 		this._active = false; 
@@ -426,12 +426,32 @@ define([
 		var wh = window.innerHeight;
 		var ww = window.innerWidth;
 
+		var r = document.getElementsByTagName('html')[0];
 		var minHeight;
 
 		if (!storeData) {
-			console.warn('slide-scroll internall error');
+			console.warn('slide-scroll internal error');
 			return;
 		}
+
+		// tmp for qqb site only
+		if (this._minHeights) {
+			minHeight = this._minHeights.reduce(function(prev, cur) {
+				return cur.bp < ww ? cur: prev;
+			});
+
+			if (wh < minHeight.h) {
+				r.classList.remove('slide-scroll-active');
+				r.classList.add('slide-scroll-inactive');
+			} else if (wh >= minHeight.h) {
+				r.classList.add('slide-scroll-active');
+				r.classList.remove('slide-scroll-inactive');
+			}
+		} else {
+			r.classList.add('slide-scroll-active');
+			r.classList.remove('slide-scroll-inactive');
+		}
+		// ----
 
 		if (this._minHeights) {
 			minHeight = this._minHeights.reduce(function(prev, cur) {

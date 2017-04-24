@@ -336,7 +336,9 @@ define([
 		this._maskElements = this.getElementsByClassName('mask');
 		this._maskSrc = this._maskElements[0].getAttribute('data-texture');
 		this._maps = [];
-		if (Modernizr && (!Modernizr.webgl || Modernizr.touchevents)) return;
+		//if (Modernizr && (!Modernizr.webgl || Modernizr.touchevents)) return;
+
+		if (!Modernizr || !Modernizr.webgl) return;
 
 		Array.prototype.forEach.call(this._maskElements, function(element) {
 			var img = document.createElement('img');

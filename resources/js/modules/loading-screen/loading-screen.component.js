@@ -110,7 +110,6 @@ define([
 
 	elementProto.handleScreenStore = function(e) {
 		var status = screenStore.getData().status;
-		console.log(status);
 		var self = this;
 		if (status === 'starting' && !this._active) {
 			this._active = true;
