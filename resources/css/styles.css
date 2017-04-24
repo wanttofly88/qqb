@@ -552,7 +552,7 @@ main {
 	transition: opacity 0.4s linear 0s;
 	opacity: 1;
 }
-.no-touchevents.webgl .page-wrapper[data-popup="active"] .content {
+.page-wrapper[data-popup="active"] .content {
 	opacity: 0;
 	transition: opacity 0.2s linear 0s;
 }
@@ -669,12 +669,20 @@ stage-component,
 popup-component .stage-fallback {
 	position: absolute;
 }
-.no-touchevents.webgl stage-component {
+/*.no-touchevents.webgl stage-component {
 	display: block;
 }
 .no-touchevents.webgl .stage-fallback {
 	display: none;
+}*/
+
+.webgl stage-component {
+	display: block;
 }
+.webgl .stage-fallback {
+	display: none;
+}
+
 
 .stage-fallback {
 	background: url(../images/bg-dark.jpg);
