@@ -86,21 +86,47 @@ define([
 		this._current = this._index;
 	}
 
+	elementProto.handleDispatcher = function(e) {
+		if (e.type === 'look-mouseenter') {
+			this._slidesData.forEach(function(slide) {
+				if (slide.id === e.id) {
+					slide.element.classList.add('hover');
+				}
+			});
+		}
+		if (e.type === 'look-mouseleave') {
+			this._slidesData.forEach(function(slide) {
+				if (slide.id === e.id) {
+					slide.element.classList.remove('hover');
+				}
+			});
+		}
+	}
+
 	elementProto.createdCallback = function() {
 		this._index = 0;
 		this._z = 1;
 		this.handleStore = this.handleStore.bind(this);
 		this.showSlide = this.showSlide.bind(this);
 		this.hideSlide = this.hideSlide.bind(this);
+		this.handleDispatcher = this.handleDispatcher.bind(this);
 	}
 	elementProto.attachedCallback = function() {
 		var l = this.getElementsByClassName('l')[0];
 		var r = this.getElementsByClassName('r')[0];
+		var allSlides = this.getElementsByClassName('slide');
 
 		this._current = 0;
 		this._id = this.getAttribute('data-id');
 		this._lSlides = l.getElementsByClassName('slide');
 		this._rSlides = r.getElementsByClassName('slide');
+
+		this._slidesData = Array.prototype.map.call(allSlides, function(slide) {
+			return {
+				id: slide.getAttribute('data-id'),
+				element: slide
+			}
+		});
 
 		if (!this._id) {
 			console.warn('data-id attribute is missing on cover-bg-slider');
@@ -126,10 +152,11 @@ define([
 			}
 		});
 
-
+		dispatcher.subscribe(this.handleDispatcher);
 		store.eventEmitter.subscribe(this.handleStore);
 	}
 	elementProto.detachedCallback = function() {
+		dispatcher.unsubscribe(this.handleDispatcher);
 		store.eventEmitter.unsubscribe(this.handleStore);
 	}
 

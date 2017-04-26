@@ -76,14 +76,16 @@ require([
 	'attribute-slider/href-slider.component',
 	'attribute-slider/buy-slider.component',
 
-	'cart/buy-fixed-btn.component',
-	'cart/buy-btn.component',
 	'cart/license.component',
 	'cart/cart.component',
 	'cart/cart-item.component',
 	'cart/cart-total.component',
 	'cart/cart-price.component',
 	'cart/buy-merch-btn.component',
+	'cart/buy-album.component',
+	'cart/buy-album-fixed.component',
+	'cart/buy-beat.component',
+	'cart/buy-beat-fixed.component',
 
 	'slider/cover-bg-slider.component',
 	'slider/cover-slider.component',
@@ -104,5 +106,6 @@ require([
 	's-scroll/s-scroll.view',
 	'page-name/page-name.component',
 
-	'merch/merch-sizes.component'
+	'merch/merch-sizes.component',
+	'merch/look.component'
 ]);

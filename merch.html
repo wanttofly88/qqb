@@ -156,7 +156,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="privacy-link">
+                <button is="popup-toggle" data-id="privacy-popup">privacy</button>
+            </div>
         </popup-component>
+
+        <popup-component class="privacy-popup" data-id="privacy-popup">
+            <div class="stage-fallback"></div>
+            <div class="popup-outer">
+                <div class="popup-inner">
+                    <div class="popup-cell">
+                        <section class="privacy">
+                            <div class="padded-wrapper">
+                                <div class="privacy-text" data-product-id="product-4">
+                                    <h3>Privacy information</h3>
+                                    <p>Penguins (order Sphenisciformes, family Spheniscidae) are a group of aquatic, flightless birds. They live almost exclusively in the Southern Hemisphere, with only one species, the Galapagos penguin, found north of the equator. Highly adapted for life in the water, penguins have countershaded dark and white plumage, and their wings have evolved into flippers. Most penguins feed on krill, fish, squid and other forms of sealife caught while swimming underwater. They spend about half of their lives on land and half in the oceans.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </popup-component>
+        
 
         <div class="replaceable" data-id="popups">
             <!--каждому попапу нужен уникальный data-id такой же как ниже у <button is="popup-toggle">-->
@@ -272,21 +295,22 @@
                 <div class="merch-bg">
                     <merch-slider data-id="merch-slides">
                         <div class="l">
-                            <div class="slide">
+                            <!--data-id такие же как на кнопках look-->
+                            <div class="slide" data-id="mp1">
                                 <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
                             </div>
-                            <div class="slide">
+                            <div class="slide" data-id="mp3">
                                 <div class="img" style="background-image:url(tmp/m2.jpg);"></div>
                             </div>
-                            <div class="slide">
+                            <div class="slide" data-id="mp5">
                                 <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
                             </div>
                         </div>
                         <div class="r">
-                            <div class="slide">
+                            <div class="slide" data-id="mp2">
                                 <div class="img" style="background-image:url(tmp/m2.jpg);"></div>
                             </div>
-                            <div class="slide">
+                            <div class="slide" data-id="mp4">
                                 <div class="img" style="background-image:url(tmp/m1.jpg);"></div>
                             </div>
                             <!--если нечетное колличество, добить пустым слайдом-->
@@ -351,7 +375,7 @@
                                         <h1 is="header-component">Ex.1</h1>
                                         <div class="price-nfo">120.00 $</div>
                                         <!--data-id это id соответствующего попапа для шмотки-->
-                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
+                                        <button is="look-component" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                                 <div class="slide-content padded r merch-content">
@@ -359,7 +383,7 @@
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.2</h1>
                                         <div class="price-nfo">80.00 $</div>
-                                        <button is="popup-toggle" class="btn" data-id="mp2">[Look]</button>
+                                        <button is="look-component" class="btn" data-id="mp2">[Look]</button>
                                     </div>
                                 </div>
                             </div>
@@ -371,7 +395,7 @@
                                         <div class="nt">Shorts</div>
                                         <h1 is="header-component">Ex.3</h1>
                                         <div class="price-nfo">50.00 $</div>
-                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
+                                        <button is="look-component" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                                 <div class="slide-content padded r merch-content">
@@ -379,7 +403,7 @@
                                         <div class="nt">Shorts Jumpsuit</div>
                                         <h1 is="header-component">Ex.4</h1>
                                         <div class="price-nfo">20.00 $</div>
-                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
+                                        <button is="look-component" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                             </div>
@@ -391,7 +415,7 @@
                                         <div class="nt">Shorts</div>
                                         <h1 is="header-component">Ex.5</h1>
                                         <div class="price-nfo">50.00 $</div>
-                                        <button is="popup-toggle" class="btn" data-id="mp1">[Look]</button>
+                                        <button is="look-component" class="btn" data-id="mp1">[Look]</button>
                                     </div>
                                 </div>
                             </div>

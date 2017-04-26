@@ -23,4 +23,6 @@ define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 		extends: 'button',
 		prototype: elementProto
 	});
+
+	return elementProto;
 });
