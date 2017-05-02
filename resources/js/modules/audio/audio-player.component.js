@@ -144,8 +144,8 @@ define([
 		var playlistId = playerStore.getData().playlistId;
 
 		if (e.type === 'audio-low-freq' && this._mode === 'webaudio') {
-			this._gainNode.gain.linearRampToValueAtTime(0.5, this._context.currentTime + 0.5);
-			this._frequencyFilter.frequency.exponentialRampToValueAtTime(this._context.sampleRate / 300, this._context.currentTime + 0.5);
+			this._gainNode.gain.linearRampToValueAtTime(0.8, this._context.currentTime + 0.5);
+			this._frequencyFilter.frequency.exponentialRampToValueAtTime(this._context.sampleRate / 150, this._context.currentTime + 0.5);
 		}
 		if (e.type === 'audio-high-freq' && this._mode === 'webaudio') {
 			this._gainNode.gain.linearRampToValueAtTime(1, this._context.currentTime + 0.5);

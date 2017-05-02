@@ -10,30 +10,28 @@ define([
 	var elementProto = Object.create(HTMLButtonElement.prototype);
 
 	elementProto.handleCart = function() {
-		var data = cartStore.getData().items;
+		var items = cartStore.getData().items;
 		var found = false;
 		var self = this;
 
-		if (!data) return;
-
-		data.forEach(function(item) {
-			if (item.id === self._productId) found = true;
+		items.forEach(function(item) {
+			if (self._products.indexOf(item.id) !== -1) {
+				found = true;
+			}
 		});
 
-		if (found && !this._active) {
-			this._active = true;
-		} else if (!found && this._active) {
-			this._active = false;
+		if (found) {
+			this.classList.add('disabled');
+			this._disabled = true;
+		} else {
+			this.classList.remove('disabled');
+			this._disabled = false;
 		}
 	}
 
 	elementProto.handleClick = function() {
 		var self = this;
-
-		// this.classList.add('show-cart');
-		// setTimeout(function() {
-		// 	self.classList.remove('show-cart');
-		// }, 2000);
+		if (this._disabled) return;
 
 		dispatcher.dispatch({
 			type: 'popup-open',
@@ -44,16 +42,26 @@ define([
 	elementProto.createdCallback = function() {
 		this._active = false;
 		this.handleClick = this.handleClick.bind(this);
+		this.handleCart = this.handleCart.bind(this);
 	}
 	elementProto.attachedCallback = function() {
 		this._productId = this.getAttribute('data-productid');
 		this._popupId = this.getAttribute('data-popupid');
 
+		if (this._productId) {
+			this._products = this._productId.split('||');
+		} else {
+			this._products = [];
+		}
+
 		this.addEventListener('click', this.handleClick);
+		this.handleCart();
+		cartStore.eventEmitter.subscribe(this.handleCart);
 	}
 
 	elementProto.detachedCallback = function() {
 		this.removeEventListener('click', this.handleClick);
+		cartStore.eventEmitter.unsubscribe(this.handleCart);
 	}
 
 	document.registerElement('buy-beat', {

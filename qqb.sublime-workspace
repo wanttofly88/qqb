@@ -4,12 +4,108 @@
 		"selected_items":
 		[
 			[
-				"st",
-				"status"
+				"pr",
+				"productId"
 			],
 			[
 				"pop",
-				"popupHandler"
+				"popupId"
+			],
+			[
+				"get",
+				"getId"
+			],
+			[
+				"_p",
+				"_products"
+			],
+			[
+				"_pr",
+				"_productId"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"pro",
+				"_productId"
+			],
+			[
+				"class",
+				"classList"
+			],
+			[
+				"ha",
+				"handleCart"
+			],
+			[
+				"car",
+				"cart"
+			],
+			[
+				"tra",
+				"transition"
+			],
+			[
+				"a",
+				"auto"
+			],
+			[
+				"animation-",
+				"animation-name"
+			],
+			[
+				"sc",
+				"scaleX()"
+			],
+			[
+				"co",
+				"content"
+			],
+			[
+				"el",
+				"element"
+			],
+			[
+				"sli",
+				"slide"
+			],
+			[
+				"_sl",
+				"_slidesData"
+			],
+			[
+				"ov",
+				"overflow"
+			],
+			[
+				"ele",
+				"element"
+			],
+			[
+				"me",
+				"merch"
+			],
+			[
+				"de",
+				"detachedCallback"
+			],
+			[
+				"po",
+				"popupToggleProto"
+			],
+			[
+				"cr",
+				"createdCallback"
+			],
+			[
+				"tran",
+				"transition"
+			],
+			[
+				"st",
+				"status"
 			],
 			[
 				"eve",
@@ -18,10 +114,6 @@
 			[
 				"popup",
 				"popupStore"
-			],
-			[
-				"re",
-				"resizeHandler"
 			],
 			[
 				"set",
@@ -34,10 +126,6 @@
 			[
 				"se",
 				"setInputHandlers"
-			],
-			[
-				"co",
-				"component"
 			],
 			[
 				"tr",
@@ -60,20 +148,8 @@
 				"margin-top"
 			],
 			[
-				"tran",
-				"transition"
-			],
-			[
-				"tra",
-				"transform-origin"
-			],
-			[
 				"cu",
 				"currentTime"
-			],
-			[
-				"_p",
-				"_playing"
 			],
 			[
 				"_ac",
@@ -82,10 +158,6 @@
 			[
 				"son",
 				"songData"
-			],
-			[
-				"ha",
-				"handleProgressClick"
 			],
 			[
 				"han",
@@ -124,10 +196,6 @@
 				"_currentMap"
 			],
 			[
-				"ele",
-				"elementProto"
-			],
-			[
 				"va",
 				"value"
 			],
@@ -146,14 +214,6 @@
 			[
 				"ac",
 				"active"
-			],
-			[
-				"pr",
-				"promise"
-			],
-			[
-				"sli",
-				"_slide"
 			],
 			[
 				"shi",
@@ -188,16 +248,8 @@
 				"_productId"
 			],
 			[
-				"car",
-				"cartStore"
-			],
-			[
 				"m",
 				"move"
-			],
-			[
-				"el",
-				"elementProto"
 			],
 			[
 				"da",
@@ -250,10 +302,6 @@
 			[
 				"ca",
 				"cart-component"
-			],
-			[
-				"de",
-				"description"
 			],
 			[
 				"des",
@@ -332,10 +380,6 @@
 				"playVideo"
 			],
 			[
-				"get",
-				"getData"
-			],
-			[
 				"nex",
 				"nextMap"
 			],
@@ -372,10 +416,6 @@
 				"table-cell"
 			],
 			[
-				"po",
-				"pointer-events"
-			],
-			[
 				"op",
 				"opacity"
 			],
@@ -386,10 +426,6 @@
 			[
 				"rou",
 				"routerStore"
-			],
-			[
-				"sc",
-				"scheme"
 			],
 			[
 				"s",
@@ -416,10 +452,6 @@
 				"classList"
 			],
 			[
-				"me",
-				"menuActive"
-			],
-			[
 				"men",
 				"menu"
 			],
@@ -442,10 +474,6 @@
 			[
 				"type",
 				"typeof"
-			],
-			[
-				"pro",
-				"prototype"
 			],
 			[
 				"fl",
@@ -486,80 +514,16 @@
 			[
 				"e",
 				"end"
-			],
-			[
-				"_a",
-				"_audioData"
-			],
-			[
-				"wo",
-				"word"
-			],
-			[
-				"Pare",
-				"_parentId"
-			],
-			[
-				"resi",
-				"_handleResize"
-			],
-			[
-				"bas",
-				"basicTranisiton"
-			],
-			[
-				"trn",
-				"transform"
-			],
-			[
-				"o",
-				"other"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "about.html",
+			"file": "resources/js/modules/cart/buy-album-fixed.component.js",
 			"settings":
 			{
-				"buffer_size": 10001,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "album.html",
-			"settings":
-			{
-				"buffer_size": 16785,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "albums.html",
-			"settings":
-			{
-				"buffer_size": 23699,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/js/modules/slide-scroll/slide-scroll.component.js",
-			"settings":
-			{
-				"buffer_size": 15610,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "todo.md",
-			"settings":
-			{
-				"buffer_size": 738,
+				"buffer_size": 2614,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -568,28 +532,35 @@
 			"file": "resources/css/styles.css",
 			"settings":
 			{
-				"buffer_size": 51715,
+				"buffer_size": 56747,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "resources/js/modules/stage/stage.component.js",
+			"file": "resources/js/modules/cart/buy-merch-btn.component.js",
 			"settings":
 			{
-				"buffer_size": 9382,
+				"buffer_size": 1735,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/js/modules/cart/buy-beat-fixed.component.js",
+			"settings":
+			{
+				"buffer_size": 2353,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 155 files for \"slide-scroll-inactive\"\n\nD:\\sites\\qqb\\resources\\css\\styles.css:\n 1060  \t}\n 1061  }\n 1062: .slide-scroll-inactive aside {\n 1063  \tdisplay: none;\n 1064  }\n 1065  @media screen and (min-width: 1000px) {\n 1066: \t.slide-scroll-inactive aside {\n 1067  \t\tdisplay: block;\n 1068  \t}\n ....\n 1619  }\n 1620  \n 1621: .slide-scroll-inactive .beat-footer {\n 1622  \tdisplay: none;\n 1623  }\n ....\n 1759  \tmargin-bottom: 20px;\n 1760  }\n 1761: .slide-scroll-inactive .general-header {\n 1762  \tdisplay: none;\n 1763  }\n 1764: .slide-scroll-inactive .general-footer {\n 1765  \tdisplay: none;\n 1766  }\n 1767: .slide-scroll-inactive .albums .nfo {\n 1768  \tmargin-top: 20px;\n 1769  }\n ....\n 1960  \tmargin-bottom: 18px;\n 1961  }\n 1962: .slide-scroll-inactive .album-footer {\n 1963  \tdisplay: none;\n 1964  }\n ....\n 2197  \tmargin-bottom: 50px;\n 2198  }\n 2199: .slide-scroll-inactive .merch-item .sizes {\n 2200  \tmargin-bottom: 10px;\n 2201  }\n ....\n 2286  \ttransition: transform 1.6s ease 0s;\n 2287  }\n 2288: /*.slide-scroll-inactive .merch-item .section-footer {\n 2289  \tdisplay: none;\n 2290  }*/\n ....\n 2391  \tdisplay: none;\n 2392  }\n 2393: .slide-scroll-inactive .slidescroll-fallback {\n 2394  \tdisplay: block;\n 2395  }\n\nD:\\sites\\qqb\\resources\\js\\modules\\slide-scroll\\slide-scroll.component.js:\n  352  \n  353  \t\tr.classList.add('slide-scroll-active');\n  354: \t\tr.classList.remove('slide-scroll-inactive');\n  355  \n  356  \t\tif (this._active === true) return;\n  ...\n  383  \n  384  \t\tr.classList.remove('slide-scroll-active');\n  385: \t\tr.classList.add('slide-scroll-inactive');\n  386  \n  387  \t\tif (this._active === false) return;\n\n12 matches across 2 files\n",
+			"file": "resources/js/modules/cart/buy-beat.component.js",
 			"settings":
 			{
-				"buffer_size": 1652,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
+				"buffer_size": 1554,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -678,36 +649,45 @@
 	},
 	"expanded_folders":
 	[
-		"/D/sites/qqb",
+		"/D/sites/qqb/lic",
 		"/D/sites/qqb/resources",
-		"/D/sites/qqb/resources/css",
-		"/D/sites/qqb/resources/images",
-		"/D/sites/qqb/resources/js",
-		"/D/sites/qqb/resources/js/modules",
-		"/D/sites/qqb/resources/js/modules/cart",
-		"/D/sites/qqb/resources/js/modules/stage",
-		"/D/sites/qqb/tmp",
-		"/D/sites/qqb/tmp/beat-lables",
-		"/D/sites/qqb/tmp/video"
+		"/D/sites/qqb/tmp"
 	],
 	"file_history":
 	[
+		"/D/sites/qqb/resources/js/modules/merch/look.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/buy-album.component.js",
+		"/D/sites/qqb/album.html",
+		"/D/sites/qqb/albums.html",
+		"/D/sites/qqb/resources/js/modules/cart/buy-beat-fixed.component.js",
+		"/D/sites/qqb/resources/css/styles.css",
+		"/D/sites/qqb/resources/js/app.js",
+		"/D/sites/qqb/resources/js/modules/slider/merch-slider.component.js",
+		"/D/sites/qqb/todo.md",
+		"/D/sites/qqb/resources/js/modules/audio/audio-player.component.js",
+		"/D/sites/qqb/resources/images/arr2.svg",
+		"/D/sites/qqb/index.html",
 		"/D/sites/qqb/merch.html",
+		"/D/sites/favicons/manifest.json",
+		"/D/sites/favicons/browserconfig.xml",
+		"/D/sites/favicons/safari-pinned-tab.svg",
+		"/C/Users/Kernel/AppData/Local/Temp/7zE8A4F0A0D/safari-pinned-tab.svg",
+		"/C/Users/Kernel/AppData/Local/Temp/7zE8A4D8C4D/manifest.json",
+		"/D/sites/qqb/design/readme.txt",
+		"/D/sites/qqb/resources/js/modules/cart/buy-album-fixed.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/buy-merch-btn.component.js",
+		"/D/sites/qqb/resources/js/modules/popup/popup-close.component.js",
+		"/D/sites/qqb/resources/js/modules/cart/buy-beat.component.js",
 		"/D/sites/qqb/videos.html",
+		"/D/sites/qqb/about.html",
+		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll.component.js",
+		"/D/sites/qqb/resources/js/modules/stage/stage.component.js",
 		"/D/sites/qqb/resources/js/modules/loading-screen/loading-screen.component.js",
 		"/D/sites/qqb/resources/js/modules/preloader/preloader.component.js",
 		"/D/sites/qqb/resources/js/modules/preloader/preloader-screen.store.js",
 		"/D/sites/qqb/resources/js/modules/preloader/preloader.store.js",
-		"/D/sites/qqb/index.html",
-		"/D/sites/qqb/todo.md",
-		"/D/sites/qqb/resources/css/styles.css",
-		"/D/sites/qqb/albums.html",
 		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll.store.js",
-		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll.component.js",
-		"/D/sites/qqb/album.html",
-		"/D/sites/qqb/about.html",
 		"/D/sites/qqb/resources/js/modules/cart/cart-total.component.js",
-		"/D/sites/qqb/resources/js/modules/audio/audio-player.component.js",
 		"/D/sites/qqb/resources/js/modules/cart/buy-btn.component.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-visual.component.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-pause.component.js",
@@ -720,7 +700,6 @@
 		"/D/sites/qqb/resources/js/modules/router/page-transition.component.js",
 		"/D/sites/qqb/resources/js/modules/video/video-play.component.js",
 		"/D/sites/qqb/resources/js/modules/video/video-play-fixed.component.js",
-		"/D/sites/qqb/resources/js/modules/stage/stage.component.js",
 		"/D/sites/qqb/resources/js/modules/router/menu-link.component.js",
 		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll-control.component.js",
 		"/D/sites/qqb/resources/js/modules/track-list/track-list.component.js",
@@ -732,11 +711,9 @@
 		"/D/sites/valerka2/resources/js/app.js",
 		"/D/sites/qqb/resources/js/modules/print-slider/print-slider.component.js",
 		"/D/sites/qqb/resources/js/modules/attribute-slider/href-slider.component.js",
-		"/D/sites/qqb/resources/js/modules/cart/buy-merch-btn.component.js",
 		"/D/sites/qqb/resources/js/modules/merch/merch-sizes.component.js",
 		"/D/sites/qqb/resources/js/modules/cart/cart-item.component.js",
 		"/D/sites/qqb/resources/js/modules/glsl/simple-fragment.glsl",
-		"/D/sites/qqb/resources/js/app.js",
 		"/D/sites/valerka2/resources/js/libs/bezier-easing.js",
 		"/D/sites/qqb/resources/js/modules/helpers/about-helper.component.js",
 		"/D/sites/qqb/resources/js/modules/cart/cart.component.js",
@@ -767,7 +744,6 @@
 		"/D/sites/qqb/resources/js/modules/attribute-slider/id-slider.helper.js",
 		"/D/sites/qqb/resources/js/modules/slider/video-slider-old.component.js",
 		"/D/sites/qqb/resources/js/modules/slider/cover-slider.component.js",
-		"/D/sites/qqb/resources/js/modules/slider/merch-slider.component.js",
 		"/D/sites/for redcollar/wargaming/index.html",
 		"/D/sites/qqb/resources/images/arr.svg",
 		"/D/sites/eldey/resources/js/modules/scroll/scroll.store.js",
@@ -791,7 +767,6 @@
 		"/D/sites/qqb/resources/js/modules/decor/text-print.component.js",
 		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll-total.component.js",
 		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll-index.component.js",
-		"/D/sites/qqb/resources/js/modules/popup/popup-close.component.js",
 		"/D/sites/qqb/resources/js/modules/resize/contain-resize.component.js",
 		"/D/sites/qqb/resources/js/modules/scheme/scheme.component.js",
 		"/D/sites/qqb/resources/js/modules/resize/vh-fix.component.js",
@@ -807,19 +782,7 @@
 		"/D/sites/qqb/resources/js/libs/text.js",
 		"/D/sites/qqb/resources/js/modules/audio/audio-data.store.js",
 		"/D/sites/qqb/resources/js/modules/menu/menu-item.component.js",
-		"/D/sites/qqb/resources/js/modules/slider/beat-bg-slider.component.js",
-		"/D/sites/qqb/resources/js/modules/print/print.view.js",
-		"/D/sites/for redcollar/redcollar/resources/js/modules/router/history.view.js",
-		"/D/sites/qqb/resources/js/modules/slide-scroll/slide-scroll-old.component.js",
-		"/D/sites/qqb/resources/js/modules/decor/header-appear.component.js",
-		"/D/sites/qqb/resources/js/modules/header-appear/header-appear.component.js",
-		"/D/sites/qqb/resources/js/modules/page-preview/page-preview.store.js",
-		"/D/sites/qqb/resources/js/modules/page-preview/page-preview.component.js",
-		"/D/sites/qqb/resources/js/modules/text-glitch/text-glitch2.component.js",
-		"/D/sites/for redcollar/baskov/templates/baskov/js/modules/audio/player.js",
-		"/D/sites/qqb/resources/css/defs.css",
-		"/D/sites/qqb/resources/js/modules/text-glitch/text-glitch.component.js",
-		"/D/sites/valerka2/resources/js/modules/stage/stage.component.js"
+		"/D/sites/qqb/resources/js/modules/slider/beat-bg-slider.component.js"
 	],
 	"find":
 	{
@@ -830,6 +793,7 @@
 		"height": 96.0,
 		"where_history":
 		[
+			"D:\\sites\\qqb\\resources\\js\\modules",
 			""
 		]
 	},
@@ -838,6 +802,78 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"conso",
+			"consol",
+			"disabled",
+			"lice",
+			"licens",
+			"buy-a",
+			"buy-al",
+			".no-t",
+			"arr",
+			"slide-scroll-c",
+			"slide-scroll0c",
+			"slide-scroll",
+			"ffffff",
+			".section-aside ",
+			".all",
+			"popup-togg",
+			"all",
+			"lic",
+			"licac",
+			"licans",
+			"licen",
+			"linear",
+			"filter",
+			"ease",
+			"merch-slider",
+			"m2",
+			"animation",
+			"-webkit",
+			"webkit",
+			" <div class=\"bar b3\"></div>",
+			"                                                    <audio-visual></audio-visual>",
+			"-webkit-",
+			"keyfr",
+			"keyframes",
+			"audio-v",
+			"h3",
+			"track",
+			"menu",
+			"menu-c",
+			"priva",
+			"зшмф",
+			"addEventListener",
+			"popup-toggle",
+			"look",
+			"handleMouseLeave",
+			"handleMouseEnter",
+			"apply",
+			"cart",
+			"btn",
+			"buy",
+			"menu-po",
+			"privacy-p",
+			"menu-po",
+			"priva",
+			"privacy-b",
+			"menu-po",
+			"privacy",
+			"license",
+			"licennse",
+			"privacy",
+			"license-component",
+			"lice",
+			"lic",
+			"licen",
+			"privac",
+			"menu",
+			".cart",
+			"buy-f",
+			"buy-btn-f",
+			"buy-btn",
+			"buy-b",
+			"buy",
 			"slide-scroll-i",
 			"heigh",
 			"min-width: 1800px",
@@ -893,79 +929,7 @@
 			"7.5%",
 			"7",
 			"padded-w",
-			"90px",
-			"cart-component",
-			"padded-w",
-			"cart",
-			"padded",
-			"wrapper ",
-			"wrapper-p",
-			"nt",
-			"header-component",
-			"slide-scroll .slide-content",
-			"slide-content",
-			"cell",
-			"slide-content",
-			"album-content",
-			"slide-content",
-			"slide-c",
-			"slide-content-padded",
-			"lide-inner-padded",
-			"slide-inner-padded",
-			"slide-inner-pa",
-			"slide-inner",
-			"menu-b",
-			"menu-to",
-			"menu-t",
-			"arr",
-			"blink",
-			"black",
-			"blink",
-			"\t\topacity: 1;",
-			"\t\topacity: 0;",
-			"-black",
-			"blink2 ",
-			"animat",
-			"fill",
-			"fill-a",
-			"blink",
-			"index",
-			"\t\t// if (this.href.indexOf('index') !== -1) {\n\t\t// \tthis.href = this.href.replace('/index.html', '');\n\t\t// \tthis.href = this.href.replace('/index.php', '');\n\t\t// }\n",
-			"index",
-			"logo",
-			"index",
-			"logo",
-			"history",
-			"sound",
-			"logo",
-			"link",
-			"inne",
-			"inner-l",
-			"div",
-			"video-it",
-			"video-iy",
-			"video-i",
-			"data-scheme",
-			"audio-progres",
-			"video",
-			"video-i",
-			"padded",
-			"left-wr",
-			"section-f",
-			"slide-sc",
-			"show",
-			"video-p",
-			"video",
-			"data-src",
-			"src",
-			";\n",
-			"animationSpeed",
-			"index",
-			"tmp/",
-			"tmp",
-			"Power1.easeOut",
-			"stage-c",
-			"album"
+			"90px"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -984,123 +948,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "about.html",
+					"file": "resources/js/modules/cart/buy-album-fixed.component.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10001,
+						"buffer_size": 2614,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8820,
-								8817
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3734.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "album.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16785,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1285,
-								1285
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "albums.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23699,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1118,
-								1118
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 254.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/js/modules/slide-scroll/slide-scroll.component.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15610,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11953,
-								11953
+								1373,
+								975
 							]
 						],
 						"settings":
@@ -1112,58 +977,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4188.0,
+						"translation.y": 670.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "todo.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 738,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								738,
-								738
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 1,
 					"file": "resources/css/styles.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 51715,
+						"buffer_size": 56747,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22921,
-								22921
+								8593,
+								8593
 							]
 						],
 						"settings":
@@ -1175,27 +1009,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 25754.0,
+						"translation.y": 8626.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "resources/js/modules/stage/stage.component.js",
+					"buffer": 2,
+					"file": "resources/js/modules/cart/buy-merch-btn.component.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9382,
+						"buffer_size": 1735,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8288,
-								8288
+								706,
+								706
 							]
 						],
 						"settings":
@@ -1207,103 +1041,74 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6580.0,
+						"translation.y": 60.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
+					"file": "resources/js/modules/cart/buy-beat-fixed.component.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1652,
+						"buffer_size": 2353,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										115,
-										136
-									],
-									[
-										233,
-										254
-									],
-									[
-										329,
-										350
-									],
-									[
-										450,
-										471
-									],
-									[
-										530,
-										551
-									],
-									[
-										610,
-										631
-									],
-									[
-										734,
-										755
-									],
-									[
-										856,
-										877
-									],
-									[
-										1006,
-										1027
-									],
-									[
-										1138,
-										1159
-									],
-									[
-										1378,
-										1399
-									],
-									[
-										1547,
-										1568
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								1384,
-								1384
+								1061,
+								1061
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
 							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
 							"remote_loading": false,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
 							"synced": false,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 780.0,
+						"translation.y": 600.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/js/modules/cart/buy-beat.component.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1554,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								554,
+								205
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 120.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

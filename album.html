@@ -36,7 +36,7 @@
     </audio-player>
 
 
-    <div is="scheme-component" class="page-wrapper" data-scheme="bright" data-popup="inactive">
+    <div is="scheme-component" class="page-wrapper preload-complete" data-scheme="bright" data-popup="inactive">
         <header>
             <a href="index.html" is="inner-link" class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.72 99.61">
@@ -190,7 +190,7 @@
                                 <div class="padded-wrapper">
                                     <track-list class="tracks-list" data-id="album">
                                         <div class="tracks-group">
-                                            <h3># Album name</h3>
+                                            <h3>Album name</h3>
                                             <ol>
                                                 <li class="track"  data-src="tmp/audio/Mt. Zion.mp3">
                                                     <audio-visual></audio-visual>
@@ -245,7 +245,12 @@
                     <a is="inner-link" href="albums.html" class="btn">[Eject]</a>
                 </div>
                 <div class="album-all">
-                    <button is="popup-toggle" class="btn all" data-id="all-tracks-popup">[/]</button>
+<!--                     <button is="popup-toggle" class="btn all" data-id="all-tracks-popup">[/]</button> -->
+                    <button is="popup-toggle" class="all" data-id="all-tracks-popup">
+                        <span class="b b1"></span>
+                        <span class="b b2"></span>
+                        <span class="b b3"></span>
+                    </button>
                 </div>
 
                 <div class="section-footer album-footer">
@@ -257,7 +262,7 @@
                         </print-slider>
                         <div class="r">
                             <button is="buy-album" class="btn"
-                                data-productId="product-6"
+                                data-productId="product-4"
                                >[Buy album]</button>
                             <print-slider data-id="album-slides-price">
                                 <div></div>
@@ -290,14 +295,34 @@
                                             </div>
                                         </div>
                                         <div class="slide-controls">
-                                            <button class="btn"
+                                            <button class="album-arr dark a-t"
                                                 is="slide-scroll-control"
                                                 data-id="album-slides"
-                                                data-to="prev">[Prev]</button>
-                                            <button class="btn"
+                                                data-to="prev">
+                                                <div class="ico">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="25.032" height="18.032" viewBox="0 0 25 18">
+                                                        <g>
+                                                            <path d="M25,18 L23,18 L23,0 L25,0 L25,18 Z" class="cls-1"/>
+                                                            <path d="M23,9 L12,17 L12,1 L23,9 Z" class="cls-2"/>
+                                                            <path d="M12,9 L1,17 L1,1 L12,9 Z" class="cls-2"/>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                            <button class="album-arr dark a-b" 
                                                 is="slide-scroll-control"
                                                 data-id="album-slides"
-                                                data-to="next">[Next]</button>
+                                                data-to="next">
+                                                <div class="ico">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="25.032" height="18.032" viewBox="0 0 25.032 18.032">
+                                                        <g>
+                                                            <path d="M25,18 L23,18 L23,0 L25,0 L25,18 Z" class="cls-1"/>
+                                                            <path d="M23,9 L12,17 L12,1 L23,9 Z" class="cls-2"/>
+                                                            <path d="M12,9 L1,17 L1,1 L12,9 Z" class="cls-2"/>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -327,14 +352,34 @@
                                         </div>
 
                                         <div class="slide-controls">
-                                            <button class="btn"
+                                            <button class="album-arr dark a-t"
                                                 is="slide-scroll-control"
                                                 data-id="album-slides"
-                                                data-to="prev">[Prev]</button>
-                                            <button class="btn"
+                                                data-to="prev">
+                                                <div class="ico">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="25.032" height="18.032" viewBox="0 0 25 18">
+                                                        <g>
+                                                            <path d="M25,18 L23,18 L23,0 L25,0 L25,18 Z" class="cls-1"/>
+                                                            <path d="M23,9 L12,17 L12,1 L23,9 Z" class="cls-2"/>
+                                                            <path d="M12,9 L1,17 L1,1 L12,9 Z" class="cls-2"/>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                            <button class="album-arr dark a-b" 
                                                 is="slide-scroll-control"
                                                 data-id="album-slides"
-                                                data-to="next">[Next]</button>
+                                                data-to="next">
+                                                <div class="ico">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="25.032" height="18.032" viewBox="0 0 25.032 18.032">
+                                                        <g>
+                                                            <path d="M25,18 L23,18 L23,0 L25,0 L25,18 Z" class="cls-1"/>
+                                                            <path d="M23,9 L12,17 L12,1 L23,9 Z" class="cls-2"/>
+                                                            <path d="M12,9 L1,17 L1,1 L12,9 Z" class="cls-2"/>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
