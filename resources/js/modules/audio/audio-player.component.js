@@ -15,7 +15,7 @@ define([
 	var requestAnimationFrame = utils.getRequestAnimationFrame();
 
 	var elementProto = Object.create(HTMLElement.prototype);
-	var ambientGain = 0.02;
+	var ambientGain = 0.2;
 
 	elementProto.playSong = function(song, position) {
 		var self = this;
