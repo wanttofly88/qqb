@@ -186,6 +186,7 @@
 
         <div class="stage-fallback"></div>
         <stage-component>
+            <div class="mask" data-texture="tmp/back-maps/album-map4.jpg"></div>
             <div class="mask" data-texture="tmp/back-maps/album-map1.jpg"></div>
             <div class="mask" data-texture="tmp/back-maps/album-map2.jpg"></div>
             <div class="mask" data-texture="tmp/back-maps/album-map3.jpg"></div>
@@ -331,11 +332,41 @@
                                 </div>
                             </div>
                         </section>
+                        <section class="albums general-slide js-slide vh-min-height">
+                            <div class="left-wrapper shifted-wrapper">
+                                <div class="slide-content padded">
+                                    <div class="slide-inner">
+                                        <h1 is="header-component">The Heart</h1>
+                                        <div class="price-nfo">
+                                            <div class="price">$15.00</div>
+                                        </div>
+                                        <div class="slidescroll-fallback fb-btns">
+                                            <div class="data-text" data-id="albums-slides">
+                                                <div>New release album</div>
+                                                <div>Date: 2017 Feb</div>
+                                                <div>2LP Limited ed</div>
+                                            </div>
+                                            <button is="buy-album" class="btn"
+                                                data-productId="product-1"
+                                               >[Buy album]</button>
+                                            <a is="inner-link" 
+                                                href="album.html" 
+                                                class="btn data-href"
+                                                data-id="albums-slides"
+                                                >[Listen now]</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </slide-scroll>
                 <aside class="cover">
                     <cover-slider class="cover-img" data-id="albums-slides">
                         <proportional-height>
+                            <a is="inner-link" class="slide" href="album.html">
+                                <img src="tmp/beat-lables/4.jpg" alt="">
+                            </a>
                             <a is="inner-link" class="slide" href="album.html">
                                 <img src="tmp/beat-lables/1.jpg" alt="">
                             </a>
