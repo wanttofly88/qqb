@@ -62,48 +62,49 @@ define(['dispatcher', 'utils', 'cart/cart.store'], function(dispatcher, utils, c
 	elementProto.handleDispatcher = function(e) {
 		var self = this;
 		if (e.type === 'cart-add') {
-			// utils.http(this._route).put({
-			// 	id: e.id
-			// }).then(function(responce) {
+			utils.http(this._route).put({
+				id: e.id
+			}).then(function(responce) {
+				self.setFromJson(responce);
+			}, function(responce) {
+
+			});
+
+			// utils.http('cart-testing-add.json').get()
+			// .then(function(responce) {
 			// 	self.setFromJson(responce);
 			// }, function(responce) {
 
 			// });
-
-			utils.http('cart-testing-add.json').get()
-			.then(function(responce) {
-				self.setFromJson(responce);
-			}, function(responce) {
-
-			});
 		}
 		if (e.type === 'cart-remove') {
-			// utils.http(this._route).delete({
-			// 	id: e.id
-			// }).then(function(responce) {
+			utils.http(this._route).delete({
+				id: e.id
+			}).then(function(responce) {
+				self.setFromJson(responce);
+			}, function(responce) {
+				
+			})
+
+			// utils.http(this._route).get()
+			// .then(function(responce) {
 			// 	self.setFromJson(responce);
 			// }, function(responce) {
-				
-			// })
 
-			utils.http(this._route).get()
+			// });
+		}
+		if (e.type === 'cart-submit') {
+			utils.http(this._route).post()
 			.then(function(responce) {
 				self.setFromJson(responce);
 			}, function(responce) {
-
-			});
+				
+			})
 		}
 	}
 
 	elementProto.updateCart = function() {
 		var self = this;
-		// utils.http(this._route).get()
-		// .then(function(responce) {
-		// 	self.setFromJson(responce);
-		// }, function(responce) {
-
-		// });
-
 		utils.http(this._route).get()
 		.then(function(responce) {
 			self.setFromJson(responce);
