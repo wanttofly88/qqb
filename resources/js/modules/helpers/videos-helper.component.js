@@ -3,11 +3,13 @@ define([
 	'scheme/scheme.store',
 	'preloader/preloader.store',
 	'audio/audio-player.store',
+	'slide-scroll/slide-scroll.store',
 ], function(
 	dispatcher,
 	schemeStore,
 	preloaderStore,
-	playerStore
+	playerStore,
+	slideStore
 ) {
 	"use strict";
 
@@ -42,8 +44,27 @@ define([
 		}
 	}
 
-	elementProto.createdCallback = function() {
+	elementProto.handleSlides = function() {
+		var storeData = slideStore.getData().items['video-slides'];
+		if (!storeData) {
+			console.warn('beat-slides data is missing in slide-scroll.store');
+			return;
+		}
 
+		if (this._slideIndex === storeData.index) return;
+		this._slideIndex = storeData.index;
+
+		dispatcher.dispatch({
+			type: 'slider:to',
+			index: this._slideIndex,
+			id: 'video-slides'
+		});
+	}
+
+	elementProto.createdCallback = function() {
+		this.handlePreloader = this.handlePreloader.bind(this);
+		this.handleSlides = this.handleSlides.bind(this);
+		this._slideIndex = 0;
 	}
 	elementProto.attachedCallback = function() {
 		dispatcher.dispatch({
@@ -51,9 +72,11 @@ define([
 			scheme: 'dark'
 		});
 		preloaderStore.eventEmitter.subscribe(this.handlePreloader);
+		slideStore.eventEmitter.subscribe(this.handleSlides);
 	}
 	elementProto.detachedCallback = function() {
 		preloaderStore.eventEmitter.unsubscribe(this.handlePreloader);
+		slideStore.eventEmitter.unsubscribe(this.handleSlides);
 
 	}
 

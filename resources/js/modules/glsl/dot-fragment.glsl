@@ -10,7 +10,7 @@ uniform float statics;
 
 const float scale = 4.;
 const float Pi = 3.14159265359;
-const float colorStep = 0.3;
+const float colorStep = 0.1;
 
 
 // float x(float t) {

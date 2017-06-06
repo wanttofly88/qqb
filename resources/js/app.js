@@ -86,11 +86,13 @@ require([
 	'cart/buy-album-fixed.component',
 	'cart/buy-beat.component',
 	'cart/buy-beat-fixed.component',
+	'cart/cart-checkout.component',
 
 	'slider/cover-bg-slider.component',
 	'slider/cover-slider.component',
 	'slider/video-slider.component',
 	'slider/merch-slider.component',
+	'slider/webgl-slider.component',
 
 	'decor/header.component',
 	'decor/text-print.component',
