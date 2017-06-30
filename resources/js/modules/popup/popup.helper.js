@@ -5,14 +5,27 @@ define(['dispatcher', 'popup/popup.store'], function(dispatcher, popupStore) {
 	var audioPaused = false;
 	var audioLowFreq = false;
 
+	var _getComponent = function(id) {
+		var popups = document.getElementsByTagName('popup-component');
+		var component = null;
+		Array.prototype.forEach.call(popups, function(popup) {
+			if (popup.getAttribute('data-id') === id) {
+				component = popup;
+			}
+		});
+
+		return component;
+	}
+
 	var _handleStore = function() {
 		var active = popupStore.getData().active;
 		var body = document.getElementsByTagName('body')[0];
 		var pw = document.getElementsByClassName('page-wrapper')[0];
 		var component;
+		
 
 		if (active) {
-			component = document.querySelector('popup-component[data-id="' + active + '"');
+			component = _getComponent(active);
 
 			if (!component.classList.contains('video-popup') &&
 				!component.classList.contains('merch-popup')) {
